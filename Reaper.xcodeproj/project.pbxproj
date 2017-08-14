@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC96A61F416544004E6123 /* AppDelegate.swift */; };
+		24DC96A91F416544004E6123 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC96A81F416544004E6123 /* ViewController.swift */; };
+		24DC96AC1F416544004E6123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AA1F416544004E6123 /* Main.storyboard */; };
+		24DC96AE1F416544004E6123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AD1F416544004E6123 /* Assets.xcassets */; };
+		24DC96B11F416545004E6123 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */; };
+		4B0AA389772429CEFDC1B342 /* Pods_Reaper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936FC6B77157823DDABC8274 /* Pods_Reaper.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		24DC96A31F416544004E6123 /* Reaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24DC96A61F416544004E6123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		24DC96A81F416544004E6123 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		24DC96AB1F416544004E6123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		24DC96AD1F416544004E6123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		24DC96B01F416545004E6123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		24DC96B21F416545004E6123 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		936FC6B77157823DDABC8274 /* Pods_Reaper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reaper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0331361091AAE5009936D90 /* Pods-Reaper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reaper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reaper/Pods-Reaper.debug.xcconfig"; sourceTree = "<group>"; };
+		CBE2CD3C567180C29743EAD7 /* Pods-Reaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reaper.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reaper/Pods-Reaper.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		24DC96A01F416544004E6123 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B0AA389772429CEFDC1B342 /* Pods_Reaper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24DC969A1F416544004E6123 = {
+			isa = PBXGroup;
+			children = (
+				24DC96A51F416544004E6123 /* Reaper */,
+				24DC96A41F416544004E6123 /* Products */,
+				282C730682C1A4485CC66DF5 /* Pods */,
+				703812F999CAA8D81C5C099C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		24DC96A41F416544004E6123 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24DC96A31F416544004E6123 /* Reaper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24DC96A51F416544004E6123 /* Reaper */ = {
+			isa = PBXGroup;
+			children = (
+				24DC96A61F416544004E6123 /* AppDelegate.swift */,
+				24DC96A81F416544004E6123 /* ViewController.swift */,
+				24DC96AA1F416544004E6123 /* Main.storyboard */,
+				24DC96AD1F416544004E6123 /* Assets.xcassets */,
+				24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */,
+				24DC96B21F416545004E6123 /* Info.plist */,
+			);
+			path = Reaper;
+			sourceTree = "<group>";
+		};
+		282C730682C1A4485CC66DF5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A0331361091AAE5009936D90 /* Pods-Reaper.debug.xcconfig */,
+				CBE2CD3C567180C29743EAD7 /* Pods-Reaper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		703812F999CAA8D81C5C099C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				936FC6B77157823DDABC8274 /* Pods_Reaper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		24DC96A21F416544004E6123 /* Reaper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24DC96B51F416545004E6123 /* Build configuration list for PBXNativeTarget "Reaper" */;
+			buildPhases = (
+				C0425435BF8E2F9C1656A18D /* [CP] Check Pods Manifest.lock */,
+				24DC969F1F416544004E6123 /* Sources */,
+				24DC96A01F416544004E6123 /* Frameworks */,
+				24DC96A11F416544004E6123 /* Resources */,
+				1268C0CDF081714DF72345CC /* [CP] Embed Pods Frameworks */,
+				D4EFFFF266E459D1D374217B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Reaper;
+			productName = Reaper;
+			productReference = 24DC96A31F416544004E6123 /* Reaper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		24DC969B1F416544004E6123 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "宋 奎熹";
+				TargetAttributes = {
+					24DC96A21F416544004E6123 = {
+						CreatedOnToolsVersion = 9.0;
+					};
+				};
+			};
+			buildConfigurationList = 24DC969E1F416544004E6123 /* Build configuration list for PBXProject "Reaper" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 24DC969A1F416544004E6123;
+			productRefGroup = 24DC96A41F416544004E6123 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				24DC96A21F416544004E6123 /* Reaper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		24DC96A11F416544004E6123 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24DC96B11F416545004E6123 /* LaunchScreen.storyboard in Resources */,
+				24DC96AE1F416544004E6123 /* Assets.xcassets in Resources */,
+				24DC96AC1F416544004E6123 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1268C0CDF081714DF72345CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reaper/Pods-Reaper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0425435BF8E2F9C1656A18D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D4EFFFF266E459D1D374217B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reaper/Pods-Reaper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		24DC969F1F416544004E6123 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24DC96A91F416544004E6123 /* ViewController.swift in Sources */,
+				24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		24DC96AA1F416544004E6123 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24DC96AB1F416544004E6123 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24DC96B01F416545004E6123 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		24DC96B31F416545004E6123 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		24DC96B41F416545004E6123 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		24DC96B61F416545004E6123 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0331361091AAE5009936D90 /* Pods-Reaper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VEBQ28K9EA;
+				INFOPLIST_FILE = Reaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.krayc.Reaper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		24DC96B71F416545004E6123 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBE2CD3C567180C29743EAD7 /* Pods-Reaper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VEBQ28K9EA;
+				INFOPLIST_FILE = Reaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.krayc.Reaper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		24DC969E1F416544004E6123 /* Build configuration list for PBXProject "Reaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24DC96B31F416545004E6123 /* Debug */,
+				24DC96B41F416545004E6123 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24DC96B51F416545004E6123 /* Build configuration list for PBXNativeTarget "Reaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24DC96B61F416545004E6123 /* Debug */,
+				24DC96B71F416545004E6123 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 24DC969B1F416544004E6123 /* Project object */;
+}
