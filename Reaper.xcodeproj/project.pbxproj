@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */; };
+		2485ADE51F5AF81E008D32A0 /* RPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */; };
+		2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */; };
 		24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC96A61F416544004E6123 /* AppDelegate.swift */; };
 		24DC96A91F416544004E6123 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC96A81F416544004E6123 /* ViewController.swift */; };
 		24DC96AC1F416544004E6123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AA1F416544004E6123 /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewController.swift; sourceTree = "<group>"; };
+		2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPTabBarController.swift; sourceTree = "<group>"; };
+		2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewCell.swift; sourceTree = "<group>"; };
 		24DC96A31F416544004E6123 /* Reaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DC96A61F416544004E6123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DC96A81F416544004E6123 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +69,9 @@
 			children = (
 				24DC96A61F416544004E6123 /* AppDelegate.swift */,
 				24DC96A81F416544004E6123 /* ViewController.swift */,
+				2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */,
+				2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */,
+				2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */,
 				24DC96AA1F416544004E6123 /* Main.storyboard */,
 				24DC96AD1F416544004E6123 /* Assets.xcassets */,
 				24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */,
@@ -210,6 +219,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
+				2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */,
+				2485ADE51F5AF81E008D32A0 /* RPTabBarController.swift in Sources */,
 				24DC96A91F416544004E6123 /* ViewController.swift in Sources */,
 				24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */,
 			);
@@ -389,6 +401,7 @@
 				24DC96B71F416545004E6123 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
