@@ -9,10 +9,19 @@
 import UIKit
 
 class RPFundListTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var roundView: UIView!
+    @IBOutlet weak var codeLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var annualProfitLabel: UILabel!
+    @IBOutlet weak var volatilityLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.contentView.backgroundColor = .rpColor
+        self.roundView.layer.cornerRadius = 4.0
+        self.roundView.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

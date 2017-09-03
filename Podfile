@@ -8,5 +8,8 @@ target 'Reaper' do
   use_frameworks!
 
   # Pods for Reaper
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'MJRefresh'
 
 end

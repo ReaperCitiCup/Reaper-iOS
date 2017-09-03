@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2453775C1F5BB54B002970EB /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453775B1F5BB54B002970EB /* UIColor+Extension.swift */; };
+		2453775E1F5BB7E7002970EB /* RPFundDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */; };
+		245377601F5BBAA4002970EB /* RPConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453775F1F5BBAA4002970EB /* RPConstant.swift */; };
+		245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377611F5BC0B3002970EB /* RPFundModel.swift */; };
+		245377641F5BC0CC002970EB /* RPFundDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377631F5BC0CC002970EB /* RPFundDetailModel.swift */; };
+		245377661F5BC102002970EB /* RPManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377651F5BC102002970EB /* RPManagerModel.swift */; };
+		2470FE0B1F5BC28200B034F9 /* RPManagerShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */; };
 		2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */; };
 		2485ADE51F5AF81E008D32A0 /* RPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */; };
 		2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */; };
@@ -19,6 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2453775B1F5BB54B002970EB /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundDetailTableViewController.swift; sourceTree = "<group>"; };
+		2453775F1F5BBAA4002970EB /* RPConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPConstant.swift; sourceTree = "<group>"; };
+		245377611F5BC0B3002970EB /* RPFundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundModel.swift; sourceTree = "<group>"; };
+		245377631F5BC0CC002970EB /* RPFundDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundDetailModel.swift; sourceTree = "<group>"; };
+		245377651F5BC102002970EB /* RPManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerModel.swift; sourceTree = "<group>"; };
+		2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerShortModel.swift; sourceTree = "<group>"; };
 		2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPTabBarController.swift; sourceTree = "<group>"; };
 		2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewCell.swift; sourceTree = "<group>"; };
@@ -72,10 +86,17 @@
 				2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */,
 				2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */,
 				2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */,
+				245377611F5BC0B3002970EB /* RPFundModel.swift */,
+				2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */,
+				245377631F5BC0CC002970EB /* RPFundDetailModel.swift */,
+				2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */,
+				245377651F5BC102002970EB /* RPManagerModel.swift */,
+				2453775B1F5BB54B002970EB /* UIColor+Extension.swift */,
 				24DC96AA1F416544004E6123 /* Main.storyboard */,
 				24DC96AD1F416544004E6123 /* Assets.xcassets */,
 				24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */,
 				24DC96B21F416545004E6123 /* Info.plist */,
+				2453775F1F5BBAA4002970EB /* RPConstant.swift */,
 			);
 			path = Reaper;
 			sourceTree = "<group>";
@@ -173,9 +194,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Reaper/Pods-Reaper-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -188,13 +216,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reaper-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D4EFFFF266E459D1D374217B /* [CP] Copy Pods Resources */ = {
@@ -219,11 +250,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2453775E1F5BB7E7002970EB /* RPFundDetailTableViewController.swift in Sources */,
+				245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */,
 				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
+				245377641F5BC0CC002970EB /* RPFundDetailModel.swift in Sources */,
 				2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */,
 				2485ADE51F5AF81E008D32A0 /* RPTabBarController.swift in Sources */,
+				2453775C1F5BB54B002970EB /* UIColor+Extension.swift in Sources */,
 				24DC96A91F416544004E6123 /* ViewController.swift in Sources */,
 				24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */,
+				245377661F5BC102002970EB /* RPManagerModel.swift in Sources */,
+				2470FE0B1F5BC28200B034F9 /* RPManagerShortModel.swift in Sources */,
+				245377601F5BBAA4002970EB /* RPConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +400,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.krayc.Reaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -377,6 +416,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.krayc.Reaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

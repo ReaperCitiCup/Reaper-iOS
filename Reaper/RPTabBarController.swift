@@ -12,13 +12,8 @@ class RPTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-//        let item1 = UITabBarItem(title: "首页", image: nil, selectedImage: nil)
-//        let item2 = UITabBarItem(title: "基金列表", image: nil, selectedImage: nil)
-//        let item3 = UITabBarItem(title: "个人中心", image: nil, selectedImage: nil)
-//        
-//        self.tabBar.items = [item1, item2, item3]
+        
+        self.tabBar.tintColor = .rpColor
     }
 
     override func didReceiveMemoryWarning() {
