@@ -11,7 +11,7 @@ import UIKit
 
 struct RPManagerShortModel {
     
-    var id: String
+    var code: String
     var name: String
     
 }

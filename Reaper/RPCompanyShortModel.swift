@@ -1,5 +1,5 @@
 //
-//  RPFundModel.swift
+//  RPCompanyShortModel.swift
 //  Reaper
 //
 //  Created by 宋 奎熹 on 2017/9/3.
@@ -8,12 +8,9 @@
 
 import UIKit
 
-struct RPFundModel {
+struct RPCompanyShortModel {
     
     var code: String
     var name: String
-    var annualProfit: Double?
-    var volatility: Double?
-    var shortManager: [RPManagerShortModel]?
     
 }
