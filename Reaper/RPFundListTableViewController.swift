@@ -35,6 +35,10 @@ class RPFundListTableViewController: UITableViewController {
             self.loadData(of: self.currentPage)
             self.tableView.mj_footer.endRefreshing()
         })
+        
+        if currentPage == 1 {
+            self.loadData(of: currentPage)
+        }
     }
 
     override func didReceiveMemoryWarning() {

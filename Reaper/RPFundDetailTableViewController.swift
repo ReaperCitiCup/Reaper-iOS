@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Charts
+import SVProgressHUD
 
 class RPFundDetailTableViewController: UITableViewController {
     
@@ -33,12 +35,25 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var rateSinceFoundLabel: UILabel!
     var rateLabels: [UILabel]?
     
+    @IBOutlet weak var ratePeriodButton: UIButton!
+    
+    @IBOutlet weak var netValueChart: LineChartView!
+    @IBOutlet weak var rateChart: LineChartView!
+    @IBOutlet weak var currentAssetChart: PieChartView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = "基金详情"
         self.tableView.backgroundColor = .rpColor
         self.rateLabels = [rate1MonthLabel, rate3MonthLabel, rate6MonthLabel, rate1YearLabel, rate3YearLabel, rateSinceFoundLabel]
+        
+        self.ratePeriodButton.layer.cornerRadius = 3.0
+        self.ratePeriodButton.layer.masksToBounds = true
+        
+        self.netValueChart.chartDescription?.text = ""
+        self.rateChart.chartDescription?.text = ""
+        self.currentAssetChart.chartDescription?.text = ""
         
         self.loadFundData()
     }
@@ -51,6 +66,7 @@ class RPFundDetailTableViewController: UITableViewController {
         guard (fundCode != nil) else {
             return
         }
+        SVProgressHUD.show(withStatus: "加载中")
         Alamofire.request("http://106.15.203.173:8080/api/fund/\(fundCode ?? "")").responseJSON { response in
         if let json = response.result.value {
             let result = JSON(json)
@@ -97,7 +113,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 for label in self.rateLabels! {
                     let attributedString = label.attributedText as! NSMutableAttributedString
                     attributedString.addAttributes([
-                        NSAttributedStringKey.foregroundColor: UIColor.black
+                        NSForegroundColorAttributeName: UIColor.black
                         ], range: NSMakeRange(4, (label.text?.characters.count)! - 4))
                     label.attributedText = attributedString
                 }
@@ -105,8 +121,134 @@ class RPFundDetailTableViewController: UITableViewController {
             
             }
         }
+        
+        self.updateChartsData()
     }
-
+    
+    func updateChartsData() {
+        
+        var unitNetValueDataSet = LineChartDataSet()
+        var cumulativeNetValueDataSet = LineChartDataSet()
+        
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.addOperation {
+            Alamofire.request("http://106.15.203.173:8080/api/fund/\(self.fundCode ?? "")/unit-net-value").responseJSON { response in
+                if let json = response.result.value {
+                    let result = JSON(json).arrayValue
+                    var dates = [String]()
+                    var values = [Double]()
+                    for dict in result {
+                        dates.append((dict.dictionaryValue["date"]?.stringValue)!)
+                        values.append((dict.dictionaryValue["value"]?.doubleValue)!)
+                    }
+                    
+                    var dataEntries = [ChartDataEntry]()
+                    for i in 0..<dates.count {
+                        dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
+                    }
+                    unitNetValueDataSet = LineChartDataSet(values: dataEntries, label: "单位净值走势")
+                    unitNetValueDataSet.drawCircleHoleEnabled = false
+                    unitNetValueDataSet.drawCirclesEnabled = false
+                    
+                    if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
+                        let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
+                        self.netValueChart.data = data
+                    }
+                }
+            }
+        }
+        queue.addOperation {
+            Alamofire.request("http://106.15.203.173:8080/api/fund/\(self.fundCode ?? "")/cumulative-net-value").responseJSON { response in
+                if let json = response.result.value {
+                    let result2 = JSON(json).arrayValue
+                    var dates2 = [String]()
+                    var values2 = [Double]()
+                    for dict in result2 {
+                        dates2.append((dict.dictionaryValue["date"]?.stringValue)!)
+                        values2.append((dict.dictionaryValue["value"]?.doubleValue)!)
+                    }
+                    
+                    var dataEntries2 = [ChartDataEntry]()
+                    for i in 0..<dates2.count {
+                        dataEntries2.append(ChartDataEntry(x: Double(i) / Double(dates2.count), y: values2[i]))
+                    }
+                    cumulativeNetValueDataSet = LineChartDataSet(values: dataEntries2, label: "累积净值走势")
+                    cumulativeNetValueDataSet.drawCircleHoleEnabled = false
+                    cumulativeNetValueDataSet.drawCirclesEnabled = false
+                    cumulativeNetValueDataSet.setColor(UIColor.red)
+                    
+                    if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
+                        let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
+                        self.netValueChart.data = data
+                    }
+                }
+            }
+        }
+        queue.addOperation {
+            self.updateRate(during: 0)
+        }
+        queue.addOperation {
+            Alamofire.request("http://106.15.203.173:8080/api/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
+                if let json = response.result.value {
+                    let result4 = JSON(json).dictionaryValue
+                    var currentAssetDict = [String:Double]()
+                    var allButOthers = 0.0
+                    for (key, value) in result4 {
+                        if value.doubleValue > 0 {
+                            currentAssetDict[key] = value.doubleValue
+                            allButOthers = allButOthers + value.doubleValue
+                        }
+                    }
+                    currentAssetDict["other"] = 100 - allButOthers
+                    
+                    var dataEntries4 = [PieChartDataEntry]()
+                    for (key, value) in currentAssetDict {
+                        dataEntries4.append(PieChartDataEntry(value: value, label: key))
+                    }
+                    let currentAssetDataSet = PieChartDataSet(values: dataEntries4, label: "当前资产配置")
+                    currentAssetDataSet.colors = ChartColorTemplates.vordiplom()
+                    currentAssetDataSet.valueTextColor = .black
+                    currentAssetDataSet.entryLabelColor = .clear
+                    let data = PieChartData(dataSet: currentAssetDataSet)
+                    self.currentAssetChart.data = data
+                }
+            }
+        }
+        queue.addOperation {
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func updateRate(during time: Int) {
+        Alamofire.request("http://106.15.203.173:8080/api/fund/\(self.fundCode ?? "")/rate?month=\(time == 0 ? "all" : String(time))").responseJSON { response in
+            if let json = response.result.value {
+                let result3 = JSON(json).arrayValue
+                var dates3 = [String]()
+                var values3 = [Double]()
+                for dict in result3 {
+                    dates3.append((dict.dictionaryValue["date"]?.stringValue)!)
+                    values3.append((dict.dictionaryValue["value"]?.doubleValue)!)
+                }
+                
+                var dataEntries3 = [ChartDataEntry]()
+                for i in 0..<dates3.count {
+                    dataEntries3.append(ChartDataEntry(x: Double(i) / Double(dates3.count), y: values3[i]))
+                }
+                let rateDataSet = LineChartDataSet(values: dataEntries3, label: "累积收益率走势")
+                rateDataSet.drawCircleHoleEnabled = false
+                rateDataSet.drawCirclesEnabled = false
+                
+                let data = LineChartData(dataSet: rateDataSet)
+                self.rateChart.data = data
+            }
+        }
+    }
+    
+    @IBAction func chooseRateAction(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "chooseRateSegue", sender: sender)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,5 +273,23 @@ class RPFundDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60.0
     }
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chooseRateSegue" {
+            let vc = segue.destination as! RPFundRateChoiceTableViewController
+            vc.delegate = self
+            vc.nowPeriod = (sender as! UIButton).tag
+        }
+    }
+    
+}
 
+extension RPFundDetailTableViewController: RPFundRateChoiceDelegate {
+    func didSelectRate(with rateChoiceModel: RPFundRateChoiceModel) {
+        self.ratePeriodButton.tag = rateChoiceModel.tag
+        self.ratePeriodButton.setTitle(rateChoiceModel.description, for: .normal)
+        self.updateRate(during: rateChoiceModel.tag)
+    }
 }

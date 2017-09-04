@@ -11,5 +11,7 @@ target 'Reaper' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'MJRefresh'
+  pod 'Charts'
+  pod 'SVProgressHUD'
 
 end

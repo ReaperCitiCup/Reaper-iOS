@@ -15,6 +15,7 @@
 		245377661F5BC102002970EB /* RPManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377651F5BC102002970EB /* RPManagerModel.swift */; };
 		2470FE0B1F5BC28200B034F9 /* RPManagerShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */; };
 		2470FE101F5BFF2700B034F9 /* RPCompanyShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */; };
+		2470FE151F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE141F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift */; };
 		2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */; };
 		2485ADE51F5AF81E008D32A0 /* RPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */; };
 		2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */; };
@@ -35,6 +36,7 @@
 		245377651F5BC102002970EB /* RPManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerModel.swift; sourceTree = "<group>"; };
 		2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerShortModel.swift; sourceTree = "<group>"; };
 		2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCompanyShortModel.swift; sourceTree = "<group>"; };
+		2470FE141F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundRateChoiceTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE41F5AF81E008D32A0 /* RPTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPTabBarController.swift; sourceTree = "<group>"; };
 		2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewCell.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				245377611F5BC0B3002970EB /* RPFundModel.swift */,
 				2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */,
 				245377631F5BC0CC002970EB /* RPFundDetailModel.swift */,
+				2470FE141F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift */,
 				2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */,
 				245377651F5BC102002970EB /* RPManagerModel.swift */,
 				2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */,
@@ -199,13 +202,17 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Reaper/Pods-Reaper-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2453775E1F5BB7E7002970EB /* RPFundDetailTableViewController.swift in Sources */,
+				2470FE151F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift in Sources */,
 				245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */,
 				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
 				245377641F5BC0CC002970EB /* RPFundDetailModel.swift in Sources */,
@@ -405,7 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.krayc.Reaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -421,7 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.krayc.Reaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
