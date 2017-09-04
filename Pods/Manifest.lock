@@ -3,6 +3,8 @@ PODS:
   - Charts (3.0.2):
     - Charts/Core (= 3.0.2)
   - Charts/Core (3.0.2)
+  - DZNEmptyDataSet (1.8.1)
+  - IQKeyboardManager (4.0.12)
   - MJRefresh (3.1.12)
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
@@ -10,6 +12,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Charts
+  - DZNEmptyDataSet
+  - IQKeyboardManager
   - MJRefresh
   - SVProgressHUD
   - SwiftyJSON
@@ -17,10 +21,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  IQKeyboardManager: feb4562ba22266c179801a76228017f7a3c0d111
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 1d057d1fd045af0a463b12bf58410913ff4f3f8c
+PODFILE CHECKSUM: bc55f1b61125fd7b2fa233fb0c9947e8ac15ccaa
 
 COCOAPODS: 1.3.1

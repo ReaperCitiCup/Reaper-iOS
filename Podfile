@@ -13,5 +13,7 @@ target 'Reaper' do
   pod 'MJRefresh'
   pod 'Charts'
   pod 'SVProgressHUD'
+  pod 'DZNEmptyDataSet'
+  pod 'IQKeyboardManager'
 
 end

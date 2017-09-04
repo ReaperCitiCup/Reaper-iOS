@@ -89,7 +89,7 @@ class RPFundDetailTableViewController: UITableViewController {
                                                      company: RPCompanyShortModel(code: result["company"]["code"].stringValue,
                                                                                   name: result["company"]["name"].stringValue))
             
-            self.nameLabel?.text = self.fundDetailModel?.name
+            self.nameLabel?.text = "\(String(self.fundDetailModel?.name ?? "")!) \(String( self.fundDetailModel?.code ?? "")!)"
             self.unitNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.unitNetValue)!)
             self.cumulativeNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.cumulativeNetValue)!)
             self.typeLabel.text = self.fundDetailModel?.type.reduce("", { r, s in "\(r ?? "")/\(s)"})
@@ -147,6 +147,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     for i in 0..<dates.count {
                         dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
                     }
+                    
                     unitNetValueDataSet = LineChartDataSet(values: dataEntries, label: "单位净值走势")
                     unitNetValueDataSet.drawCircleHoleEnabled = false
                     unitNetValueDataSet.drawCirclesEnabled = false
@@ -154,6 +155,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
                         let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
                         self.netValueChart.data = data
+                        self.netValueChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
                     }
                 }
             }
@@ -181,6 +183,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
                         let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
                         self.netValueChart.data = data
+                        self.netValueChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates2)
                     }
                 }
             }
@@ -210,6 +213,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     currentAssetDataSet.colors = ChartColorTemplates.vordiplom()
                     currentAssetDataSet.valueTextColor = .black
                     currentAssetDataSet.entryLabelColor = .clear
+                    
                     let data = PieChartData(dataSet: currentAssetDataSet)
                     self.currentAssetChart.data = data
                 }
@@ -241,6 +245,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 
                 let data = LineChartData(dataSet: rateDataSet)
                 self.rateChart.data = data
+                self.rateChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates3)
             }
         }
     }
@@ -273,9 +278,9 @@ class RPFundDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60.0
     }
+    
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseRateSegue" {
             let vc = segue.destination as! RPFundRateChoiceTableViewController

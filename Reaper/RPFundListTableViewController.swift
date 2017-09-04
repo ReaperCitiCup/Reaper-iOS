@@ -10,6 +10,7 @@ import UIKit
 import MJRefresh
 import Alamofire
 import SwiftyJSON
+import DZNEmptyDataSet
 
 class RPFundListTableViewController: UITableViewController {
     
@@ -27,9 +28,12 @@ class RPFundListTableViewController: UITableViewController {
         
         self.navigationItem.title = "基金数据库"
         self.tableView.backgroundColor = .rpColor
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
         
         self.searchBar.delegate = self
         self.searchBar.barTintColor = .rpColor
+        self.searchBar.searchBarStyle = .prominent
         
         self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.loadData(of: self.currentPage)
@@ -62,8 +66,6 @@ class RPFundListTableViewController: UITableViewController {
                 }
             }
             
-            print(self.searchFundArr)
-            
             self.currentPage = self.currentPage + 1
             self.tableView.reloadData()
         }
@@ -82,7 +84,9 @@ class RPFundListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! RPFundListTableViewCell
         
-        let fundModel = searchString == nil ? fundArr[indexPath.row] : searchFundArr[indexPath.row]
+        print(self.searchFundArr.count)
+        
+        let fundModel = searchString == nil ? self.fundArr[indexPath.row] : self.searchFundArr[indexPath.row]
         cell.codeLabel.text = fundModel.code
         cell.nameLabel.text = fundModel.name
         //
@@ -103,13 +107,11 @@ class RPFundListTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fundDetailSegue" {
             let fund = sender as? RPFundModel
             guard fund != nil else {
-                print("Sender nil")
                 return
             }
             let vc = segue.destination as! RPFundDetailTableViewController
@@ -119,9 +121,14 @@ class RPFundListTableViewController: UITableViewController {
 
 }
 
+extension RPFundListTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
+}
+
 extension RPFundListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("Did change \(searchText)")
         self.searchString = searchText
     }
     

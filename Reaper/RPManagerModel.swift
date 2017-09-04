@@ -9,5 +9,13 @@
 import UIKit
 
 struct RPManagerModel {
-
+    
+    var code: String
+    var name: String
+    var appointedDate: String
+    var company: RPCompanyShortModel?
+    var totalScope: Double?
+    var bestReturns: Double?
+    var introduction: String
+    
 }
