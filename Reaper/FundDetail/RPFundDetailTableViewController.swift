@@ -88,6 +88,22 @@ class RPFundDetailTableViewController: UITableViewController {
         self.netValueChart.chartDescription?.text = ""
         self.rateChart.chartDescription?.text = ""
         self.currentAssetChart.chartDescription?.text = ""
+        
+        self.netValueChart.xAxis.labelPosition = .bottom
+        self.rateChart.xAxis.labelPosition = .bottom
+        
+        self.netValueChart.xAxis.drawGridLinesEnabled = false
+        self.rateChart.xAxis.drawGridLinesEnabled = false
+        
+        self.netValueChart.rightAxis.drawAxisLineEnabled = false
+        self.rateChart.rightAxis.drawAxisLineEnabled = false
+        
+        self.netValueChart.rightAxis.drawLabelsEnabled = false
+        self.rateChart.rightAxis.drawLabelsEnabled = false
+        
+        self.rateChart.legend.enabled = false
+        
+        self.currentAssetChart.drawHoleEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -170,11 +186,9 @@ class RPFundDetailTableViewController: UITableViewController {
                 if let json = response.result.value {
                     let result4 = JSON(json).dictionaryValue
                     var currentAssetDict = [String:Double]()
-                    var allButOthers = 0.0
                     for (key, value) in result4 {
                         if value.doubleValue > 0 {
                             currentAssetDict[key] = value.doubleValue
-                            allButOthers = allButOthers + value.doubleValue
                         }
                     }
                     

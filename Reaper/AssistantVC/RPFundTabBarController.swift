@@ -14,8 +14,11 @@ class RPFundTabBarController: UITabBarController {
     
     var fundCode: String = "" {
         didSet {
-            let managerVC = self.viewControllers![1] as! RPFundManagerTableViewController
+            let managerVC = self.viewControllers![1] as! RPManagerTableViewController
             managerVC.fundCode = self.fundCode
+            
+            let analysisVC = self.viewControllers![3] as! RPAnalysisViewController
+            analysisVC.fundCode = self.fundCode
             
             Alamofire.request("\(BASE_URL)/fund/\(fundCode)").responseJSON { response in
                 if let json = response.result.value {
@@ -50,10 +53,8 @@ class RPFundTabBarController: UITabBarController {
                     let detailVC = self.viewControllers![0] as! RPFundDetailTableViewController
                     detailVC.fundDetailModel = fundDetailModel
                     
-                    let companyVC = self.viewControllers![2] as! RPFundCompanyTableViewController
+                    let companyVC = self.viewControllers![2] as! RPCompanyTableViewController
                     companyVC.companyModel = companyShortModel
-                    
-                    print(companyShortModel)
                 }
             }
         }

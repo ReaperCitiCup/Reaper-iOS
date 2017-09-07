@@ -1,5 +1,5 @@
 //
-//  RPFundManagerTableViewController.swift
+//  RPManagerTableViewController.swift
 //  Reaper
 //
 //  Created by 宋 奎熹 on 2017/9/4.
@@ -12,7 +12,7 @@ import SwiftyJSON
 import Charts
 import BTNavigationDropdownMenu
 
-class RPFundManagerTableViewController: UITableViewController {
+class RPManagerTableViewController: UITableViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
@@ -73,8 +73,6 @@ class RPFundManagerTableViewController: UITableViewController {
                 self.totalScopeLabel.text = String.init(format: "%.2f", (self.managerModel?.totalScope)!)
                 self.bestReturnLabel.text = String.init(format: "%.2f", (self.managerModel?.bestReturns)!)
                 
-                self.updateAbilityChart()
-                
                 self.updateChartsData()
             }
         }
@@ -89,6 +87,15 @@ class RPFundManagerTableViewController: UITableViewController {
         
         self.abilityRadarChart.chartDescription?.text = ""
         self.fundRateTrendChart.chartDescription?.text = ""
+        
+        self.abilityRadarChart.legend.enabled = false
+        self.abilityRadarChart.yAxis.drawLabelsEnabled = false
+        self.abilityRadarChart.xAxis.valueFormatter = RPManagerAbilityFormatter()
+        
+        self.fundRateTrendChart.xAxis.labelPosition = .bottom
+        self.fundRateTrendChart.xAxis.drawGridLinesEnabled = false
+        self.fundRateTrendChart.rightAxis.drawAxisLineEnabled = false
+        self.fundRateTrendChart.rightAxis.drawLabelsEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,32 +133,11 @@ class RPFundManagerTableViewController: UITableViewController {
         }
     }
     
-    private func updateAbilityChart() {
-        guard self.managerModel != nil else {
-            return
-        }
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
-            if let json = response.result.value {
-                let result = JSON(json).dictionaryValue
-                
-                var abilityChartDataEntries = [RadarChartDataEntry]()
-                for (key, value) in result {
-                    abilityChartDataEntries.append(RadarChartDataEntry(value: value.doubleValue,
-                                                                       data: key as AnyObject))
-                }
-                let abilityDataSet = RadarChartDataSet(values: abilityChartDataEntries, label: "经理综合能力")
-                
-                let data = RadarChartData(dataSet: abilityDataSet)
-                self.abilityRadarChart.data = data
-            }
-        }
-    }
-    
     private func updateChartsData() {
-//        let queue = OperationQueue()
-//        queue.maxConcurrentOperationCount = 1
-        //现任收益率走势
-//        queue.addOperation {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        // 现任收益率走势
+        queue.addOperation {
             Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rate-trend").responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json).arrayValue
@@ -159,7 +145,7 @@ class RPFundManagerTableViewController: UITableViewController {
                     var fundRateTrendDataSetArray = [LineChartDataSet]()
                     
                     for dict in result {
-                        let fundID = dict["id"]
+                        _ = dict["id"]
                         let fundName = dict["name"]
                         let dataArr = dict["data"].arrayValue
                         
@@ -175,8 +161,6 @@ class RPFundManagerTableViewController: UITableViewController {
                             dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
                         }
                         
-                        print(dataEntries)
-                        
                         let fundRateTrendDataSet = LineChartDataSet(values: dataEntries, label: fundName.stringValue)
                         fundRateTrendDataSet.drawCircleHoleEnabled = false
                         fundRateTrendDataSet.drawCirclesEnabled = false
@@ -188,9 +172,27 @@ class RPFundManagerTableViewController: UITableViewController {
 //                    self.fundRateTrendChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
                 }
             }
-//        }
+        }
+        // 综合能力
+        queue.addOperation {
+            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
+                if let json = response.result.value {
+                    let result = JSON(json).dictionaryValue
+                    
+                    var abilityChartDataEntries = [RadarChartDataEntry]()
+                    for (key, value) in result {
+                        abilityChartDataEntries.append(RadarChartDataEntry(value: value.doubleValue,
+                                                                           data: key as AnyObject))
+                    }
+                    let abilityDataSet = RadarChartDataSet(values: abilityChartDataEntries, label: "经理综合能力")
+                    abilityDataSet.drawFilledEnabled = true
+                    
+                    let data = RadarChartData(dataSet: abilityDataSet)
+                    self.abilityRadarChart.data = data
+                }
+            }
+        }
     }
-    
     
     // MARK: - Table view data source
 
