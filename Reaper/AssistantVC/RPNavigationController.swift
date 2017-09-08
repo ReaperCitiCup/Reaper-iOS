@@ -9,15 +9,29 @@
 import UIKit
 
 class RPNavigationController: UINavigationController, UIGestureRecognizerDelegate {
-
+    
+    var navigationBarBottomLine: UIImageView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.interactivePopGestureRecognizer?.delegate = self
+        
+        self.navigationBarBottomLine = findBottomLine(under: self.navigationBar)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationBarBottomLine?.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationBarBottomLine?.isHidden = false
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -36,6 +50,19 @@ class RPNavigationController: UINavigationController, UIGestureRecognizerDelegat
     
     @objc func back() {
         self.popViewController(animated: true)
+    }
+    
+    private func findBottomLine(under view: UIView) -> UIImageView? {
+        if view is UIImageView && view.bounds.size.height <= 1.0 {
+            return view as? UIImageView
+        }
+        for subview in view.subviews {
+            let imageView = self.findBottomLine(under: subview)
+            if imageView != nil {
+                return imageView
+            }
+        }
+        return nil
     }
 
 }

@@ -86,6 +86,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		249ADB5B1F6293E000307608 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				249ADB5C1F629B2500307608 /* ChartFormatter */,
+				2453775B1F5BB54B002970EB /* UIColor+Extension.swift */,
+				2453775F1F5BBAA4002970EB /* RPConstant.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		249ADB5C1F629B2500307608 /* ChartFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */,
+				2470FE241F5D276200B034F9 /* RPFundDateFormatter.swift */,
+				249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */,
+			);
+			path = ChartFormatter;
+			sourceTree = "<group>";
+		};
 		24DC969A1F416544004E6123 = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +134,7 @@
 				24FBCA2E1F6146860016A894 /* Manager */,
 				24FBCA2F1F6146A40016A894 /* Company */,
 				24E2631C1F6153C700F66DC3 /* Analysis */,
-				2453775B1F5BB54B002970EB /* UIColor+Extension.swift */,
-				2453775F1F5BBAA4002970EB /* RPConstant.swift */,
+				249ADB5B1F6293E000307608 /* Utility */,
 				24FBCA221F60EBBB0016A894 /* Assets.xcassets */,
 				24DC96AA1F416544004E6123 /* Main.storyboard */,
 				24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */,
@@ -128,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				24FBCA251F611E270016A894 /* RPNavigationController.swift */,
-				24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */,
 			);
 			path = AssistantVC;
 			sourceTree = "<group>";
@@ -144,9 +162,9 @@
 		24FBCA281F6122A70016A894 /* FundList */ = {
 			isa = PBXGroup;
 			children = (
-				245377611F5BC0B3002970EB /* RPFundModel.swift */,
 				2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */,
 				2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */,
+				245377611F5BC0B3002970EB /* RPFundModel.swift */,
 			);
 			path = FundList;
 			sourceTree = "<group>";
@@ -154,9 +172,9 @@
 		24FBCA291F6122B10016A894 /* FundDetail */ = {
 			isa = PBXGroup;
 			children = (
+				24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */,
 				2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */,
 				2470FE141F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift */,
-				2470FE241F5D276200B034F9 /* RPFundDateFormatter.swift */,
 				245377631F5BC0CC002970EB /* RPFundDetailModel.swift */,
 			);
 			path = FundDetail;
@@ -166,14 +184,12 @@
 			isa = PBXGroup;
 			children = (
 				2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */,
-				24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */,
-				249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */,
-				2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */,
-				245377651F5BC102002970EB /* RPManagerModel.swift */,
 				249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */,
 				249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */,
 				249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */,
 				249ADB561F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib */,
+				245377651F5BC102002970EB /* RPManagerModel.swift */,
+				2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */,
 				249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */,
 			);
 			path = Manager;

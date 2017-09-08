@@ -45,6 +45,7 @@ class RPCompanyTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金公司"
         self.updateCharts()
     }

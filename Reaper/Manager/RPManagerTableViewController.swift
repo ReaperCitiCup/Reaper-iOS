@@ -114,11 +114,13 @@ class RPManagerTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金经理"
         self.tabBarController?.navigationItem.titleView = menuView
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         self.tabBarController?.navigationItem.titleView = nil
     }
     

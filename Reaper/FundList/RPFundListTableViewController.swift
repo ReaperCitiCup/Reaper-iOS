@@ -33,7 +33,7 @@ class RPFundListTableViewController: UITableViewController {
         
         self.searchBar.delegate = self
         self.searchBar.barTintColor = .rpColor
-        self.searchBar.searchBarStyle = .prominent
+        self.searchBar.backgroundImage = UIImage()
         
         self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.loadData(of: self.currentPage)
