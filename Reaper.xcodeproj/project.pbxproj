@@ -20,6 +20,12 @@
 		2470FE391F5D7A8100B034F9 /* RPManagerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */; };
 		2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */; };
 		2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */; };
+		249ADB501F6236B300307608 /* RPManagerHistoryFundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */; };
+		249ADB521F6236BF00307608 /* RPManagerHistoryFundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */; };
+		249ADB541F623DA800307608 /* RPManagerFundRankFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */; };
+		249ADB571F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */; };
+		249ADB581F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249ADB561F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib */; };
+		249ADB5A1F628B6800307608 /* RPManagerHistoryFundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */; };
 		24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC96A61F416544004E6123 /* AppDelegate.swift */; };
 		24DC96AC1F416544004E6123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AA1F416544004E6123 /* Main.storyboard */; };
 		24DC96B11F416545004E6123 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */; };
@@ -46,6 +52,12 @@
 		2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewCell.swift; sourceTree = "<group>"; };
+		249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerHistoryFundView.swift; sourceTree = "<group>"; };
+		249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RPManagerHistoryFundView.xib; sourceTree = "<group>"; };
+		249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPManagerFundRankFormatter.swift; sourceTree = "<group>"; };
+		249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerHistoryFundTableViewCell.swift; sourceTree = "<group>"; };
+		249ADB561F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RPManagerHistoryFundTableViewCell.xib; sourceTree = "<group>"; };
+		249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerHistoryFundModel.swift; sourceTree = "<group>"; };
 		24DC96A31F416544004E6123 /* Reaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DC96A61F416544004E6123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DC96AB1F416544004E6123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -155,8 +167,14 @@
 			children = (
 				2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */,
 				24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */,
+				249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */,
 				2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */,
 				245377651F5BC102002970EB /* RPManagerModel.swift */,
+				249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */,
+				249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */,
+				249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */,
+				249ADB561F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib */,
+				249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -248,8 +266,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249ADB521F6236BF00307608 /* RPManagerHistoryFundView.xib in Resources */,
 				24DC96B11F416545004E6123 /* LaunchScreen.storyboard in Resources */,
 				24FBCA271F611F2D0016A894 /* Assets.xcassets in Resources */,
+				249ADB581F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib in Resources */,
 				24DC96AC1F416544004E6123 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +347,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249ADB501F6236B300307608 /* RPManagerHistoryFundView.swift in Sources */,
+				249ADB541F623DA800307608 /* RPManagerFundRankFormatter.swift in Sources */,
+				249ADB5A1F628B6800307608 /* RPManagerHistoryFundModel.swift in Sources */,
 				2453775E1F5BB7E7002970EB /* RPFundDetailTableViewController.swift in Sources */,
 				2470FE151F5D009B00B034F9 /* RPFundRateChoiceTableViewController.swift in Sources */,
 				2470FE391F5D7A8100B034F9 /* RPManagerTableViewController.swift in Sources */,
@@ -334,6 +357,7 @@
 				245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */,
 				2470FE251F5D276200B034F9 /* RPFundDateFormatter.swift in Sources */,
 				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
+				249ADB571F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift in Sources */,
 				24E2631B1F61534A00F66DC3 /* RPAnalysisViewController.swift in Sources */,
 				24FBCA241F61142E0016A894 /* RPFundTabBarController.swift in Sources */,
 				245377641F5BC0CC002970EB /* RPFundDetailModel.swift in Sources */,

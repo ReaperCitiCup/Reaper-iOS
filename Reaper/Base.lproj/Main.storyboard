@@ -185,13 +185,36 @@
                                                                             <color key="textColor" red="0.27843137254901962" green="0.26666666666666666" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qZ2-41-lSG">
+                                                                            <rect key="frame" x="0.0" y="65" width="93.5" height="12"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lL7-bs-wUi">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="47" height="12"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aA-mb-mCe">
+                                                                                    <rect key="frame" x="47" y="0.0" width="46.5" height="12"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstItem="5aA-mb-mCe" firstAttribute="width" secondItem="lL7-bs-wUi" secondAttribute="width" id="lcb-3V-a1O"/>
+                                                                            </constraints>
+                                                                        </stackView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="LQJ-xY-l0Z" firstAttribute="leading" secondItem="zp6-xQ-2YX" secondAttribute="leading" id="DgC-gz-TwA"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="qZ2-41-lSG" secondAttribute="trailing" constant="20" id="Hxq-7c-eql"/>
                                                                         <constraint firstItem="31r-Cl-X4M" firstAttribute="top" secondItem="zp6-xQ-2YX" secondAttribute="top" id="L24-Ii-xkZ"/>
+                                                                        <constraint firstItem="qZ2-41-lSG" firstAttribute="leading" secondItem="LQJ-xY-l0Z" secondAttribute="leading" id="NbX-At-W11"/>
                                                                         <constraint firstItem="LQJ-xY-l0Z" firstAttribute="top" secondItem="31r-Cl-X4M" secondAttribute="bottom" constant="5" id="WmI-IP-1Bp"/>
                                                                         <constraint firstItem="31r-Cl-X4M" firstAttribute="leading" secondItem="zp6-xQ-2YX" secondAttribute="leading" id="dbL-gy-OiO"/>
+                                                                        <constraint firstItem="qZ2-41-lSG" firstAttribute="top" secondItem="LQJ-xY-l0Z" secondAttribute="bottom" constant="2" id="mED-YV-lP4"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D32-0u-ffQ">
@@ -514,7 +537,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7w-4A-0qV" customClass="LineChartView" customModule="Charts">
-                                                            <rect key="frame" x="10" y="30" width="341" height="137.5"/>
+                                                            <rect key="frame" x="10" y="35" width="341" height="132.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Avb-yT-1JW">
@@ -541,7 +564,7 @@
                                                         <constraint firstItem="u7w-4A-0qV" firstAttribute="leading" secondItem="Jle-oD-eZK" secondAttribute="leading" constant="10" id="S6r-aQ-ejt"/>
                                                         <constraint firstItem="Avb-yT-1JW" firstAttribute="centerY" secondItem="BPP-e1-cZO" secondAttribute="centerY" id="azM-Sc-Ruc"/>
                                                         <constraint firstItem="BPP-e1-cZO" firstAttribute="leading" secondItem="Jle-oD-eZK" secondAttribute="leading" constant="10" id="gUH-XL-RQa"/>
-                                                        <constraint firstItem="u7w-4A-0qV" firstAttribute="top" secondItem="BPP-e1-cZO" secondAttribute="bottom" constant="5" id="hMg-XK-FG9"/>
+                                                        <constraint firstItem="u7w-4A-0qV" firstAttribute="top" secondItem="BPP-e1-cZO" secondAttribute="bottom" constant="10" id="hMg-XK-FG9"/>
                                                         <constraint firstAttribute="trailing" secondItem="u7w-4A-0qV" secondAttribute="trailing" constant="10" id="pH5-IT-zAz"/>
                                                     </constraints>
                                                 </view>
@@ -609,6 +632,9 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="基金详情" image="fund" id="Ug1-cq-5Kk"/>
                     <connections>
+                        <outlet property="assessDailyRateLabel" destination="5aA-mb-mCe" id="778-4H-ftf"/>
+                        <outlet property="assessIncreaseLabel" destination="lL7-bs-wUi" id="dBE-Th-oRy"/>
+                        <outlet property="assessNetValueLabel" destination="LQJ-xY-l0Z" id="mXC-dW-war"/>
                         <outlet property="companyLabel" destination="xbB-oz-R03" id="Z2q-zq-3rJ"/>
                         <outlet property="cumulativeNetValueLabel" destination="WqF-7k-3dt" id="ARs-xl-rXv"/>
                         <outlet property="currentAssetChart" destination="AT1-hM-5N1" id="oxO-iz-c00"/>
@@ -938,17 +964,25 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb7-EE-Zc9">
                                                     <rect key="frame" x="7" y="7" width="361" height="193"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现任基金业绩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqs-8q-vHr">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现任基金排名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqs-8q-vHr">
                                                             <rect key="frame" x="10" y="5" width="84" height="20"/>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RF6-pD-sgl" customClass="HorizontalBarChartView" customModule="Charts">
+                                                            <rect key="frame" x="10" y="30" width="341" height="158"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="RF6-pD-sgl" secondAttribute="bottom" constant="5" id="H4G-iC-XMY"/>
                                                         <constraint firstItem="oqs-8q-vHr" firstAttribute="top" secondItem="cb7-EE-Zc9" secondAttribute="top" constant="5" id="KOm-KD-A8L"/>
                                                         <constraint firstItem="oqs-8q-vHr" firstAttribute="leading" secondItem="cb7-EE-Zc9" secondAttribute="leading" constant="10" id="MFa-mJ-jKA"/>
+                                                        <constraint firstItem="RF6-pD-sgl" firstAttribute="leading" secondItem="cb7-EE-Zc9" secondAttribute="leading" constant="10" id="Rha-Ud-Tj3"/>
+                                                        <constraint firstItem="RF6-pD-sgl" firstAttribute="top" secondItem="oqs-8q-vHr" secondAttribute="bottom" constant="5" id="amc-Jx-nT4"/>
+                                                        <constraint firstAttribute="trailing" secondItem="RF6-pD-sgl" secondAttribute="trailing" constant="10" id="pqT-lT-Ghq"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1018,11 +1052,19 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veg-aU-a85" customClass="RPManagerHistoryFundView" customModule="Reaper" customModuleProvider="target">
+                                                            <rect key="frame" x="10" y="30" width="341" height="158"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="Nd0-ZF-UnI" firstAttribute="top" secondItem="Hol-Wv-Q6A" secondAttribute="top" constant="5" id="Xec-BF-hNb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="veg-aU-a85" secondAttribute="bottom" constant="5" id="b4a-Kd-IG9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="veg-aU-a85" secondAttribute="trailing" constant="10" id="ncy-76-8FG"/>
                                                         <constraint firstItem="Nd0-ZF-UnI" firstAttribute="leading" secondItem="Hol-Wv-Q6A" secondAttribute="leading" constant="10" id="p9v-UG-9o4"/>
+                                                        <constraint firstItem="veg-aU-a85" firstAttribute="leading" secondItem="Hol-Wv-Q6A" secondAttribute="leading" constant="10" id="tXJ-yW-Jhf"/>
+                                                        <constraint firstItem="veg-aU-a85" firstAttribute="top" secondItem="Nd0-ZF-UnI" secondAttribute="bottom" constant="5" id="tio-X3-AeC"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1051,7 +1093,9 @@
                         <outlet property="appointedDateLabel" destination="dv4-g5-wKE" id="jde-Xn-bti"/>
                         <outlet property="bestReturnLabel" destination="ZgA-Ui-9pa" id="DOc-cm-G5I"/>
                         <outlet property="companyLabel" destination="DE7-eU-za4" id="BSX-U7-Fea"/>
+                        <outlet property="fundRankHorizontalBarChart" destination="RF6-pD-sgl" id="x9B-G0-46G"/>
                         <outlet property="fundRateTrendChart" destination="sJP-v0-pb1" id="YUS-7o-TZD"/>
+                        <outlet property="historyFundView" destination="veg-aU-a85" id="vTC-MK-Ru9"/>
                         <outlet property="infoLabel" destination="lNN-aL-5Jx" id="kQ8-Ku-cr8"/>
                         <outlet property="nameLabel" destination="4uv-tL-Zis" id="h98-G8-bqS"/>
                         <outlet property="totalScopeLabel" destination="Q6g-G2-RIh" id="RPn-Vc-CLg"/>
@@ -1059,7 +1103,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHU-Mu-I35" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3108" y="198"/>
+            <point key="canvasLocation" x="3108" y="197.45127436281859"/>
         </scene>
         <!--基金公司-->
         <scene sceneID="nDA-E6-rCZ">
@@ -1350,9 +1394,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="analysis" width="32" height="26"/>
-        <image name="company" width="32" height="32"/>
-        <image name="fund" width="32" height="32"/>
-        <image name="manager" width="32" height="30"/>
+        <image name="analysis" width="24" height="20"/>
+        <image name="company" width="24" height="24"/>
+        <image name="fund" width="24" height="24"/>
+        <image name="manager" width="24" height="22"/>
     </resources>
 </document>

@@ -29,6 +29,9 @@ class RPFundDetailTableViewController: UITableViewController {
             }
             self.companyLabel.text = self.fundDetailModel?.company?.name
             self.dateLabel.text = self.fundDetailModel?.establishmentDate
+            self.assessDailyRateLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessDailyRate)!)
+            self.assessIncreaseLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessIncrease)!)
+            self.assessNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessNetValue)!)
             
             let dict = self.fundDetailModel?.rate
             if dict != nil {
@@ -61,6 +64,9 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var scopeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var assessNetValueLabel: UILabel!
+    @IBOutlet weak var assessIncreaseLabel: UILabel!
+    @IBOutlet weak var assessDailyRateLabel: UILabel!
     
     var rateLabels: [UILabel]?
     @IBOutlet weak var rate1MonthLabel: UILabel!
@@ -181,8 +187,7 @@ class RPFundDetailTableViewController: UITableViewController {
             self.updateRate(during: 0)
         }
         queue.addOperation {
-            // FIXME:- asset or assert
-            Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/current-assert").responseJSON { response in
+            Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
                 if let json = response.result.value {
                     let result4 = JSON(json).dictionaryValue
                     var currentAssetDict = [String:Double]()

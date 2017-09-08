@@ -22,12 +22,15 @@ class RPManagerTableViewController: UITableViewController {
     @IBOutlet weak var appointedDateLabel: UILabel!
     
     @IBOutlet weak var abilityRadarChart: RadarChartView!
-    
+    @IBOutlet weak var fundRankHorizontalBarChart: HorizontalBarChartView!
     @IBOutlet weak var fundRateTrendChart: LineChartView!
+    
+    @IBOutlet weak var historyFundView: RPManagerHistoryFundView!
     
     var fundCode: String? = nil {
         didSet {
-            Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/managers").responseJSON { response in
+            let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/managers"
+            Alamofire.request(url).responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json).arrayValue
                     var tempManagers = [RPManagerShortModel]()
@@ -87,6 +90,7 @@ class RPManagerTableViewController: UITableViewController {
         
         self.abilityRadarChart.chartDescription?.text = ""
         self.fundRateTrendChart.chartDescription?.text = ""
+        self.fundRankHorizontalBarChart.chartDescription?.text = ""
         
         self.abilityRadarChart.legend.enabled = false
         self.abilityRadarChart.yAxis.drawLabelsEnabled = false
@@ -96,6 +100,13 @@ class RPManagerTableViewController: UITableViewController {
         self.fundRateTrendChart.xAxis.drawGridLinesEnabled = false
         self.fundRateTrendChart.rightAxis.drawAxisLineEnabled = false
         self.fundRateTrendChart.rightAxis.drawLabelsEnabled = false
+        
+        self.fundRankHorizontalBarChart.xAxis.labelPosition = .bottom
+        self.fundRankHorizontalBarChart.rightAxis.drawAxisLineEnabled = false
+        self.fundRankHorizontalBarChart.rightAxis.drawLabelsEnabled = false
+        self.fundRankHorizontalBarChart.dragEnabled = false
+        self.fundRankHorizontalBarChart.doubleTapToZoomEnabled = false
+        self.fundRankHorizontalBarChart.pinchZoomEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -173,6 +184,48 @@ class RPManagerTableViewController: UITableViewController {
                 }
             }
         }
+        // 现任基金排名
+        queue.addOperation {
+            //FIXME: - URL
+            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/manager-fund-rank").responseJSON { response in
+                if let json = response.result.value {
+                    let result = JSON(json).arrayValue
+                    
+                    var monthDataSets = [BarChartDataSet]()
+                    
+                    print(result)
+                    
+                    for fundDict in result {
+                        let fundName = fundDict["name"].stringValue
+                        
+                        var monthDataEntries : [BarChartDataEntry] = []
+                        for dict in fundDict["data"].arrayValue {
+                            let month = Int.transformToXAxis(from: dict["month"].intValue)
+                            let rank = dict["rank"].doubleValue
+                            let total = dict["total"].doubleValue
+                            monthDataEntries.append(BarChartDataEntry(x: Double(month),
+                                                                      y: rank / total,
+                                                                      data: fundName as AnyObject))
+                        }
+                        
+                        let dataSet = BarChartDataSet(values: monthDataEntries.sorted(by: { $0.x < $1.x }),
+                                                      label: fundName)
+                        dataSet.setColor(ChartColorTemplates.vordiplom()[monthDataSets.count])
+                        
+                        monthDataSets.append(dataSet)
+                    }
+
+                    let data = BarChartData(dataSets: monthDataSets)
+                    data.barWidth /= (Double(monthDataSets.count) * 1.5)
+                    data.groupBars(fromX: 0.45,
+                                   groupSpace: 0.15,
+                                   barSpace: 0.15)
+                    
+                    self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPManagerFundRankFormatter()
+                    self.fundRankHorizontalBarChart.data = data
+                }
+            }
+        }
         // 综合能力
         queue.addOperation {
             Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
@@ -189,6 +242,25 @@ class RPManagerTableViewController: UITableViewController {
                     
                     let data = RadarChartData(dataSet: abilityDataSet)
                     self.abilityRadarChart.data = data
+                }
+            }
+        }
+        // 历史基金
+        queue.addOperation {
+            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/funds").responseJSON { response in
+                if let json = response.result.value {
+                    let result = JSON(json).arrayValue
+                    
+                    var models: [RPManagerHistoryFundModel] = []
+                    print( result)
+                    
+                    for dict in result {
+                        models.append(RPManagerHistoryFundModel(name: dict["name"].stringValue,
+                                                                scale: dict["scope"].doubleValue,
+                                                                returnVal: dict["returns"].doubleValue))
+                    }
+                    
+                    self.historyFundView.fundHistoryModels = models
                 }
             }
         }
@@ -211,8 +283,33 @@ class RPManagerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 3 {
             return SCREEN_WIDTH - 20
+        } else if indexPath.row == 6 {
+            return CGFloat(75 + historyFundView.fundHistoryModels.count * 30)
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+    
+}
+
+private extension Int {
+    
+    static func transformToXAxis(from month: Int) -> Int {
+        switch month {
+        case 1:
+            return 1
+        case 3:
+            return 2
+        case 6:
+            return 3
+        case 12:
+            return 4
+        case 24:
+            return 5
+        case 36:
+            return 6
+        default:
+            return -1
         }
     }
     

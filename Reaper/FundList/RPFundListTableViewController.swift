@@ -97,8 +97,8 @@ class RPFundListTableViewController: UITableViewController {
         cell.codeLabel.text = fundModel.code
         cell.nameLabel.text = fundModel.name
         //
-        cell.annualProfitLabel.text = "0.0"
-        cell.volatilityLabel.text = "0.0"
+        cell.annualProfitLabel.text = String.init(format: "%.2f", fundModel.annualProfit ?? 0.0)
+        cell.volatilityLabel.text = String.init(format: "%.2f", fundModel.volatility ?? 0.0)
         
         return cell
     }
