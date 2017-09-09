@@ -14,7 +14,7 @@ import Charts
 class RPCompanyTableViewController: UITableViewController {
     
     var companyModel: RPCompanyShortModel?
-    var nameLabel: UILabel?
+    private var nameLabel: UILabel?
     
     @IBOutlet weak var fundPerformanceScatterChart: ScatterChartView!
     @IBOutlet weak var managerPerformanceScatterChart: ScatterChartView!

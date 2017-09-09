@@ -16,12 +16,12 @@ class RPFundListTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let reuseId = "RPFundListTableViewCell"
+    private let reuseId = "RPFundListTableViewCell"
     
-    var currentPage = 1
+    private var currentPage = 1
     var fundArr = [RPFundModel]()
-    var searchFundArr = [RPFundModel]()
-    var searchString: String? = nil
+    fileprivate var searchFundArr = [RPFundModel]()
+    fileprivate var searchString: String? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()

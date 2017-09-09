@@ -81,7 +81,7 @@ class RPManagerTableViewController: UITableViewController {
         }
     }
     
-    var menuView: UIView?
+    private var menuView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()

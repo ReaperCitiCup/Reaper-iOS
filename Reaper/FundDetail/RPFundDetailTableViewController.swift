@@ -29,18 +29,18 @@ class RPFundDetailTableViewController: UITableViewController {
             }
             self.companyLabel.text = self.fundDetailModel?.company?.name
             self.dateLabel.text = self.fundDetailModel?.establishmentDate
-            self.assessDailyRateLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessDailyRate)!)
+            self.assessDailyRateLabel.text = String(format: "%.4f%%", (self.fundDetailModel?.assessDailyRate)!)
             self.assessIncreaseLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessIncrease)!)
             self.assessNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessNetValue)!)
             
             let dict = self.fundDetailModel?.rate
             if dict != nil {
-                self.rate1MonthLabel.text?.append(String(format: "%.2f", dict!["oneMonth"] ?? 0.0))
-                self.rate3MonthLabel.text?.append(String(format: "%.2f", dict!["threeMonths"] ?? 0.0))
-                self.rate6MonthLabel.text?.append(String(format: "%.2f", dict!["sixMonths"] ?? 0.0))
-                self.rate1YearLabel.text?.append(String(format: "%.2f", dict!["oneYear"] ?? 0.0))
-                self.rate3YearLabel.text?.append(String(format: "%.2f", dict!["threeYears"] ?? 0.0))
-                self.rateSinceFoundLabel.text?.append(String(format: "%.2f", dict!["sinceFounded"] ?? 0.0))
+                self.rate1MonthLabel.text?.append(String(format: "%.2f%%", dict!["oneMonth"] ?? 0.0))
+                self.rate3MonthLabel.text?.append(String(format: "%.2f%%", dict!["threeMonths"] ?? 0.0))
+                self.rate6MonthLabel.text?.append(String(format: "%.2f%%", dict!["sixMonths"] ?? 0.0))
+                self.rate1YearLabel.text?.append(String(format: "%.2f%%", dict!["oneYear"] ?? 0.0))
+                self.rate3YearLabel.text?.append(String(format: "%.2f%%", dict!["threeYears"] ?? 0.0))
+                self.rateSinceFoundLabel.text?.append(String(format: "%.2f%%", dict!["sinceFounded"] ?? 0.0))
                 
                 for label in self.rateLabels! {
                     let attributedString = label.attributedText as! NSMutableAttributedString
@@ -55,7 +55,7 @@ class RPFundDetailTableViewController: UITableViewController {
         }
     }
     
-    var nameLabel: UILabel?
+    private var nameLabel: UILabel?
     @IBOutlet weak var unitNetValueLabel: UILabel!
     @IBOutlet weak var cumulativeNetValueLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -68,7 +68,7 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var assessIncreaseLabel: UILabel!
     @IBOutlet weak var assessDailyRateLabel: UILabel!
     
-    var rateLabels: [UILabel]?
+    private var rateLabels: [UILabel]?
     @IBOutlet weak var rate1MonthLabel: UILabel!
     @IBOutlet weak var rate3MonthLabel: UILabel!
     @IBOutlet weak var rate6MonthLabel: UILabel!

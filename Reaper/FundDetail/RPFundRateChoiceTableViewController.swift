@@ -19,12 +19,12 @@ struct RPFundRateChoiceModel {
 
 class RPFundRateChoiceTableViewController: UITableViewController {
     
-    let choiceModels = [RPFundRateChoiceModel(description: "成立来", tag: 0),
-                        RPFundRateChoiceModel(description: "1个月", tag: 1),
-                        RPFundRateChoiceModel(description: "3个月", tag: 3),
-                        RPFundRateChoiceModel(description: "6个月", tag: 6),
-                        RPFundRateChoiceModel(description: "1年", tag: 12),
-                        RPFundRateChoiceModel(description: "3年", tag: 36)]
+    private let choiceModels = [RPFundRateChoiceModel(description: "成立来", tag: 0),
+                                RPFundRateChoiceModel(description: "1个月", tag: 1),
+                                RPFundRateChoiceModel(description: "3个月", tag: 3),
+                                RPFundRateChoiceModel(description: "6个月", tag: 6),
+                                RPFundRateChoiceModel(description: "1年", tag: 12),
+                                RPFundRateChoiceModel(description: "3年", tag: 36)]
     
     var delegate: RPFundRateChoiceDelegate?
     var nowPeriod: Int?

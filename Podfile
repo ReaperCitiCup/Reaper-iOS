@@ -15,5 +15,6 @@ target 'Reaper' do
   pod 'SVProgressHUD'
   pod 'DZNEmptyDataSet'
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git'
+  #pod 'SwiftLint'
 
 end

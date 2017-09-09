@@ -10,7 +10,7 @@ import UIKit
 
 class RPManagerHistoryFundView: UIView {
     
-    let cellId = "RPManagerHistoryFundTableViewCell"
+    fileprivate let cellId = "RPManagerHistoryFundTableViewCell"
     
     @IBOutlet weak var fundTableView: UITableView!
     var fundHistoryModels: [RPManagerHistoryFundModel] = [] {

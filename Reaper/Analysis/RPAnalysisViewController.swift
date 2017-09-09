@@ -15,25 +15,25 @@ import BTNavigationDropdownMenu
 class RPAnalysisViewController: UIViewController {
     
     var fundCode: String?
-    let analysisTypeArray = ["风险走势",
-                             "每日回撤",
-                             "波动率",
-                             "在险价值",
-                             "下行波动率",
-                             "夏普指标",
-                             "特雷诺指标",
-                             "詹森指数",
-                             "信息比率"]
-    let analysisURLArray = ["risk-trend",
-                            "daily-retracement",
-                            "volatility",
-                            "value-at-risk",
-                            "downside-volatility",
-                            "sharpe-index",
-                            "treynor-index",
-                            "jensen-index",
-                            "information-ratio"]
-    var menuView: UIView?
+    private let analysisTypeArray = ["风险走势",
+                                     "每日回撤",
+                                     "波动率",
+                                     "在险价值",
+                                     "下行波动率",
+                                     "夏普指标",
+                                     "特雷诺指标",
+                                     "詹森指数",
+                                     "信息比率"]
+    private let analysisURLArray = ["risk-trend",
+                                    "daily-retracement",
+                                    "volatility",
+                                    "value-at-risk",
+                                    "downside-volatility",
+                                    "sharpe-index",
+                                    "treynor-index",
+                                    "jensen-index",
+                                    "information-ratio"]
+    private var menuView: UIView?
     @IBOutlet weak var lineChartView: LineChartView!
 
     override func viewDidLoad() {
