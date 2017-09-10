@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RPFundRateChoiceDelegate {
+protocol RPFundRateChoiceDelegate: class {
     func didSelectRate(with rateChoiceModel: RPFundRateChoiceModel)
 }
 
@@ -26,7 +26,7 @@ class RPFundRateChoiceTableViewController: UITableViewController {
                                 RPFundRateChoiceModel(description: "1年", tag: 12),
                                 RPFundRateChoiceModel(description: "3年", tag: 36)]
     
-    var delegate: RPFundRateChoiceDelegate?
+    weak var delegate: RPFundRateChoiceDelegate?
     var nowPeriod: Int?
     
     override func viewDidLoad() {

@@ -21,7 +21,7 @@ class RPFundListTableViewController: UITableViewController {
     private var currentPage = 1
     var fundArr = [RPFundModel]()
     fileprivate var searchFundArr = [RPFundModel]()
-    fileprivate var searchString: String? = nil
+    fileprivate var searchString: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()

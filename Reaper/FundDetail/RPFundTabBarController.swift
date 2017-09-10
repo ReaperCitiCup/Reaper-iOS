@@ -67,7 +67,7 @@ class RPFundTabBarController: UITabBarController {
         super.viewDidLoad()
         
         let backItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationController?.navigationItem.backBarButtonItem = backItem;
+        self.navigationController?.navigationItem.backBarButtonItem = backItem
         
         self.tabBar.tintColor = .rpColor
     }

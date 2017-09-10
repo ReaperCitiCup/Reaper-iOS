@@ -13,7 +13,7 @@ import Charts
 
 class RPFundDetailTableViewController: UITableViewController {
     
-    var fundCode: String? = nil
+    var fundCode: String?
     var fundDetailModel: RPFundDetailModel? {
         didSet {
             self.fundCode = self.fundDetailModel?.code
@@ -192,10 +192,8 @@ class RPFundDetailTableViewController: UITableViewController {
                 if let json = response.result.value {
                     let result4 = JSON(json).dictionaryValue
                     var currentAssetDict = [String:Double]()
-                    for (key, value) in result4 {
-                        if value.doubleValue > 0 {
-                            currentAssetDict[key] = value.doubleValue
-                        }
+                    for (key, value) in result4 where value.doubleValue > 0 {
+                        currentAssetDict[key] = value.doubleValue
                     }
                     
                     var dataEntries4 = [PieChartDataEntry]()

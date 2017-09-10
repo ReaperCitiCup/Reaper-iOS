@@ -45,7 +45,7 @@ class RPAnalysisViewController: UIViewController {
                                                 containerView: self.navigationController!.view,
                                                 title: BTTitle.title("深度分析"),
                                                 items: analysisTypeArray)
-        menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
+        menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> Void in
             self?.loadData(at: indexPath)
         }
         

@@ -56,7 +56,7 @@ class RPManagerTableViewController: UITableViewController {
                                                     containerView: self.navigationController!.view,
                                                     title: BTTitle.title(managers![0].name),
                                                     items: managers!.map{ $0.name })
-            menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
+            menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> Void in
                 if let code = self?.managers![indexPath].code {
                     self?.loadManager(of: code)
                 }

@@ -234,6 +234,7 @@
 				24DC96A11F416544004E6123 /* Resources */,
 				1268C0CDF081714DF72345CC /* [CP] Embed Pods Frameworks */,
 				D4EFFFF266E459D1D374217B /* [CP] Copy Pods Resources */,
+				243209981F64EA4800AA23FF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -322,6 +323,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reaper/Pods-Reaper-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		243209981F64EA4800AA23FF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		C0425435BF8E2F9C1656A18D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
