@@ -11,6 +11,7 @@ import MJRefresh
 import Alamofire
 import SwiftyJSON
 import DZNEmptyDataSet
+import SVProgressHUD
 
 class RPFundListTableViewController: UITableViewController {
     
@@ -50,11 +51,13 @@ class RPFundListTableViewController: UITableViewController {
     }
     
     func loadData(of page: Int) {
+        SVProgressHUD.show()
+
         let url: URLConvertible = "\(BASE_URL)/fund/search"
-        let para = ["keyword" : searchString ?? "",
-                    "order" : "code",
-                    "size" : 10,
-                    "page" : page] as [String : Any]
+        let para = ["keyword": searchString ?? "",
+                    "order": "code",
+                    "size": 10,
+                    "page": 1] as [String: Any]
         Alamofire.request(url, parameters: para).responseJSON { response in
             if let json = response.result.value {
                 for result in JSON(json)["result"].arrayValue {
@@ -70,7 +73,9 @@ class RPFundListTableViewController: UITableViewController {
                     }
                 }
             }
-            
+
+            SVProgressHUD.dismiss()
+
             self.currentPage += 1
             self.tableView.reloadData()
         }
@@ -97,8 +102,8 @@ class RPFundListTableViewController: UITableViewController {
         cell.codeLabel.text = fundModel.code
         cell.nameLabel.text = fundModel.name
         //
-        cell.annualProfitLabel.text = String.init(format: "%.2f", fundModel.annualProfit ?? 0.0)
-        cell.volatilityLabel.text = String.init(format: "%.2f", fundModel.volatility ?? 0.0)
+        cell.annualProfitLabel.text = String.init(format: "%.2f%%", fundModel.annualProfit ?? 0.0)
+        cell.volatilityLabel.text = String.init(format: "%.2f%%", fundModel.volatility ?? 0.0)
         
         return cell
     }
@@ -135,7 +140,6 @@ extension RPFundListTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetD
 extension RPFundListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Did change \(searchText)")
         searchString = searchText
     }
     

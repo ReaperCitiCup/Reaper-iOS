@@ -41,7 +41,7 @@ class RPNavigationController: UINavigationController, UIGestureRecognizerDelegat
             button.setImage(#imageLiteral(resourceName: "nav_back"), for: .normal)
             button.setImage(#imageLiteral(resourceName: "nav_back"), for: .highlighted)
             button.contentHorizontalAlignment = .left
-            button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+            button.contentEdgeInsets = UIEdgeInsets.zero
             button.addTarget(self, action: #selector(back), for: .touchUpInside)
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         }

@@ -55,7 +55,7 @@ class RPManagerTableViewController: UITableViewController {
             let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController,
                                                     containerView: self.navigationController!.view,
                                                     title: BTTitle.title(managers![0].name),
-                                                    items: managers!.map{ $0.name })
+                                                    items: managers!.map { $0.name })
             menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> Void in
                 if let code = self?.managers![indexPath].code {
                     self?.loadManager(of: code)
@@ -107,6 +107,7 @@ class RPManagerTableViewController: UITableViewController {
         self.fundRankHorizontalBarChart.dragEnabled = false
         self.fundRankHorizontalBarChart.doubleTapToZoomEnabled = false
         self.fundRankHorizontalBarChart.pinchZoomEnabled = false
+        self.fundRankHorizontalBarChart.xAxis.drawGridLinesEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,9 +126,6 @@ class RPManagerTableViewController: UITableViewController {
     }
     
     func loadManager(of code: String) {
-        
-        print("Code: \(code)")
-        
         Alamofire.request("\(BASE_URL)/manager/\(code)").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json)
@@ -151,119 +149,133 @@ class RPManagerTableViewController: UITableViewController {
         queue.maxConcurrentOperationCount = 1
         // 现任收益率走势
         queue.addOperation {
-            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rate-trend").responseJSON { response in
-                if let json = response.result.value {
-                    let result = JSON(json).arrayValue
-                    
-                    var fundRateTrendDataSetArray = [LineChartDataSet]()
-                    
-                    for dict in result {
-                        _ = dict["id"]
-                        let fundName = dict["name"]
-                        let dataArr = dict["data"].arrayValue
-                        
-                        var dates = [String]()
-                        var values = [Double]()
-                        for pairs in dataArr {
-                            dates.append((pairs.dictionaryValue["date"]?.stringValue)!)
-                            values.append((pairs.dictionaryValue["value"]?.doubleValue)!)
-                        }
-                        
-                        var dataEntries = [ChartDataEntry]()
-                        for i in 0..<dates.count {
-                            dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
-                        }
-                        
-                        let fundRateTrendDataSet = LineChartDataSet(values: dataEntries, label: fundName.stringValue)
-                        fundRateTrendDataSet.drawCircleHoleEnabled = false
-                        fundRateTrendDataSet.drawCirclesEnabled = false
-                        fundRateTrendDataSetArray.append(fundRateTrendDataSet)
-                    }
-                    
-                    let data = LineChartData(dataSets: fundRateTrendDataSetArray)
-                    self.fundRateTrendChart.data = data
-//                    self.fundRateTrendChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
-                }
-            }
+            self.updateFundRateTrend()
         }
         // 现任基金排名
         queue.addOperation {
-            //FIXME: - URL
-            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/manager-fund-rank").responseJSON { response in
-                if let json = response.result.value {
-                    let result = JSON(json).arrayValue
-                    
-                    var monthDataSets = [BarChartDataSet]()
-                    
-                    print(result)
-                    
-                    for fundDict in result {
-                        let fundName = fundDict["name"].stringValue
-                        
-                        var monthDataEntries : [BarChartDataEntry] = []
-                        for dict in fundDict["data"].arrayValue {
-                            let month = Int.transformToXAxis(from: dict["month"].intValue)
-                            let rank = dict["rank"].doubleValue
-                            let total = dict["total"].doubleValue
-                            monthDataEntries.append(BarChartDataEntry(x: Double(month),
-                                                                      y: rank / total,
-                                                                      data: fundName as AnyObject))
-                        }
-                        
-                        let dataSet = BarChartDataSet(values: monthDataEntries.sorted(by: { $0.x < $1.x }),
-                                                      label: fundName)
-                        dataSet.setColor(ChartColorTemplates.vordiplom()[monthDataSets.count])
-                        
-                        monthDataSets.append(dataSet)
-                    }
-
-                    let data = BarChartData(dataSets: monthDataSets)
-                    data.barWidth /= (Double(monthDataSets.count) * 1.5)
-                    data.groupBars(fromX: 0.45,
-                                   groupSpace: 0.15,
-                                   barSpace: 0.15)
-                    
-                    self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPManagerFundRankFormatter()
-                    self.fundRankHorizontalBarChart.data = data
-                }
-            }
+            self.updateManagerFundRank()
         }
         // 综合能力
         queue.addOperation {
-            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
-                if let json = response.result.value {
-                    let result = JSON(json).dictionaryValue
-                    
-                    var abilityChartDataEntries = [RadarChartDataEntry]()
-                    for (key, value) in result {
-                        abilityChartDataEntries.append(RadarChartDataEntry(value: value.doubleValue,
-                                                                           data: key as AnyObject))
-                    }
-                    let abilityDataSet = RadarChartDataSet(values: abilityChartDataEntries, label: "经理综合能力")
-                    abilityDataSet.drawFilledEnabled = true
-                    
-                    let data = RadarChartData(dataSet: abilityDataSet)
-                    self.abilityRadarChart.data = data
-                }
-            }
+            self.updateAbility()
         }
         // 历史基金
         queue.addOperation {
-            Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/funds").responseJSON { response in
-                if let json = response.result.value {
-                    let result = JSON(json).arrayValue
-                    
-                    var models: [RPManagerHistoryFundModel] = []
-                    print( result)
-                    
-                    for dict in result {
-                        models.append(RPManagerHistoryFundModel(name: dict["name"].stringValue,
-                                                                scale: dict["scope"].doubleValue,
-                                                                returnVal: dict["returns"].doubleValue))
+            self.updateHistoryFund()
+        }
+    }
+
+    private func updateFundRateTrend() {
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rate-trend").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+
+                var fundRateTrendDataSetArray = [LineChartDataSet]()
+
+                for dict in result {
+                    _ = dict["id"]
+                    let fundName = dict["name"]
+                    let dataArr = dict["data"].arrayValue
+
+                    var dates = [String]()
+                    var values = [Double]()
+                    for pairs in dataArr {
+                        dates.append((pairs.dictionaryValue["date"]?.stringValue)!)
+                        values.append((pairs.dictionaryValue["value"]?.doubleValue)!)
                     }
-                    
-                    self.historyFundView.fundHistoryModels = models
+
+                    var dataEntries = [ChartDataEntry]()
+                    for i in 0..<dates.count {
+                        dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
+                    }
+
+                    let fundRateTrendDataSet = LineChartDataSet(values: dataEntries, label: fundName.stringValue)
+                    fundRateTrendDataSet.drawCircleHoleEnabled = false
+                    fundRateTrendDataSet.drawCirclesEnabled = false
+                    fundRateTrendDataSet.setColor(ChartColorTemplates.material()[fundRateTrendDataSetArray.count])
+                    fundRateTrendDataSetArray.append(fundRateTrendDataSet)
                 }
+
+                let data = LineChartData(dataSets: fundRateTrendDataSetArray)
+                self.fundRateTrendChart.data = data
+                //                    self.fundRateTrendChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
+            }
+        }
+    }
+
+    private func updateManagerFundRank() {
+        //FIXME: - URL
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+
+                var monthDataSets = [BarChartDataSet]()
+
+                for fundDict in result {
+                    let fundName = fundDict["name"].stringValue
+
+                    var monthDataEntries: [BarChartDataEntry] = []
+                    for dict in fundDict["data"].arrayValue {
+                        let month = Int.transformToXAxis(from: dict["month"].intValue)
+                        let rank = dict["rank"].doubleValue
+                        let total = dict["total"].doubleValue
+                        monthDataEntries.append(BarChartDataEntry(x: Double(month),
+                                                                  y: rank / total,
+                                                                  data: fundName as AnyObject))
+                    }
+
+                    let dataSet = BarChartDataSet(values: monthDataEntries.sorted(by: { $0.x < $1.x }),
+                                                  label: fundName)
+                    dataSet.setColor(ChartColorTemplates.material()[monthDataSets.count])
+
+                    monthDataSets.append(dataSet)
+                }
+
+                let data = BarChartData(dataSets: monthDataSets)
+                data.barWidth /= (Double(monthDataSets.count) * 1.5)
+                data.groupBars(fromX: 0.45,
+                               groupSpace: 0.15,
+                               barSpace: 0.15)
+
+                self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPManagerFundRankFormatter()
+                self.fundRankHorizontalBarChart.data = data
+            }
+        }
+    }
+
+    private func updateAbility() {
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).dictionaryValue
+
+                var abilityChartDataEntries = [RadarChartDataEntry]()
+                for (key, value) in result {
+                    abilityChartDataEntries.append(RadarChartDataEntry(value: value.doubleValue,
+                                                                       data: key as AnyObject))
+                }
+                let abilityDataSet = RadarChartDataSet(values: abilityChartDataEntries, label: "经理综合能力")
+                abilityDataSet.drawFilledEnabled = true
+
+                let data = RadarChartData(dataSet: abilityDataSet)
+                self.abilityRadarChart.data = data
+            }
+        }
+    }
+
+    private func updateHistoryFund() {
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/funds").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+
+                var models: [RPManagerHistoryFundModel] = []
+
+                for dict in result {
+                    models.append(RPManagerHistoryFundModel(name: dict["name"].stringValue,
+                                                            scale: dict["scope"].doubleValue,
+                                                            returnVal: dict["returns"].doubleValue))
+                }
+
+                self.historyFundView.fundHistoryModels = models
             }
         }
     }

@@ -14,4 +14,3 @@ let SCREEN_BOUNDS = UIScreen.main.bounds
 let ROOT_VIEW = (UIApplication.shared.keyWindow?.rootViewController?.view)!
 //let BASE_URL = "http://106.15.203.173:8080/api"
 let BASE_URL = "http://localhost:3000/api"
-

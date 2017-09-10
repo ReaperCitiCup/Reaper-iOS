@@ -29,8 +29,6 @@ class RPFundDetailTableViewController: UITableViewController {
             }
             self.companyLabel.text = self.fundDetailModel?.company?.name
             self.dateLabel.text = self.fundDetailModel?.establishmentDate
-            self.assessDailyRateLabel.text = String(format: "%.4f%%", (self.fundDetailModel?.assessDailyRate)!)
-            self.assessIncreaseLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessIncrease)!)
             self.assessNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessNetValue)!)
             
             let dict = self.fundDetailModel?.rate
@@ -46,7 +44,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     let attributedString = label.attributedText as! NSMutableAttributedString
                     attributedString.addAttributes([
                         NSForegroundColorAttributeName: UIColor.black
-                        ], range: NSMakeRange(4, (label.text?.characters.count)! - 4))
+                        ], range: NSRange.init(location: 4, length: (label.text?.characters.count)! - 4))
                     label.attributedText = attributedString
                 }
             }
@@ -65,8 +63,6 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var assessNetValueLabel: UILabel!
-    @IBOutlet weak var assessIncreaseLabel: UILabel!
-    @IBOutlet weak var assessDailyRateLabel: UILabel!
     
     private var rateLabels: [UILabel]?
     @IBOutlet weak var rate1MonthLabel: UILabel!
@@ -174,7 +170,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     cumulativeNetValueDataSet = LineChartDataSet(values: dataEntries2, label: "累积净值走势")
                     cumulativeNetValueDataSet.drawCircleHoleEnabled = false
                     cumulativeNetValueDataSet.drawCirclesEnabled = false
-                    cumulativeNetValueDataSet.setColor(UIColor.red)
+                    cumulativeNetValueDataSet.setColor(.red)
                     
                     if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
                         let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
@@ -188,27 +184,7 @@ class RPFundDetailTableViewController: UITableViewController {
             self.updateRate(during: 0)
         }
         queue.addOperation {
-            Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
-                if let json = response.result.value {
-                    let result4 = JSON(json).dictionaryValue
-                    var currentAssetDict = [String:Double]()
-                    for (key, value) in result4 where value.doubleValue > 0 {
-                        currentAssetDict[key] = value.doubleValue
-                    }
-                    
-                    var dataEntries4 = [PieChartDataEntry]()
-                    for (key, value) in currentAssetDict {
-                        dataEntries4.append(PieChartDataEntry(value: value, label: key))
-                    }
-                    let currentAssetDataSet = PieChartDataSet(values: dataEntries4, label: "")
-                    currentAssetDataSet.colors = ChartColorTemplates.vordiplom()
-                    currentAssetDataSet.valueTextColor = .black
-                    currentAssetDataSet.entryLabelColor = .clear
-                    
-                    let data = PieChartData(dataSet: currentAssetDataSet)
-                    self.currentAssetChart.data = data
-                }
-            }
+            self.updateCurrentAsset()
         }
     }
     
@@ -238,7 +214,31 @@ class RPFundDetailTableViewController: UITableViewController {
             }
         }
     }
-    
+
+    private func updateCurrentAsset() {
+        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
+            if let json = response.result.value {
+                let result4 = JSON(json).dictionaryValue
+                var currentAssetDict = [String: Double]()
+                for (key, value) in result4 where value.doubleValue > 0 {
+                    currentAssetDict[key] = value.doubleValue
+                }
+
+                var dataEntries4 = [PieChartDataEntry]()
+                for (key, value) in currentAssetDict {
+                    dataEntries4.append(PieChartDataEntry(value: value, label: key))
+                }
+                let currentAssetDataSet = PieChartDataSet(values: dataEntries4, label: "")
+                currentAssetDataSet.colors = ChartColorTemplates.material()
+                currentAssetDataSet.valueTextColor = .black
+                currentAssetDataSet.entryLabelColor = .clear
+
+                let data = PieChartData(dataSet: currentAssetDataSet)
+                self.currentAssetChart.data = data
+            }
+        }
+    }
+
     @IBAction func chooseRateAction(_ sender: UIButton) {
         self.performSegue(withIdentifier: "chooseRateSegue", sender: sender)
     }

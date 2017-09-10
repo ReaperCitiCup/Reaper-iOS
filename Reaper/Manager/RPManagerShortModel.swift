@@ -1,4 +1,3 @@
-
 //
 //  RPManagerShortModel.swift
 //  Reaper

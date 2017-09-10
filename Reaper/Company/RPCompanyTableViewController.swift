@@ -91,7 +91,7 @@ class RPCompanyTableViewController: UITableViewController {
         }
         queue.addOperation {
             let url = "http://localhost:3000/field-value-pie"
-            // "\(BASE_URL)/company/\(self.companyModel!.code)/product-strategy"
+            //let url = "\(BASE_URL)/company/\(self.companyModel!.code)/product-strategy"
             Alamofire.request(url).responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json).arrayValue
@@ -103,7 +103,7 @@ class RPCompanyTableViewController: UITableViewController {
                     }
                     
                     let productStrategyDataSet = PieChartDataSet(values: productStrategyEntry, label: "")
-                    productStrategyDataSet.colors = ChartColorTemplates.vordiplom()
+                    productStrategyDataSet.colors = ChartColorTemplates.material()
                     productStrategyDataSet.valueTextColor = .black
                     productStrategyDataSet.entryLabelColor = .clear
                     
@@ -114,7 +114,7 @@ class RPCompanyTableViewController: UITableViewController {
         }
         queue.addOperation {
             let url = "http://localhost:3000/field-value-pie"
-            // "\(BASE_URL)/company/\(self.companyModel!.code)/product-strategy"
+            //let url = "\(BASE_URL)/company/\(self.companyModel!.code)/asset-allocation"
             Alamofire.request(url).responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json).arrayValue
@@ -126,7 +126,7 @@ class RPCompanyTableViewController: UITableViewController {
                     }
                     
                     let assetAllocationDataSet = PieChartDataSet(values: assetAllocationEntry, label: "")
-                    assetAllocationDataSet.colors = ChartColorTemplates.vordiplom()
+                    assetAllocationDataSet.colors = ChartColorTemplates.material()
                     assetAllocationDataSet.valueTextColor = .black
                     assetAllocationDataSet.entryLabelColor = .clear
                     

@@ -47,8 +47,6 @@ class RPFundTabBarController: UITabBarController {
                                                              cumulativeNetValue: result["cumulativeNetValue"].doubleValue,
                                                              dailyRate: result["dailyRate"].doubleValue,
                                                              assessNetValue: result["assessNetValue"].doubleValue,
-                                                             assessIncrease: result["assessIncrease"].doubleValue,
-                                                             assessDailyRate: result["assessDailyRate"].doubleValue,
                                                              rate: rateDict,
                                                              manager: managerArray,
                                                              company: companyShortModel)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.white
         ]
+
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setForegroundColor(.black)
+        SVProgressHUD.setBackgroundColor(.white)
         
         return true
     }
@@ -47,4 +52,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
