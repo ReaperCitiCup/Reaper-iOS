@@ -19,6 +19,8 @@ struct RPFundDetailModel {
     var cumulativeNetValue: Double
     var dailyRate: Double
     var assessNetValue: Double
+    var assessIncrease: Double
+    var assessDailyRate: Double
     var rate: [String:Double]?
     var manager: [RPManagerShortModel]?
     var company: RPCompanyShortModel?

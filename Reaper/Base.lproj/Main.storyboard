@@ -185,13 +185,36 @@
                                                                             <color key="textColor" red="0.27843137254901962" green="0.26666666666666666" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qZ2-41-lSG">
+                                                                            <rect key="frame" x="0.0" y="65" width="93.5" height="12"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lL7-bs-wUi">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="47" height="12"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aA-mb-mCe">
+                                                                                    <rect key="frame" x="47" y="0.0" width="46.5" height="12"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstItem="5aA-mb-mCe" firstAttribute="width" secondItem="lL7-bs-wUi" secondAttribute="width" id="lcb-3V-a1O"/>
+                                                                            </constraints>
+                                                                        </stackView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="LQJ-xY-l0Z" firstAttribute="leading" secondItem="zp6-xQ-2YX" secondAttribute="leading" id="DgC-gz-TwA"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="qZ2-41-lSG" secondAttribute="trailing" constant="20" id="Hxq-7c-eql"/>
                                                                         <constraint firstItem="31r-Cl-X4M" firstAttribute="top" secondItem="zp6-xQ-2YX" secondAttribute="top" id="L24-Ii-xkZ"/>
+                                                                        <constraint firstItem="qZ2-41-lSG" firstAttribute="leading" secondItem="LQJ-xY-l0Z" secondAttribute="leading" id="NbX-At-W11"/>
                                                                         <constraint firstItem="LQJ-xY-l0Z" firstAttribute="top" secondItem="31r-Cl-X4M" secondAttribute="bottom" constant="5" id="WmI-IP-1Bp"/>
                                                                         <constraint firstItem="31r-Cl-X4M" firstAttribute="leading" secondItem="zp6-xQ-2YX" secondAttribute="leading" id="dbL-gy-OiO"/>
+                                                                        <constraint firstItem="qZ2-41-lSG" firstAttribute="top" secondItem="LQJ-xY-l0Z" secondAttribute="bottom" constant="2" id="mED-YV-lP4"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D32-0u-ffQ">
@@ -609,6 +632,8 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="基金详情" image="fund" id="Ug1-cq-5Kk"/>
                     <connections>
+                        <outlet property="assessDailyRateLabel" destination="5aA-mb-mCe" id="778-4H-ftf"/>
+                        <outlet property="assessIncreaseLabel" destination="lL7-bs-wUi" id="dBE-Th-oRy"/>
                         <outlet property="assessNetValueLabel" destination="LQJ-xY-l0Z" id="mXC-dW-war"/>
                         <outlet property="companyLabel" destination="xbB-oz-R03" id="Z2q-zq-3rJ"/>
                         <outlet property="cumulativeNetValueLabel" destination="WqF-7k-3dt" id="ARs-xl-rXv"/>

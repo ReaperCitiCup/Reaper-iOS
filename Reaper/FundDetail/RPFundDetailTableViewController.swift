@@ -29,6 +29,8 @@ class RPFundDetailTableViewController: UITableViewController {
             }
             self.companyLabel.text = self.fundDetailModel?.company?.name
             self.dateLabel.text = self.fundDetailModel?.establishmentDate
+            self.assessDailyRateLabel.text = String(format: "%.4f%%", (self.fundDetailModel?.assessDailyRate)!)
+            self.assessIncreaseLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessIncrease)!)
             self.assessNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.assessNetValue)!)
             
             let dict = self.fundDetailModel?.rate
@@ -63,6 +65,8 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var assessNetValueLabel: UILabel!
+    @IBOutlet weak var assessIncreaseLabel: UILabel!
+    @IBOutlet weak var assessDailyRateLabel: UILabel!
     
     private var rateLabels: [UILabel]?
     @IBOutlet weak var rate1MonthLabel: UILabel!

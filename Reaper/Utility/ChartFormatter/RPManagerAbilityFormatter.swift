@@ -11,7 +11,7 @@ import Charts
 
 class RPManagerAbilityFormatter: NSObject, IAxisValueFormatter {
     
-    var labels = ["经验值", "择时能力", "收益率", "稳定性", "抗风险"]
+    var labels = ["经验值", "择时能力", "收益率", "择股能力", "抗风险"]
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return labels[Int(value) % self.labels.count]
