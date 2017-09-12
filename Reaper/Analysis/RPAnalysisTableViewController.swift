@@ -1,19 +1,19 @@
 //
-//  RPAnalysisViewController.swift
+//  RPAnalysisTableViewController.swift
 //  Reaper
 //
-//  Created by 宋 奎熹 on 2017/9/7.
+//  Created by 宋 奎熹 on 2017/9/12.
 //  Copyright © 2017年 宋 奎熹. All rights reserved.
 //
 
 import UIKit
-import Charts
 import Alamofire
 import SwiftyJSON
-import BTNavigationDropdownMenu
+import Charts
+import SVProgressHUD
 
-class RPAnalysisViewController: UIViewController {
-    
+class RPAnalysisTableViewController: UITableViewController {
+
     var fundCode: String?
     private let analysisTypeArray = ["风险走势",
                                      "每日回撤",
@@ -33,78 +33,85 @@ class RPAnalysisViewController: UIViewController {
                                     "treynor-index",
                                     "jensen-index",
                                     "information-ratio"]
-    private var menuView: BTNavigationDropdownMenu?
-    @IBOutlet weak var lineChartView: LineChartView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
-        
-        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController,
-                                                containerView: self.navigationController!.view,
-                                                title: BTTitle.title("深度分析"),
-                                                items: analysisTypeArray)
-        menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> Void in
-            self?.loadData(at: indexPath)
-        }
-        
-        self.menuView = menuView
-        
-        self.lineChartView.chartDescription?.text = ""
-        self.lineChartView.xAxis.labelPosition = .bottom
-        self.lineChartView.xAxis.drawGridLinesEnabled = false
-        self.lineChartView.rightAxis.drawAxisLineEnabled = false
-        self.lineChartView.rightAxis.drawLabelsEnabled = false
-        self.lineChartView.legend.enabled = false
+
+        self.tableView.tableFooterView = UIView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.navigationItem.title = "深度分析"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.navigationItem.title = "深度分析"
-        self.tabBarController?.navigationItem.titleView = menuView!
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.tabBarController?.navigationItem.titleView = nil
 
-        menuView?.hide()
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    
-    private func loadData(at index: Int) {
-        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode!)/\(analysisURLArray[index])").responseJSON { response in
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return analysisTypeArray.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RPAnalysisTableViewCell", for: indexPath)
+
+        cell.textLabel?.text = analysisTypeArray[indexPath.row]
+
+        cell.accessoryType = .disclosureIndicator
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        SVProgressHUD.show()
+        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode!)/\(analysisURLArray[indexPath.row])").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
 
                 print("Analysis \(result)")
-                
+
                 var dates = [String]()
                 var values = [Double]()
-                
+
                 for dict in result {
                     dates.append((dict.dictionaryValue["date"]?.stringValue)!)
                     values.append((dict.dictionaryValue["value"]?.doubleValue)!)
                 }
-                
+
                 var dataEntries = [ChartDataEntry]()
                 for i in 0..<dates.count {
                     dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
                 }
-                
+
                 let analysisDataSet = LineChartDataSet(values: dataEntries, label: "")
                 analysisDataSet.drawCircleHoleEnabled = false
                 analysisDataSet.drawCirclesEnabled = false
-                
-                let data = LineChartData(dataSet: analysisDataSet)
-                self.lineChartView.data = data
-                self.lineChartView.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
+
+                SVProgressHUD.dismiss()
+
+                self.performSegue(withIdentifier: "fullChartSegue", sender:
+                    RPLineChartViewModel(title: self.analysisTypeArray[indexPath.row],
+                                         data: LineChartData(dataSet: analysisDataSet),
+                                         valueFormatter: RPFundDateFormatter(labels: dates)))
             }
         }
     }
+
+     // MARK: - Navigation
+
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fullChartSegue" {
+            let vc = segue.destination as! RPLineChartViewController
+            vc.dataModel = (sender as! RPLineChartViewModel)
+        }
+     }
 
 }

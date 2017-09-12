@@ -75,10 +75,7 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var rate3YearLabel: UILabel!
     @IBOutlet weak var rateSinceFoundLabel: UILabel!
     
-    @IBOutlet weak var ratePeriodButton: UIButton!
-    
     @IBOutlet weak var netValueChart: LineChartView!
-    @IBOutlet weak var rateChart: LineChartView!
     @IBOutlet weak var currentAssetChart: PieChartView!
     
     override func viewDidLoad() {
@@ -87,26 +84,16 @@ class RPFundDetailTableViewController: UITableViewController {
         self.tableView.backgroundColor = .rpColor
         self.rateLabels = [rate1MonthLabel, rate3MonthLabel, rate6MonthLabel, rate1YearLabel, rate3YearLabel, rateSinceFoundLabel]
         
-        self.ratePeriodButton.layer.cornerRadius = 3.0
-        self.ratePeriodButton.layer.masksToBounds = true
-        
         self.netValueChart.chartDescription?.text = ""
-        self.rateChart.chartDescription?.text = ""
         self.currentAssetChart.chartDescription?.text = ""
         
         self.netValueChart.xAxis.labelPosition = .bottom
-        self.rateChart.xAxis.labelPosition = .bottom
         
         self.netValueChart.xAxis.drawGridLinesEnabled = false
-        self.rateChart.xAxis.drawGridLinesEnabled = false
         
         self.netValueChart.rightAxis.drawAxisLineEnabled = false
-        self.rateChart.rightAxis.drawAxisLineEnabled = false
         
         self.netValueChart.rightAxis.drawLabelsEnabled = false
-        self.rateChart.rightAxis.drawLabelsEnabled = false
-        
-        self.rateChart.legend.enabled = false
         
         self.currentAssetChart.drawHoleEnabled = false
     }
@@ -189,19 +176,16 @@ class RPFundDetailTableViewController: UITableViewController {
             }
         }
         queue.addOperation {
-            self.updateRate(during: 0)
-        }
-        queue.addOperation {
             self.updateCurrentAsset()
         }
     }
     
-    fileprivate func updateRate(during time: Int) {
-        print("Here")
+    @IBAction func updateRateAction(_ sender: UIButton) {
+        SVProgressHUD.show()
         Alamofire.request(
             "\(BASE_URL)/fund/\(self.fundCode ?? "")/rate",
             method: .get,
-            parameters: ["month": time == 0 ? "all" : String(time)]
+            parameters: ["month": sender.tag == -1 ? "all" : String(sender.tag)]
             ).responseJSON { response in
             if let json = response.result.value {
                 let result3 = JSON(json).arrayValue
@@ -217,13 +201,18 @@ class RPFundDetailTableViewController: UITableViewController {
                 for i in 0..<dates3.count {
                     dataEntries3.append(ChartDataEntry(x: Double(i) / Double(dates3.count), y: values3[i]))
                 }
-                let rateDataSet = LineChartDataSet(values: dataEntries3, label: "累积收益率走势")
+                let rateDataSet = LineChartDataSet(values: dataEntries3, label: "累积收益率走势 - \(sender.titleLabel?.text ?? "")")
                 rateDataSet.drawCircleHoleEnabled = false
                 rateDataSet.drawCirclesEnabled = false
                 rateDataSet.valueFont = UIFont(name: "PingFangSC-Regular", size: 15.0)!
 
-                self.rateChart.data = LineChartData(dataSet: rateDataSet)
-                self.rateChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates3)
+                SVProgressHUD.dismiss()
+
+                self.performSegue(withIdentifier: "fullChartSegue", sender:
+                    RPLineChartViewModel(title: "累积收益率走势 - \(sender.titleLabel?.text ?? "")",
+                                         data: LineChartData(dataSet: rateDataSet),
+                                         valueFormatter: RPFundDateFormatter(labels: dates3)))
+
             }
         }
     }
@@ -252,10 +241,14 @@ class RPFundDetailTableViewController: UITableViewController {
         }
     }
 
-    @IBAction func chooseRateAction(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "chooseRateSegue", sender: sender)
+    @IBAction func seeFullChartAction(_ sender: UIButton) {
+        if let data = self.netValueChart.data {
+            self.performSegue(withIdentifier: "fullChartSegue", sender: RPLineChartViewModel(title: "净值走势",
+                                                                                             data: data,
+                                                                                             valueFormatter: self.netValueChart.xAxis.valueFormatter))
+        }
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -290,21 +283,12 @@ class RPFundDetailTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseRateSegue" {
-            let vc = segue.destination as! RPFundRateChoiceTableViewController
-            vc.delegate = self
-            vc.nowPeriod = (sender as! UIButton).tag
+        if segue.identifier == "fullChartSegue" {
+            let vc = segue.destination as! RPLineChartViewController
+            vc.dataModel = (sender as! RPLineChartViewModel)
         }
     }
     
-}
-
-extension RPFundDetailTableViewController: RPFundRateChoiceDelegate {
-    func didSelectRate(with rateChoiceModel: RPFundRateChoiceModel) {
-        self.ratePeriodButton.tag = rateChoiceModel.tag
-        self.ratePeriodButton.setTitle(rateChoiceModel.description, for: .normal)
-        self.updateRate(during: rateChoiceModel.tag)
-    }
 }

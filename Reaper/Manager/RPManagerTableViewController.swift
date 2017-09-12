@@ -133,7 +133,7 @@ class RPManagerTableViewController: UITableViewController {
         self.tabBarController?.navigationItem.title = "基金经理"
         self.tabBarController?.navigationItem.titleView = menuView
 
-        print("Manager Code : \(managerModel?.code)")
+        print("Manager Code : \(managerModel?.code ?? "")")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -207,9 +207,7 @@ class RPManagerTableViewController: UITableViewController {
                 var fundRateTrendDataSetArray = [LineChartDataSet]()
 
                 if result.count > 0 {
-
                     for dict in result {
-                        _ = dict["id"]
                         let fundName = dict["name"]
                         let dataArr = dict["data"].arrayValue
 
@@ -241,7 +239,6 @@ class RPManagerTableViewController: UITableViewController {
     }
 
     private func updateManagerFundRank() {
-        //FIXME: - URL
         Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -350,6 +347,15 @@ class RPManagerTableViewController: UITableViewController {
             }
         }
     }
+
+    @IBAction func seeFullChartAction(_ sender: UIButton) {
+        if let data = self.fundRateTrendChart.data {
+            self.performSegue(withIdentifier: "fullChartSegue", sender: RPLineChartViewModel(title: "现任基金收益率走势",
+                                                                                             data: data,
+                                                                                             valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -374,7 +380,16 @@ class RPManagerTableViewController: UITableViewController {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
-    
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fullChartSegue" {
+            let vc = segue.destination as! RPLineChartViewController
+            vc.dataModel = (sender as? RPLineChartViewModel)
+        }
+    }
+
 }
 
 private extension Int {
