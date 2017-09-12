@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Charts
+import SVProgressHUD
 
 class RPFundDetailTableViewController: UITableViewController {
     
@@ -50,8 +51,6 @@ class RPFundDetailTableViewController: UITableViewController {
                     label.attributedText = attributedString
                 }
             }
-            
-            self.updateChartsData()
         }
     }
     
@@ -119,10 +118,15 @@ class RPFundDetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金详情"
+
+        updateChartsData()
     }
     
     private func updateChartsData() {
-        
+        guard fundCode != nil else {
+            return
+        }
+
         var unitNetValueDataSet = LineChartDataSet()
         var cumulativeNetValueDataSet = LineChartDataSet()
         
@@ -193,9 +197,15 @@ class RPFundDetailTableViewController: UITableViewController {
     }
     
     fileprivate func updateRate(during time: Int) {
-        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/rate?month=\(time == 0 ? "all" : String(time))").responseJSON { response in
+        print("Here")
+        Alamofire.request(
+            "\(BASE_URL)/fund/\(self.fundCode ?? "")/rate",
+            method: .get,
+            parameters: ["month": time == 0 ? "all" : String(time)]
+            ).responseJSON { response in
             if let json = response.result.value {
                 let result3 = JSON(json).arrayValue
+                
                 var dates3 = [String]()
                 var values3 = [Double]()
                 for dict in result3 {
@@ -211,9 +221,8 @@ class RPFundDetailTableViewController: UITableViewController {
                 rateDataSet.drawCircleHoleEnabled = false
                 rateDataSet.drawCirclesEnabled = false
                 rateDataSet.valueFont = UIFont(name: "PingFangSC-Regular", size: 15.0)!
-                
-                let data = LineChartData(dataSet: rateDataSet)
-                self.rateChart.data = data
+
+                self.rateChart.data = LineChartData(dataSet: rateDataSet)
                 self.rateChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates3)
             }
         }
@@ -233,7 +242,7 @@ class RPFundDetailTableViewController: UITableViewController {
                     dataEntries4.append(PieChartDataEntry(value: value, label: key))
                 }
                 let currentAssetDataSet = PieChartDataSet(values: dataEntries4, label: "")
-                currentAssetDataSet.colors = ChartColorTemplates.material()
+                currentAssetDataSet.colors = ChartColorTemplates.vordiplom()
                 currentAssetDataSet.valueTextColor = .black
                 currentAssetDataSet.entryLabelColor = .clear
 

@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Charts
 import BTNavigationDropdownMenu
+import SVProgressHUD
 
 class RPManagerTableViewController: UITableViewController {
     
@@ -24,6 +25,8 @@ class RPManagerTableViewController: UITableViewController {
     @IBOutlet weak var abilityRadarChart: RadarChartView!
     @IBOutlet weak var fundRankHorizontalBarChart: HorizontalBarChartView!
     @IBOutlet weak var fundRateTrendChart: LineChartView!
+    @IBOutlet weak var managerFundPerformanceScatterChart: ScatterChartView!
+    @IBOutlet weak var managerPerformanceScatterChart: ScatterChartView!
     
     @IBOutlet weak var historyFundView: RPManagerHistoryFundView!
     
@@ -81,7 +84,7 @@ class RPManagerTableViewController: UITableViewController {
         }
     }
     
-    private var menuView: UIView?
+    private var menuView: BTNavigationDropdownMenu?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +94,8 @@ class RPManagerTableViewController: UITableViewController {
         self.abilityRadarChart.chartDescription?.text = ""
         self.fundRateTrendChart.chartDescription?.text = ""
         self.fundRankHorizontalBarChart.chartDescription?.text = ""
+        self.managerFundPerformanceScatterChart.chartDescription?.text = ""
+        self.managerPerformanceScatterChart.chartDescription?.text = ""
         
         self.abilityRadarChart.legend.enabled = false
         self.abilityRadarChart.yAxis.drawLabelsEnabled = false
@@ -108,6 +113,15 @@ class RPManagerTableViewController: UITableViewController {
         self.fundRankHorizontalBarChart.doubleTapToZoomEnabled = false
         self.fundRankHorizontalBarChart.pinchZoomEnabled = false
         self.fundRankHorizontalBarChart.xAxis.drawGridLinesEnabled = false
+
+        managerFundPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
+        managerPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
+
+        managerFundPerformanceScatterChart.xAxis.labelPosition = .bottom
+        managerPerformanceScatterChart.xAxis.labelPosition = .bottom
+
+        managerFundPerformanceScatterChart.legend.enabled = false
+        managerPerformanceScatterChart.legend.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,11 +132,15 @@ class RPManagerTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金经理"
         self.tabBarController?.navigationItem.titleView = menuView
+
+        print("Manager Code : \(managerModel?.code)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tabBarController?.navigationItem.titleView = nil
+
+        menuView?.hide()
     }
     
     func loadManager(of code: String) {
@@ -145,6 +163,11 @@ class RPManagerTableViewController: UITableViewController {
     }
     
     private func updateChartsData() {
+        guard managerModel != nil else {
+            return
+        }
+        SVProgressHUD.show()
+
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         // 现任收益率走势
@@ -163,6 +186,17 @@ class RPManagerTableViewController: UITableViewController {
         queue.addOperation {
             self.updateHistoryFund()
         }
+        // 历任基金表现
+        queue.addOperation {
+            self.updateFundPerformance()
+        }
+        // 基金经理表现
+        queue.addOperation {
+            self.updateManagerPerformance()
+        }
+        queue.addOperation {
+            SVProgressHUD.dismiss()
+        }
     }
 
     private func updateFundRateTrend() {
@@ -172,33 +206,36 @@ class RPManagerTableViewController: UITableViewController {
 
                 var fundRateTrendDataSetArray = [LineChartDataSet]()
 
-                for dict in result {
-                    _ = dict["id"]
-                    let fundName = dict["name"]
-                    let dataArr = dict["data"].arrayValue
+                if result.count > 0 {
 
-                    var dates = [String]()
-                    var values = [Double]()
-                    for pairs in dataArr {
-                        dates.append((pairs.dictionaryValue["date"]?.stringValue)!)
-                        values.append((pairs.dictionaryValue["value"]?.doubleValue)!)
+                    for dict in result {
+                        _ = dict["id"]
+                        let fundName = dict["name"]
+                        let dataArr = dict["data"].arrayValue
+
+                        var dates = [String]()
+                        var values = [Double]()
+                        for pairs in dataArr {
+                            dates.append((pairs.dictionaryValue["date"]?.stringValue)!)
+                            values.append((pairs.dictionaryValue["value"]?.doubleValue)!)
+                        }
+
+                        var dataEntries = [ChartDataEntry]()
+                        for i in 0..<dates.count {
+                            dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
+                        }
+
+                        let fundRateTrendDataSet = LineChartDataSet(values: dataEntries, label: fundName.stringValue)
+                        fundRateTrendDataSet.drawCircleHoleEnabled = false
+                        fundRateTrendDataSet.drawCirclesEnabled = false
+                        fundRateTrendDataSet.setColor(ChartColorTemplates.vordiplom()[fundRateTrendDataSetArray.count % ChartColorTemplates.vordiplom().count])
+                        fundRateTrendDataSetArray.append(fundRateTrendDataSet)
                     }
 
-                    var dataEntries = [ChartDataEntry]()
-                    for i in 0..<dates.count {
-                        dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
-                    }
-
-                    let fundRateTrendDataSet = LineChartDataSet(values: dataEntries, label: fundName.stringValue)
-                    fundRateTrendDataSet.drawCircleHoleEnabled = false
-                    fundRateTrendDataSet.drawCirclesEnabled = false
-                    fundRateTrendDataSet.setColor(ChartColorTemplates.material()[fundRateTrendDataSetArray.count])
-                    fundRateTrendDataSetArray.append(fundRateTrendDataSet)
+                    let data = LineChartData(dataSets: fundRateTrendDataSetArray)
+                    self.fundRateTrendChart.data = data
+                    //                    self.fundRateTrendChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
                 }
-
-                let data = LineChartData(dataSets: fundRateTrendDataSetArray)
-                self.fundRateTrendChart.data = data
-                //                    self.fundRateTrendChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
             }
         }
     }
@@ -226,7 +263,7 @@ class RPManagerTableViewController: UITableViewController {
 
                     let dataSet = BarChartDataSet(values: monthDataEntries.sorted(by: { $0.x < $1.x }),
                                                   label: fundName)
-                    dataSet.setColor(ChartColorTemplates.material()[monthDataSets.count])
+                    dataSet.setColor(ChartColorTemplates.vordiplom()[monthDataSets.count % ChartColorTemplates.vordiplom().count])
 
                     monthDataSets.append(dataSet)
                 }
@@ -279,7 +316,40 @@ class RPManagerTableViewController: UITableViewController {
             }
         }
     }
-    
+
+    private func updateFundPerformance() {
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-performance").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+
+                var fundPerformanceEntry = [ChartDataEntry]()
+                for dict in result {
+                    fundPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
+                                                               y: dict["risk"].doubleValue))
+                }
+                let fundPerformanceDataSet = ScatterChartDataSet(values: fundPerformanceEntry)
+                let data = ScatterChartData(dataSet: fundPerformanceDataSet)
+                self.managerFundPerformanceScatterChart.data = data
+            }
+        }
+    }
+
+    private func updateManagerPerformance() {
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/manager-performance").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+
+                var managerPerformanceEntry = [ChartDataEntry]()
+                for dict in result {
+                    managerPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
+                                                               y: dict["risk"].doubleValue))
+                }
+                let managerPerformanceDataSet = ScatterChartDataSet(values: managerPerformanceEntry)
+                let data = ScatterChartData(dataSet: managerPerformanceDataSet)
+                self.managerPerformanceScatterChart.data = data
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -287,7 +357,7 @@ class RPManagerTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 9
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -295,11 +365,12 @@ class RPManagerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 {
+        switch indexPath.row {
+        case 3, 7, 8:
             return SCREEN_WIDTH - 20
-        } else if indexPath.row == 6 {
+        case 6:
             return CGFloat(75 + historyFundView.fundHistoryModels.count * 30)
-        } else {
+        default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }

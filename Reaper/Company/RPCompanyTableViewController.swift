@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Charts
+import SVProgressHUD
 
 class RPCompanyTableViewController: UITableViewController {
     
@@ -18,7 +19,6 @@ class RPCompanyTableViewController: UITableViewController {
     
     @IBOutlet weak var fundPerformanceScatterChart: ScatterChartView!
     @IBOutlet weak var managerPerformanceScatterChart: ScatterChartView!
-    @IBOutlet weak var productStrategyPieChart: PieChartView!
     @IBOutlet weak var assetAllocationPieChart: PieChartView!
     
     override func viewDidLoad() {
@@ -28,7 +28,6 @@ class RPCompanyTableViewController: UITableViewController {
         
         fundPerformanceScatterChart.chartDescription?.text = ""
         managerPerformanceScatterChart.chartDescription?.text = ""
-        productStrategyPieChart.chartDescription?.text = ""
         assetAllocationPieChart.chartDescription?.text = ""
         
         fundPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
@@ -39,8 +38,7 @@ class RPCompanyTableViewController: UITableViewController {
         
         fundPerformanceScatterChart.legend.enabled = false
         managerPerformanceScatterChart.legend.enabled = false
-        
-        productStrategyPieChart.drawHoleEnabled = false
+
         assetAllocationPieChart.drawHoleEnabled = false
     }
     
@@ -48,6 +46,8 @@ class RPCompanyTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金公司"
         self.updateCharts()
+
+        print("Company Code : \(companyModel?.code)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,19 +55,29 @@ class RPCompanyTableViewController: UITableViewController {
     }
     
     private func updateCharts() {
+        guard companyModel != nil else {
+            return
+        }
+
+        SVProgressHUD.show()
+
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         queue.addOperation {
             Alamofire.request("\(BASE_URL)/company/\(self.companyModel!.code)/fund-performance").responseJSON { response in
                 if let json = response.result.value {
-                    let result = JSON(json).arrayValue
-                    
+                    let result = JSON(json).dictionaryValue["funds"]?.arrayValue
+
+                    print("Company fund-performance \(result)")
+
                     var fundPerformanceEntry = [ChartDataEntry]()
-                    for dict in result {
+                    for dict in result ?? [] {
                         fundPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
-                                                                   y: dict["risk"].doubleValue))
+                                                                   y: dict["risk"].doubleValue,
+                                                                   data: dict["name"].stringValue as AnyObject))
                     }
                     let fundPerformanceDataSet = ScatterChartDataSet(values: fundPerformanceEntry)
+                    fundPerformanceDataSet.setScatterShape(.circle)
                     let data = ScatterChartData(dataSet: fundPerformanceDataSet)
                     self.fundPerformanceScatterChart.data = data
                 }
@@ -76,48 +86,30 @@ class RPCompanyTableViewController: UITableViewController {
         queue.addOperation {
             Alamofire.request("\(BASE_URL)/company/\(self.companyModel!.code)/manager-performance").responseJSON { response in
                 if let json = response.result.value {
-                    let result = JSON(json).arrayValue
+                    let result = JSON(json).dictionaryValue["managers"]?.arrayValue
+
+                    print("Company manager-performance \(result)")
                     
                     var managerPerformanceEntry = [ChartDataEntry]()
-                    for dict in result {
+                    for dict in result ?? [] {
                         managerPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
-                                                                   y: dict["risk"].doubleValue))
+                                                                   y: dict["risk"].doubleValue,
+                                                                   data: dict["name"].stringValue as AnyObject))
                     }
                     let managerPerformanceDataSet = ScatterChartDataSet(values: managerPerformanceEntry)
+                    managerPerformanceDataSet.setScatterShape(.circle)
                     let data = ScatterChartData(dataSet: managerPerformanceDataSet)
                     self.managerPerformanceScatterChart.data = data
                 }
             }
         }
         queue.addOperation {
-            let url = "http://localhost:3000/field-value-pie"
-            //let url = "\(BASE_URL)/company/\(self.companyModel!.code)/product-strategy"
+            let url = "\(BASE_URL)/company/\(self.companyModel!.code)/asset-allocation"
             Alamofire.request(url).responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json).arrayValue
-                    
-                    var productStrategyEntry = [PieChartDataEntry]()
-                    for dict in result {
-                        productStrategyEntry.append(PieChartDataEntry(value: dict["value"].doubleValue,
-                                                                      label: dict["field"].stringValue))
-                    }
-                    
-                    let productStrategyDataSet = PieChartDataSet(values: productStrategyEntry, label: "")
-                    productStrategyDataSet.colors = ChartColorTemplates.material()
-                    productStrategyDataSet.valueTextColor = .black
-                    productStrategyDataSet.entryLabelColor = .clear
-                    
-                    let data = PieChartData(dataSet: productStrategyDataSet)
-                    self.productStrategyPieChart.data = data
-                }
-            }
-        }
-        queue.addOperation {
-            let url = "http://localhost:3000/field-value-pie"
-            //let url = "\(BASE_URL)/company/\(self.companyModel!.code)/asset-allocation"
-            Alamofire.request(url).responseJSON { response in
-                if let json = response.result.value {
-                    let result = JSON(json).arrayValue
+
+                    print("Company asset \(result)")
                     
                     var assetAllocationEntry = [PieChartDataEntry]()
                     for dict in result {
@@ -126,7 +118,7 @@ class RPCompanyTableViewController: UITableViewController {
                     }
                     
                     let assetAllocationDataSet = PieChartDataSet(values: assetAllocationEntry, label: "")
-                    assetAllocationDataSet.colors = ChartColorTemplates.material()
+                    assetAllocationDataSet.colors = ChartColorTemplates.vordiplom()
                     assetAllocationDataSet.valueTextColor = .black
                     assetAllocationDataSet.entryLabelColor = .clear
                     
@@ -134,6 +126,9 @@ class RPCompanyTableViewController: UITableViewController {
                     self.assetAllocationPieChart.data = data
                 }
             }
+        }
+        queue.addOperation {
+            SVProgressHUD.dismiss()
         }
     }
     
@@ -144,7 +139,7 @@ class RPCompanyTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

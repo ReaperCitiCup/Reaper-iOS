@@ -33,7 +33,7 @@ class RPAnalysisViewController: UIViewController {
                                     "treynor-index",
                                     "jensen-index",
                                     "information-ratio"]
-    private var menuView: UIView?
+    private var menuView: BTNavigationDropdownMenu?
     @IBOutlet weak var lineChartView: LineChartView!
 
     override func viewDidLoad() {
@@ -72,12 +72,16 @@ class RPAnalysisViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tabBarController?.navigationItem.titleView = nil
+
+        menuView?.hide()
     }
     
     private func loadData(at index: Int) {
         Alamofire.request("\(BASE_URL)/fund/\(self.fundCode!)/\(analysisURLArray[index])").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
+
+                print("Analysis \(result)")
                 
                 var dates = [String]()
                 var values = [Double]()

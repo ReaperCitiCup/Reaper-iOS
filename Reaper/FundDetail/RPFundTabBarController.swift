@@ -9,11 +9,14 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
+import SVProgressHUD
 
 class RPFundTabBarController: UITabBarController {
     
     var fundCode: String = "" {
         didSet {
+            SVProgressHUD.show()
+
             let managerVC = self.viewControllers![1] as! RPManagerTableViewController
             managerVC.fundCode = self.fundCode
             
@@ -23,14 +26,16 @@ class RPFundTabBarController: UITabBarController {
             Alamofire.request("\(BASE_URL)/fund/\(fundCode)").responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json)
+
+                    print("Fund Detail \(result)")
                     
                     var managerArray = [RPManagerShortModel]()
                     for dict in result["manager"].arrayValue {
-                        managerArray.append(RPManagerShortModel(code: dict["id"].stringValue,
+                        managerArray.append(RPManagerShortModel(code: dict["code"].stringValue,
                                                                 name: dict["name"].stringValue))
                     }
                     
-                    let companyShortModel = RPCompanyShortModel(code: result["company"]["id"].stringValue,
+                    let companyShortModel = RPCompanyShortModel(code: result["company"]["code"].stringValue,
                                                                 name: result["company"]["name"].stringValue)
                     
                     var rateDict: [String: Double] = [:]
@@ -58,6 +63,8 @@ class RPFundTabBarController: UITabBarController {
                     
                     let companyVC = self.viewControllers![2] as! RPCompanyTableViewController
                     companyVC.companyModel = companyShortModel
+
+                    SVProgressHUD.dismiss()
                 }
             }
         }
@@ -74,6 +81,12 @@ class RPFundTabBarController: UITabBarController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        SVProgressHUD.dismiss()
     }
 
 }

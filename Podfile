@@ -16,5 +16,6 @@ target 'Reaper' do
   pod 'DZNEmptyDataSet'
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git'
   pod 'SwiftLint'
+  # pod 'IQKeyboardManagerSwift'
 
 end

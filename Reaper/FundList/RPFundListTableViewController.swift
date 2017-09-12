@@ -147,11 +147,13 @@ extension RPFundListTableViewController: UISearchBarDelegate {
         searchString = nil
         searchFundArr.removeAll()
         loadData(of: 1)
+//        searchBar.resignFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchFundArr.removeAll()
         loadData(of: 1)
+//        searchBar.resignFirstResponder()
     }
     
 }
