@@ -102,6 +102,8 @@ class RPFundDetailTableViewController: UITableViewController {
     
     @IBAction func netValueAction(_ sender: UIButton) {
         guard fundCode != nil else {
+            SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+            SVProgressHUD.dismiss(withDelay: 2.0)
             return
         }
 
@@ -138,7 +140,7 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
-                    RPLineChartViewModel(title: "单位净值走势",
+                    RPChartViewModel(title: "单位净值走势",
                                          data: LineChartData(dataSet: unitNetValueDataSet),
                                          valueFormatter: RPFundDateFormatter(labels: dates)))
             }
@@ -170,7 +172,7 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
-                    RPLineChartViewModel(title: "累积净值走势",
+                    RPChartViewModel(title: "累积净值走势",
                                          data: LineChartData(dataSet: cumulativeNetValueDataSet),
                                          valueFormatter: RPFundDateFormatter(labels: dates2)))
             }
@@ -210,7 +212,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 SVProgressHUD.dismiss()
 
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
-                    RPLineChartViewModel(title: "累积收益率走势 - \(sender.titleLabel?.text ?? "")",
+                    RPChartViewModel(title: "累积收益率走势 - \(sender.titleLabel?.text ?? "")",
                                          data: LineChartData(dataSet: rateDataSet),
                                          valueFormatter: RPFundDateFormatter(labels: dates3)))
             }
@@ -247,6 +249,158 @@ class RPFundDetailTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func horizontalAction(_ sender: UIButton) {
+        guard self.fundCode != nil else {
+            SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+            SVProgressHUD.dismiss(withDelay: 2.0)
+            return
+        }
+        switch sender.tag {
+        case 0:
+            updateStyleProfit()
+            break
+        case 1:
+            updateStyleRisk()
+            break
+        case 2:
+            updateIndustryProfit()
+            break
+        case 3:
+            updateIndustryRisk()
+            break
+        default:
+            break
+        }
+    }
+    
+    private func updateStyleProfit() {
+        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/style-attribution/profit"
+        Alamofire.request(url).responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+                var styleAttributionProfitEntries = [ChartDataEntry]()
+
+                var labels: [String] = []
+                var values: [Double] = []
+
+                for i in 0..<result.count {
+                    let dict = result[i].dictionaryValue
+                    labels.append((dict["field"]?.stringValue)!)
+                    values.append((dict["value"]?.doubleValue)!)
+                    styleAttributionProfitEntries.append(BarChartDataEntry(x: Double(i),
+                                                                           y: values[i],
+                                                                           data: labels[i] as AnyObject))
+                }
+
+                let styleAttributionProfitDataSet = BarChartDataSet(values: styleAttributionProfitEntries, label: "")
+                styleAttributionProfitDataSet.colors = ChartColorTemplates.vordiplom()
+                styleAttributionProfitDataSet.valueTextColor = .black
+
+                let data = BarChartData(dataSet: styleAttributionProfitDataSet)
+
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动收益",
+                                                                                              data: data,
+                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+            }
+        }
+    }
+
+    private func updateStyleRisk() {
+        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/style-attribution/risk"
+        Alamofire.request(url).responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+                var styleAttributionRiskEntries = [ChartDataEntry]()
+
+                var labels: [String] = []
+                var values: [Double] = []
+
+                for i in 0..<result.count {
+                    let dict = result[i].dictionaryValue
+                    labels.append((dict["field"]?.stringValue)!)
+                    values.append((dict["value"]?.doubleValue)!)
+                    styleAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
+                                                                         y: values[i],
+                                                                         data: labels[i] as AnyObject))
+                }
+
+                let styleAttributionRiskDataSet = BarChartDataSet(values: styleAttributionRiskEntries, label: "")
+                styleAttributionRiskDataSet.colors = ChartColorTemplates.vordiplom()
+                styleAttributionRiskDataSet.valueTextColor = .black
+
+                let data = BarChartData(dataSet: styleAttributionRiskDataSet)
+
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动风险",
+                                                                                              data: data,
+                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+            }
+        }
+    }
+
+    private func updateIndustryProfit() {
+        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/industry-attribution/profit"
+        Alamofire.request(url).responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+                var industryAttributionProfitEntries = [ChartDataEntry]()
+
+                var labels: [String] = []
+                var values: [Double] = []
+
+                for i in 0..<result.count {
+                    let dict = result[i].dictionaryValue
+                    labels.append((dict["field"]?.stringValue)!)
+                    values.append((dict["value"]?.doubleValue)!)
+                    industryAttributionProfitEntries.append(BarChartDataEntry(x: Double(i),
+                                                                              y: values[i],
+                                                                              data: labels[i] as AnyObject))
+                }
+
+                let industryAttributionProfitDataSet = BarChartDataSet(values: industryAttributionProfitEntries, label: "")
+                industryAttributionProfitDataSet.colors = ChartColorTemplates.vordiplom()
+                industryAttributionProfitDataSet.valueTextColor = .black
+
+                let data = BarChartData(dataSet: industryAttributionProfitDataSet)
+
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动收益",
+                                                                                              data: data,
+                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+            }
+        }
+    }
+
+    private func updateIndustryRisk() {
+        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/industry-attribution/risk"
+        Alamofire.request(url).responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+                var industryAttributionRiskEntries = [ChartDataEntry]()
+
+                var labels: [String] = []
+                var values: [Double] = []
+
+                for i in 0..<result.count {
+                    let dict = result[i].dictionaryValue
+                    labels.append((dict["field"]?.stringValue)!)
+                    values.append((dict["value"]?.doubleValue)!)
+                    industryAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
+                                                                            y: values[i],
+                                                                            data: labels[i] as AnyObject))
+                }
+
+                let industryAttributionRiskDataSet = BarChartDataSet(values: industryAttributionRiskEntries, label: "")
+                industryAttributionRiskDataSet.colors = ChartColorTemplates.vordiplom()
+                industryAttributionRiskDataSet.valueTextColor = .black
+
+                let data = BarChartData(dataSet: industryAttributionRiskDataSet)
+
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动风险",
+                                                                                              data: data,
+                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+            }
+        }
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -254,7 +408,7 @@ class RPFundDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -273,7 +427,7 @@ class RPFundDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 4 {
+        if indexPath.row == 6 {
             return SCREEN_WIDTH - 20
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -285,7 +439,10 @@ class RPFundDetailTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullChartSegue" {
             let vc = segue.destination as! RPLineChartViewController
-            vc.dataModel = (sender as! RPLineChartViewModel)
+            vc.dataModel = (sender as! RPChartViewModel)
+        } else if segue.identifier == "horizontalSegue" {
+            let vc = segue.destination as! RPHorizontalBarChartViewController
+            vc.dataModel = (sender as! RPChartViewModel)
         }
     }
     

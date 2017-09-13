@@ -1,5 +1,5 @@
 //
-//  RPLineChartViewModel.swift
+//  RPChartViewModel.swift
 //  Reaper
 //
 //  Created by 宋 奎熹 on 2017/9/12.
@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-struct RPLineChartViewModel {
+struct RPChartViewModel {
 
     var title: String
     var data: ChartData

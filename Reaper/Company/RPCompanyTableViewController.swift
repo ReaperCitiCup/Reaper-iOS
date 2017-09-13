@@ -78,19 +78,27 @@ class RPCompanyTableViewController: UITableViewController {
             self.updateAssetAllocation()
         }
         queue.addOperation {
-            self.updateStyleProfit()
-        }
-        queue.addOperation {
-            self.updateStyleRisk()
-        }
-        queue.addOperation {
-            self.updateIndustryProfit()
-        }
-        queue.addOperation {
-            self.updateIndustryRisk()
-        }
-        queue.addOperation {
             SVProgressHUD.dismiss()
+        }
+    }
+
+    @IBAction func horizontalAction(_ sender: UIButton) {
+        guard companyModel != nil else {
+            SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+            SVProgressHUD.dismiss(withDelay: 2.0)
+            return
+        }
+        switch sender.tag {
+        case 0:
+            updateStyleProfit()
+        case 1:
+            updateStyleRisk()
+        case 2:
+            updateIndustryProfit()
+        case 3:
+            updateIndustryRisk()
+        default:
+            break
         }
     }
 
@@ -181,8 +189,9 @@ class RPCompanyTableViewController: UITableViewController {
                 let data = BarChartData(dataSet: styleAttributionProfitDataSet)
                 data.barWidth = 1.0
 
-                self.styleAttributionProfitBarChart.data = data
-                self.styleAttributionProfitBarChart.xAxis.valueFormatter = RPCompanyAttributionFormatter(labels: labels)
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动收益",
+                                                                                         data: data,
+                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
             }
         }
     }
@@ -213,8 +222,9 @@ class RPCompanyTableViewController: UITableViewController {
                 let data = BarChartData(dataSet: styleAttributionRiskDataSet)
                 data.barWidth = 1.0
 
-                self.styleAttributionRiskBarChart.data = data
-                self.styleAttributionRiskBarChart.xAxis.valueFormatter = RPCompanyAttributionFormatter(labels: labels)
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动风险",
+                                                                                         data: data,
+                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
             }
         }
     }
@@ -245,8 +255,9 @@ class RPCompanyTableViewController: UITableViewController {
                 let data = BarChartData(dataSet: industryAttributionProfitDataSet)
                 data.barWidth = 1.0
 
-                self.industryAttributionProfitBarChart.data = data
-                self.industryAttributionProfitBarChart.xAxis.valueFormatter = RPCompanyAttributionFormatter(labels: labels)
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动收益",
+                                                                                         data: data,
+                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
             }
         }
     }
@@ -277,8 +288,9 @@ class RPCompanyTableViewController: UITableViewController {
                 let data = BarChartData(dataSet: industryAttributionRiskDataSet)
                 data.barWidth = 1.0
 
-                self.industryAttributionRiskBarChart.data = data
-                self.industryAttributionRiskBarChart.xAxis.valueFormatter = RPCompanyAttributionFormatter(labels: labels)
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动风险",
+                                                                                         data: data,
+                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
             }
         }
     }
@@ -290,14 +302,14 @@ class RPCompanyTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row <= 2 {
             return SCREEN_WIDTH - 20
         } else {
-            return SCREEN_HEIGHT - 44 - 20 - 64
+            return 100.0
         }
     }
     
@@ -314,6 +326,15 @@ class RPCompanyTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60.0
+    }
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "horizontalSegue" {
+            let vc = segue.destination as! RPHorizontalBarChartViewController
+            vc.dataModel = (sender as! RPChartViewModel)
+        }
     }
 
 }

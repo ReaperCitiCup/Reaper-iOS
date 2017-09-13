@@ -98,7 +98,7 @@ class RPAnalysisTableViewController: UITableViewController {
                 SVProgressHUD.dismiss()
 
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
-                    RPLineChartViewModel(title: self.analysisTypeArray[indexPath.row],
+                    RPChartViewModel(title: self.analysisTypeArray[indexPath.row],
                                          data: LineChartData(dataSet: analysisDataSet),
                                          valueFormatter: RPFundDateFormatter(labels: dates)))
             }
@@ -110,7 +110,7 @@ class RPAnalysisTableViewController: UITableViewController {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullChartSegue" {
             let vc = segue.destination as! RPLineChartViewController
-            vc.dataModel = (sender as! RPLineChartViewModel)
+            vc.dataModel = (sender as! RPChartViewModel)
         }
      }
 

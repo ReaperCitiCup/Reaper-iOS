@@ -13,7 +13,7 @@ class RPLineChartViewController: UIViewController {
 
     @IBOutlet weak var lineChartView: LineChartView!
 
-    var dataModel: RPLineChartViewModel?
+    var dataModel: RPChartViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()

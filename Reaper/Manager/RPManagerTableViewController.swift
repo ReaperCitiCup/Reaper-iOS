@@ -353,7 +353,7 @@ class RPManagerTableViewController: UITableViewController {
 
     @IBAction func seeFullChartAction(_ sender: UIButton) {
         if let data = self.fundRateTrendChart.data {
-            self.performSegue(withIdentifier: "fullChartSegue", sender: RPLineChartViewModel(title: "现任基金收益率走势",
+            self.performSegue(withIdentifier: "fullChartSegue", sender: RPChartViewModel(title: "现任基金收益率走势",
                                                                                              data: data,
                                                                                              valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
         }
@@ -389,7 +389,7 @@ class RPManagerTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullChartSegue" {
             let vc = segue.destination as! RPLineChartViewController
-            vc.dataModel = (sender as? RPLineChartViewModel)
+            vc.dataModel = (sender as? RPChartViewModel)
         }
     }
 
