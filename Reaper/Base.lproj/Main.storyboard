@@ -479,53 +479,68 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.27843137254901962" green="0.26666666666666666" blue="0.3411764705882353" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="uoI-Dt-pyk">
-                                        <rect key="frame" x="0.0" y="273" width="375" height="180"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="uoI-Dt-pyk">
+                                        <rect key="frame" x="0.0" y="273" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uoI-Dt-pyk" id="dU8-Vb-etO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSO-4A-71v">
-                                                    <rect key="frame" x="7" y="7" width="361" height="172.5"/>
+                                                    <rect key="frame" x="7" y="7" width="361" height="90"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="净值走势" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxA-WI-rlQ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="净值走势" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-QW-beP">
                                                             <rect key="frame" x="10" y="5" width="56" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="Hgw-bd-n8q"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbK-x8-TVG" customClass="LineChartView" customModule="Charts">
-                                                            <rect key="frame" x="10" y="30" width="341" height="137.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWC-uu-aAs" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                            <rect key="frame" x="291" y="5" width="60" height="20"/>
-                                                            <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="8c2-89-lhB"/>
-                                                                <constraint firstAttribute="width" secondItem="LWC-uu-aAs" secondAttribute="height" multiplier="3:1" id="Ddq-mM-n4p"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <state key="normal" title="看大图">
-                                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="seeFullChartAction:" destination="HHm-N1-eCz" eventType="touchUpInside" id="09H-4b-g3J"/>
-                                                            </connections>
-                                                        </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h7R-dL-WW6">
+                                                            <rect key="frame" x="10" y="30" width="341" height="55"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIp-a3-qIo" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="55"/>
+                                                                    <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="HIp-a3-qIo" secondAttribute="height" multiplier="3:1" id="A4y-Q4-6Cy"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <state key="normal" title="单位净值走势">
+                                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="netValueAction:" destination="HHm-N1-eCz" eventType="touchUpInside" id="Loe-ZT-oHr"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWC-uu-aAs" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
+                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="55"/>
+                                                                    <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="LWC-uu-aAs" secondAttribute="height" multiplier="3:1" id="ajr-8g-XrL"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <state key="normal" title="累积净值走势">
+                                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="netValueAction:" destination="HHm-N1-eCz" eventType="touchUpInside" id="fcT-cL-aYI"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="jxA-WI-rlQ" firstAttribute="top" secondItem="XSO-4A-71v" secondAttribute="top" constant="5" id="4pf-gG-8iw"/>
-                                                        <constraint firstAttribute="bottom" secondItem="cbK-x8-TVG" secondAttribute="bottom" constant="5" id="9ly-s2-Bdr"/>
-                                                        <constraint firstItem="LWC-uu-aAs" firstAttribute="width" secondItem="LWC-uu-aAs" secondAttribute="height" multiplier="3:1" id="Ryh-S6-NIm"/>
-                                                        <constraint firstAttribute="trailing" secondItem="cbK-x8-TVG" secondAttribute="trailing" constant="10" id="Vbz-ng-cIX"/>
-                                                        <constraint firstItem="jxA-WI-rlQ" firstAttribute="leading" secondItem="XSO-4A-71v" secondAttribute="leading" constant="10" id="Zvh-tt-hdv"/>
-                                                        <constraint firstItem="LWC-uu-aAs" firstAttribute="centerY" secondItem="jxA-WI-rlQ" secondAttribute="centerY" id="gom-Cy-4Ga"/>
-                                                        <constraint firstItem="cbK-x8-TVG" firstAttribute="top" secondItem="jxA-WI-rlQ" secondAttribute="bottom" constant="5" id="nkG-dz-i0w"/>
-                                                        <constraint firstItem="cbK-x8-TVG" firstAttribute="leading" secondItem="XSO-4A-71v" secondAttribute="leading" constant="10" id="rCG-fG-rcZ"/>
-                                                        <constraint firstAttribute="trailing" secondItem="LWC-uu-aAs" secondAttribute="trailing" constant="10" id="uB2-2z-OSa"/>
+                                                        <constraint firstItem="h7R-dL-WW6" firstAttribute="top" secondItem="pVu-QW-beP" secondAttribute="bottom" constant="5" id="EfJ-cL-6fa"/>
+                                                        <constraint firstItem="pVu-QW-beP" firstAttribute="top" secondItem="XSO-4A-71v" secondAttribute="top" constant="5" id="KrA-wg-iMh"/>
+                                                        <constraint firstItem="h7R-dL-WW6" firstAttribute="centerX" secondItem="XSO-4A-71v" secondAttribute="centerX" id="QRX-kC-mwb"/>
+                                                        <constraint firstItem="pVu-QW-beP" firstAttribute="leading" secondItem="XSO-4A-71v" secondAttribute="leading" constant="10" id="e02-1u-JUK"/>
+                                                        <constraint firstItem="h7R-dL-WW6" firstAttribute="leading" secondItem="XSO-4A-71v" secondAttribute="leading" constant="10" id="mYg-UZ-OBW"/>
+                                                        <constraint firstAttribute="bottom" secondItem="h7R-dL-WW6" secondAttribute="bottom" constant="5" id="paw-xq-ujx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="h7R-dL-WW6" secondAttribute="trailing" constant="10" id="qEc-Bk-Gm6"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -539,7 +554,7 @@
                                         <color key="backgroundColor" red="0.27843137254901962" green="0.26666666666666666" blue="0.3411764705882353" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="JZI-Ah-cQh">
-                                        <rect key="frame" x="0.0" y="453" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="373" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JZI-Ah-cQh" id="5se-sE-thM">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -557,14 +572,14 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4F6-tm-DtC">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4F6-tm-DtC">
                                                             <rect key="frame" x="10" y="30" width="341" height="58"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="cv5-0N-f2M">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="341" height="26.5"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Avb-yT-1JW" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="72" height="24"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="79.5" height="26.5"/>
                                                                             <color key="backgroundColor" red="0.31372549019607843" green="0.66666666666666663" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="Avb-yT-1JW" secondAttribute="height" multiplier="3:1" id="2ma-Rw-owJ"/>
@@ -578,7 +593,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ3-WD-2zw" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                            <rect key="frame" x="134.5" y="0.0" width="72" height="24"/>
+                                                                            <rect key="frame" x="131" y="0.0" width="79.5" height="26.5"/>
                                                                             <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="RQ3-WD-2zw" secondAttribute="height" multiplier="3:1" id="gzG-i5-ozM"/>
@@ -592,7 +607,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3f-fo-HeC" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                            <rect key="frame" x="269" y="0.0" width="72" height="24"/>
+                                                                            <rect key="frame" x="261.5" y="0.0" width="79.5" height="26.5"/>
                                                                             <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="Q3f-fo-HeC" secondAttribute="height" multiplier="3:1" id="Wek-8a-Auj"/>
@@ -612,10 +627,10 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="iVs-Wu-uJ3">
-                                                                    <rect key="frame" x="0.0" y="34" width="341" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="31.5" width="341" height="26.5"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2nd-Fy-OiO" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="72" height="24"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="79.5" height="26.5"/>
                                                                             <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="2nd-Fy-OiO" secondAttribute="height" multiplier="3:1" id="gY2-wN-w6h"/>
@@ -629,7 +644,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" tag="36" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IuX-qS-XBN" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                            <rect key="frame" x="134.5" y="0.0" width="72" height="24"/>
+                                                                            <rect key="frame" x="131" y="0.0" width="79.5" height="26.5"/>
                                                                             <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="IuX-qS-XBN" secondAttribute="height" multiplier="3:1" id="LXK-Pt-bg1"/>
@@ -643,7 +658,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqn-od-54Q" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                            <rect key="frame" x="269" y="0.0" width="72" height="24"/>
+                                                                            <rect key="frame" x="261.5" y="0.0" width="79.5" height="26.5"/>
                                                                             <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="Mqn-od-54Q" secondAttribute="height" multiplier="3:1" id="WeF-XX-OE6"/>
@@ -687,7 +702,7 @@
                                         <color key="backgroundColor" red="0.27843137254901962" green="0.26666666666666666" blue="0.3411764705882353" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="kFC-hd-AAx">
-                                        <rect key="frame" x="0.0" y="553" width="375" height="250"/>
+                                        <rect key="frame" x="0.0" y="473" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kFC-hd-AAx" id="U4g-k1-FCS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
@@ -748,7 +763,6 @@
                         <outlet property="currentAssetChart" destination="AT1-hM-5N1" id="oxO-iz-c00"/>
                         <outlet property="dateLabel" destination="Ncu-eW-TQg" id="OQn-m5-pSq"/>
                         <outlet property="managerLabel" destination="9D9-HH-cYJ" id="hzJ-W4-oW5"/>
-                        <outlet property="netValueChart" destination="cbK-x8-TVG" id="JWa-44-eFd"/>
                         <outlet property="rate1MonthLabel" destination="XDe-84-RF5" id="eRk-KQ-4Vg"/>
                         <outlet property="rate1YearLabel" destination="de9-XS-A7U" id="KfN-GU-BI1"/>
                         <outlet property="rate3MonthLabel" destination="dpV-yg-iyp" id="Q9v-5e-Y7D"/>
@@ -764,7 +778,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gu7-mz-9uv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3108" y="-534"/>
+            <point key="canvasLocation" x="3108" y="-534.78260869565224"/>
         </scene>
         <!--Line Chart View Controller-->
         <scene sceneID="OfX-dn-Rbi">

@@ -80,6 +80,7 @@ class RPCompanyTableViewController: UITableViewController {
                     fundPerformanceDataSet.setScatterShape(.circle)
                     let data = ScatterChartData(dataSet: fundPerformanceDataSet)
                     self.fundPerformanceScatterChart.data = data
+                    self.fundPerformanceScatterChart.notifyDataSetChanged()
                 }
             }
         }
@@ -100,6 +101,7 @@ class RPCompanyTableViewController: UITableViewController {
                     managerPerformanceDataSet.setScatterShape(.circle)
                     let data = ScatterChartData(dataSet: managerPerformanceDataSet)
                     self.managerPerformanceScatterChart.data = data
+                    self.managerPerformanceScatterChart.notifyDataSetChanged()
                 }
             }
         }
@@ -124,6 +126,7 @@ class RPCompanyTableViewController: UITableViewController {
                     
                     let data = PieChartData(dataSet: assetAllocationDataSet)
                     self.assetAllocationPieChart.data = data
+                    self.assetAllocationPieChart.notifyDataSetChanged()
                 }
             }
         }

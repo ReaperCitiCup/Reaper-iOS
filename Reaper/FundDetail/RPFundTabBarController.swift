@@ -15,8 +15,6 @@ class RPFundTabBarController: UITabBarController {
     
     var fundCode: String = "" {
         didSet {
-            SVProgressHUD.show()
-
             let managerVC = self.viewControllers![1] as! RPManagerTableViewController
             managerVC.fundCode = self.fundCode
             
@@ -63,8 +61,6 @@ class RPFundTabBarController: UITabBarController {
                     
                     let companyVC = self.viewControllers![2] as! RPCompanyTableViewController
                     companyVC.companyModel = companyShortModel
-
-                    SVProgressHUD.dismiss()
                 }
             }
         }
@@ -72,11 +68,13 @@ class RPFundTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let backItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationController?.navigationItem.backBarButtonItem = backItem
         
         self.tabBar.tintColor = .rpColor
+
+        SVProgressHUD.show()
     }
 
     override func didReceiveMemoryWarning() {

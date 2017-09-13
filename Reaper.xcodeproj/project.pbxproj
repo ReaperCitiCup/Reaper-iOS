@@ -31,7 +31,6 @@
 		249ADB5A1F628B6800307608 /* RPManagerHistoryFundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */; };
 		24DC96A71F416544004E6123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC96A61F416544004E6123 /* AppDelegate.swift */; };
 		24DC96AC1F416544004E6123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AA1F416544004E6123 /* Main.storyboard */; };
-		24DC96B11F416545004E6123 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */; };
 		24FBCA241F61142E0016A894 /* RPFundTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */; };
 		24FBCA261F611E270016A894 /* RPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FBCA251F611E270016A894 /* RPNavigationController.swift */; };
 		24FBCA271F611F2D0016A894 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24FBCA221F60EBBB0016A894 /* Assets.xcassets */; };
@@ -66,7 +65,6 @@
 		24DC96A31F416544004E6123 /* Reaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DC96A61F416544004E6123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DC96AB1F416544004E6123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		24DC96B01F416545004E6123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24DC96B21F416545004E6123 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24FBCA221F60EBBB0016A894 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundTabBarController.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				249ADB5B1F6293E000307608 /* Utility */,
 				24FBCA221F60EBBB0016A894 /* Assets.xcassets */,
 				24DC96AA1F416544004E6123 /* Main.storyboard */,
-				24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */,
 				24DC96B21F416545004E6123 /* Info.plist */,
 			);
 			path = Reaper;
@@ -290,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				249ADB521F6236BF00307608 /* RPManagerHistoryFundView.xib in Resources */,
-				24DC96B11F416545004E6123 /* LaunchScreen.storyboard in Resources */,
 				24FBCA271F611F2D0016A894 /* Assets.xcassets in Resources */,
 				249ADB581F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib in Resources */,
 				24DC96AC1F416544004E6123 /* Main.storyboard in Resources */,
@@ -420,14 +416,6 @@
 				24DC96AB1F416544004E6123 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		24DC96AF1F416545004E6123 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				24DC96B01F416545004E6123 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -10,7 +10,7 @@ import UIKit
 
 class RPNavigationController: UINavigationController, UIGestureRecognizerDelegate {
     
-    var navigationBarBottomLine: UIImageView?
+    private var navigationBarBottomLine: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()

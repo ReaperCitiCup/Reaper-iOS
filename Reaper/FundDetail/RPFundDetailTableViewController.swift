@@ -51,6 +51,8 @@ class RPFundDetailTableViewController: UITableViewController {
                     label.attributedText = attributedString
                 }
             }
+
+            SVProgressHUD.dismiss()
         }
     }
     
@@ -74,8 +76,7 @@ class RPFundDetailTableViewController: UITableViewController {
     @IBOutlet weak var rate1YearLabel: UILabel!
     @IBOutlet weak var rate3YearLabel: UILabel!
     @IBOutlet weak var rateSinceFoundLabel: UILabel!
-    
-    @IBOutlet weak var netValueChart: LineChartView!
+
     @IBOutlet weak var currentAssetChart: PieChartView!
     
     override func viewDidLoad() {
@@ -83,18 +84,8 @@ class RPFundDetailTableViewController: UITableViewController {
         
         self.tableView.backgroundColor = .rpColor
         self.rateLabels = [rate1MonthLabel, rate3MonthLabel, rate6MonthLabel, rate1YearLabel, rate3YearLabel, rateSinceFoundLabel]
-        
-        self.netValueChart.chartDescription?.text = ""
+
         self.currentAssetChart.chartDescription?.text = ""
-        
-        self.netValueChart.xAxis.labelPosition = .bottom
-        
-        self.netValueChart.xAxis.drawGridLinesEnabled = false
-        
-        self.netValueChart.rightAxis.drawAxisLineEnabled = false
-        
-        self.netValueChart.rightAxis.drawLabelsEnabled = false
-        
         self.currentAssetChart.drawHoleEnabled = false
     }
 
@@ -106,81 +97,91 @@ class RPFundDetailTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金详情"
 
-        updateChartsData()
+        updateCurrentAsset()
     }
     
-    private func updateChartsData() {
+    @IBAction func netValueAction(_ sender: UIButton) {
         guard fundCode != nil else {
             return
         }
 
-        var unitNetValueDataSet = LineChartDataSet()
-        var cumulativeNetValueDataSet = LineChartDataSet()
-        
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        queue.addOperation {
-            Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/unit-net-value").responseJSON { response in
-                if let json = response.result.value {
-                    let result = JSON(json).arrayValue
-                    var dates = [String]()
-                    var values = [Double]()
-                    for dict in result {
-                        dates.append((dict.dictionaryValue["date"]?.stringValue)!)
-                        values.append((dict.dictionaryValue["value"]?.doubleValue)!)
-                    }
-                    
-                    var dataEntries = [ChartDataEntry]()
-                    for i in 0..<dates.count {
-                        dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
-                    }
-                    
-                    unitNetValueDataSet = LineChartDataSet(values: dataEntries, label: "单位净值走势")
-                    unitNetValueDataSet.drawCircleHoleEnabled = false
-                    unitNetValueDataSet.drawCirclesEnabled = false
-                    
-                    if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
-                        let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
-                        self.netValueChart.data = data
-                        self.netValueChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
-                    }
-                }
-            }
-        }
-        queue.addOperation {
-            Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/cumulative-net-value").responseJSON { response in
-                if let json = response.result.value {
-                    let result2 = JSON(json).arrayValue
-                    var dates2 = [String]()
-                    var values2 = [Double]()
-                    for dict in result2 {
-                        dates2.append((dict.dictionaryValue["date"]?.stringValue)!)
-                        values2.append((dict.dictionaryValue["value"]?.doubleValue)!)
-                    }
-                    
-                    var dataEntries2 = [ChartDataEntry]()
-                    for i in 0..<dates2.count {
-                        dataEntries2.append(ChartDataEntry(x: Double(i) / Double(dates2.count), y: values2[i]))
-                    }
-                    cumulativeNetValueDataSet = LineChartDataSet(values: dataEntries2, label: "累积净值走势")
-                    cumulativeNetValueDataSet.drawCircleHoleEnabled = false
-                    cumulativeNetValueDataSet.drawCirclesEnabled = false
-                    cumulativeNetValueDataSet.setColor(.red)
-                    
-                    if unitNetValueDataSet.entryCount > 0 && cumulativeNetValueDataSet.entryCount > 0 {
-                        let data = LineChartData(dataSets: [unitNetValueDataSet, cumulativeNetValueDataSet])
-                        self.netValueChart.data = data
-                        self.netValueChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates2)
-                    }
-                }
-            }
-        }
-        queue.addOperation {
-            self.updateCurrentAsset()
+        SVProgressHUD.show()
+
+        if sender.tag == 0 {
+            self.unitNetValueAction()
+        } else {
+            self.cumulativeNetValueAction()
         }
     }
-    
+
+    private func unitNetValueAction() {
+        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/unit-net-value").responseJSON { response in
+            if let json = response.result.value {
+                var unitNetValueDataSet = LineChartDataSet()
+
+                let result = JSON(json).arrayValue
+                var dates = [String]()
+                var values = [Double]()
+                for dict in result {
+                    dates.append((dict.dictionaryValue["date"]?.stringValue)!)
+                    values.append((dict.dictionaryValue["value"]?.doubleValue)!)
+                }
+
+                var dataEntries = [ChartDataEntry]()
+                for i in 0..<dates.count {
+                    dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
+                }
+
+                unitNetValueDataSet = LineChartDataSet(values: dataEntries, label: "单位净值走势")
+                unitNetValueDataSet.drawCircleHoleEnabled = false
+                unitNetValueDataSet.drawCirclesEnabled = false
+
+                SVProgressHUD.dismiss()
+                self.performSegue(withIdentifier: "fullChartSegue", sender:
+                    RPLineChartViewModel(title: "单位净值走势",
+                                         data: LineChartData(dataSet: unitNetValueDataSet),
+                                         valueFormatter: RPFundDateFormatter(labels: dates)))
+            }
+        }
+    }
+
+    private func cumulativeNetValueAction() {
+        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/cumulative-net-value").responseJSON { response in
+            if let json = response.result.value {
+                let result2 = JSON(json).arrayValue
+
+                var cumulativeNetValueDataSet = LineChartDataSet()
+
+                var dates2 = [String]()
+                var values2 = [Double]()
+                for dict in result2 {
+                    dates2.append((dict.dictionaryValue["date"]?.stringValue)!)
+                    values2.append((dict.dictionaryValue["value"]?.doubleValue)!)
+                }
+
+                var dataEntries2 = [ChartDataEntry]()
+                for i in 0..<dates2.count {
+                    dataEntries2.append(ChartDataEntry(x: Double(i) / Double(dates2.count), y: values2[i]))
+                }
+                cumulativeNetValueDataSet = LineChartDataSet(values: dataEntries2, label: "累积净值走势")
+                cumulativeNetValueDataSet.drawCircleHoleEnabled = false
+                cumulativeNetValueDataSet.drawCirclesEnabled = false
+                cumulativeNetValueDataSet.setColor(.red)
+
+                SVProgressHUD.dismiss()
+                self.performSegue(withIdentifier: "fullChartSegue", sender:
+                    RPLineChartViewModel(title: "累积净值走势",
+                                         data: LineChartData(dataSet: cumulativeNetValueDataSet),
+                                         valueFormatter: RPFundDateFormatter(labels: dates2)))
+            }
+        }
+    }
+
     @IBAction func updateRateAction(_ sender: UIButton) {
+        guard fundCode != nil else {
+            return
+        }
+
         SVProgressHUD.show()
         Alamofire.request(
             "\(BASE_URL)/fund/\(self.fundCode ?? "")/rate",
@@ -212,7 +213,6 @@ class RPFundDetailTableViewController: UITableViewController {
                     RPLineChartViewModel(title: "累积收益率走势 - \(sender.titleLabel?.text ?? "")",
                                          data: LineChartData(dataSet: rateDataSet),
                                          valueFormatter: RPFundDateFormatter(labels: dates3)))
-
             }
         }
     }
@@ -221,6 +221,9 @@ class RPFundDetailTableViewController: UITableViewController {
         Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
             if let json = response.result.value {
                 let result4 = JSON(json).dictionaryValue
+
+                print("Current Asset \(result4)")
+
                 var currentAssetDict = [String: Double]()
                 for (key, value) in result4 where value.doubleValue > 0 {
                     currentAssetDict[key] = value.doubleValue
@@ -235,17 +238,12 @@ class RPFundDetailTableViewController: UITableViewController {
                 currentAssetDataSet.valueTextColor = .black
                 currentAssetDataSet.entryLabelColor = .clear
 
-                let data = PieChartData(dataSet: currentAssetDataSet)
-                self.currentAssetChart.data = data
+                DispatchQueue.main.async {
+                    let data = PieChartData(dataSet: currentAssetDataSet)
+                    self.currentAssetChart.data = data
+                    self.currentAssetChart.notifyDataSetChanged()
+                }
             }
-        }
-    }
-
-    @IBAction func seeFullChartAction(_ sender: UIButton) {
-        if let data = self.netValueChart.data {
-            self.performSegue(withIdentifier: "fullChartSegue", sender: RPLineChartViewModel(title: "净值走势",
-                                                                                             data: data,
-                                                                                             valueFormatter: self.netValueChart.xAxis.valueFormatter))
         }
     }
 

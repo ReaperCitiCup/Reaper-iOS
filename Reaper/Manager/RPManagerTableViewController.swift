@@ -71,6 +71,8 @@ class RPManagerTableViewController: UITableViewController {
     
     var managerModel: RPManagerModel? = nil {
         didSet {
+            SVProgressHUD.show()
+
             DispatchQueue.main.async {
                 self.nameLabel.text = self.managerModel?.name
                 self.infoLabel.text = self.managerModel?.introduction
@@ -78,9 +80,9 @@ class RPManagerTableViewController: UITableViewController {
                 self.appointedDateLabel.text = String.init(format: "现任基金公司: %@", (self.managerModel?.appointedDate)!)
                 self.totalScopeLabel.text = String.init(format: "%.2f", (self.managerModel?.totalScope)!)
                 self.bestReturnLabel.text = String.init(format: "%.2f", (self.managerModel?.bestReturns)!)
-                
-                self.updateChartsData()
             }
+
+            self.updateChartsData()
         }
     }
     
@@ -156,7 +158,6 @@ class RPManagerTableViewController: UITableViewController {
                                                    totalScope: result["totalScope"].doubleValue,
                                                    bestReturns: result["bestReturns"].doubleValue,
                                                    introduction: result["introduction"].stringValue)
-                
                 self.tableView.reloadData()
             }
         }
@@ -166,7 +167,6 @@ class RPManagerTableViewController: UITableViewController {
         guard managerModel != nil else {
             return
         }
-        SVProgressHUD.show()
 
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
@@ -206,6 +206,8 @@ class RPManagerTableViewController: UITableViewController {
 
                 var fundRateTrendDataSetArray = [LineChartDataSet]()
 
+                var dateFormatter: RPFundDateFormatter? = nil
+
                 if result.count > 0 {
                     for dict in result {
                         let fundName = dict["name"]
@@ -228,11 +230,16 @@ class RPManagerTableViewController: UITableViewController {
                         fundRateTrendDataSet.drawCirclesEnabled = false
                         fundRateTrendDataSet.setColor(ChartColorTemplates.vordiplom()[fundRateTrendDataSetArray.count % ChartColorTemplates.vordiplom().count])
                         fundRateTrendDataSetArray.append(fundRateTrendDataSet)
+
+                        if dateFormatter == nil {
+                            dateFormatter = RPFundDateFormatter(labels: dates)
+                        }
                     }
 
                     let data = LineChartData(dataSets: fundRateTrendDataSetArray)
                     self.fundRateTrendChart.data = data
-                    //                    self.fundRateTrendChart.xAxis.valueFormatter = RPFundDateFormatter(labels: dates)
+                    self.fundRateTrendChart.xAxis.valueFormatter = dateFormatter!
+                    self.fundRateTrendChart.notifyDataSetChanged()
                 }
             }
         }
@@ -273,6 +280,7 @@ class RPManagerTableViewController: UITableViewController {
 
                 self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPManagerFundRankFormatter()
                 self.fundRankHorizontalBarChart.data = data
+                self.fundRankHorizontalBarChart.notifyDataSetChanged()
             }
         }
     }
@@ -292,6 +300,7 @@ class RPManagerTableViewController: UITableViewController {
 
                 let data = RadarChartData(dataSet: abilityDataSet)
                 self.abilityRadarChart.data = data
+                self.abilityRadarChart.notifyDataSetChanged()
             }
         }
     }
@@ -327,6 +336,7 @@ class RPManagerTableViewController: UITableViewController {
                 let fundPerformanceDataSet = ScatterChartDataSet(values: fundPerformanceEntry)
                 let data = ScatterChartData(dataSet: fundPerformanceDataSet)
                 self.managerFundPerformanceScatterChart.data = data
+                self.managerFundPerformanceScatterChart.notifyDataSetChanged()
             }
         }
     }
@@ -344,6 +354,7 @@ class RPManagerTableViewController: UITableViewController {
                 let managerPerformanceDataSet = ScatterChartDataSet(values: managerPerformanceEntry)
                 let data = ScatterChartData(dataSet: managerPerformanceDataSet)
                 self.managerPerformanceScatterChart.data = data
+                self.managerPerformanceScatterChart.notifyDataSetChanged()
             }
         }
     }
