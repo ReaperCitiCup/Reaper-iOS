@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242F24621F68CFB1009D264E /* RPCompanyAttributionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F24611F68CFB1009D264E /* RPCompanyAttributionFormatter.swift */; };
+		242F24641F68D526009D264E /* RPHorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */; };
 		243A8B441F68197400E8BE40 /* RPAnalysisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A8B431F68197400E8BE40 /* RPAnalysisTableViewController.swift */; };
 		243A8B461F681A2D00E8BE40 /* RPLineChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A8B451F681A2D00E8BE40 /* RPLineChartViewController.swift */; };
 		243A8B481F681E0700E8BE40 /* RPBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A8B471F681E0700E8BE40 /* RPBlueButton.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		242F24611F68CFB1009D264E /* RPCompanyAttributionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCompanyAttributionFormatter.swift; sourceTree = "<group>"; };
+		242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPHorizontalBarChartView.swift; sourceTree = "<group>"; };
 		243A8B431F68197400E8BE40 /* RPAnalysisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPAnalysisTableViewController.swift; sourceTree = "<group>"; };
 		243A8B451F681A2D00E8BE40 /* RPLineChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPLineChartViewController.swift; sourceTree = "<group>"; };
 		243A8B471F681E0700E8BE40 /* RPBlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPBlueButton.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 		249ADB5B1F6293E000307608 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */,
 				249ADB5C1F629B2500307608 /* ChartFormatter */,
 				2453775B1F5BB54B002970EB /* UIColor+Extension.swift */,
 				243A8B471F681E0700E8BE40 /* RPBlueButton.swift */,
@@ -105,6 +110,7 @@
 				24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */,
 				2470FE241F5D276200B034F9 /* RPFundDateFormatter.swift */,
 				249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */,
+				242F24611F68CFB1009D264E /* RPCompanyAttributionFormatter.swift */,
 			);
 			path = ChartFormatter;
 			sourceTree = "<group>";
@@ -387,9 +393,11 @@
 				24FBCA2D1F613F150016A894 /* RPManagerAbilityFormatter.swift in Sources */,
 				243A8B481F681E0700E8BE40 /* RPBlueButton.swift in Sources */,
 				245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */,
+				242F24621F68CFB1009D264E /* RPCompanyAttributionFormatter.swift in Sources */,
 				2470FE251F5D276200B034F9 /* RPFundDateFormatter.swift in Sources */,
 				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
 				249ADB571F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift in Sources */,
+				242F24641F68D526009D264E /* RPHorizontalBarChartView.swift in Sources */,
 				243A8B441F68197400E8BE40 /* RPAnalysisTableViewController.swift in Sources */,
 				243A8B461F681A2D00E8BE40 /* RPLineChartViewController.swift in Sources */,
 				248FB8841F6826F7001E7498 /* RPLineChartViewModel.swift in Sources */,

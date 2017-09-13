@@ -23,7 +23,7 @@ class RPManagerTableViewController: UITableViewController {
     @IBOutlet weak var appointedDateLabel: UILabel!
     
     @IBOutlet weak var abilityRadarChart: RadarChartView!
-    @IBOutlet weak var fundRankHorizontalBarChart: HorizontalBarChartView!
+    @IBOutlet weak var fundRankHorizontalBarChart: RPHorizontalBarChartView!
     @IBOutlet weak var fundRateTrendChart: LineChartView!
     @IBOutlet weak var managerFundPerformanceScatterChart: ScatterChartView!
     @IBOutlet weak var managerPerformanceScatterChart: ScatterChartView!
@@ -107,14 +107,6 @@ class RPManagerTableViewController: UITableViewController {
         self.fundRateTrendChart.xAxis.drawGridLinesEnabled = false
         self.fundRateTrendChart.rightAxis.drawAxisLineEnabled = false
         self.fundRateTrendChart.rightAxis.drawLabelsEnabled = false
-        
-        self.fundRankHorizontalBarChart.xAxis.labelPosition = .bottom
-        self.fundRankHorizontalBarChart.rightAxis.drawAxisLineEnabled = false
-        self.fundRankHorizontalBarChart.rightAxis.drawLabelsEnabled = false
-        self.fundRankHorizontalBarChart.dragEnabled = false
-        self.fundRankHorizontalBarChart.doubleTapToZoomEnabled = false
-        self.fundRankHorizontalBarChart.pinchZoomEnabled = false
-        self.fundRankHorizontalBarChart.xAxis.drawGridLinesEnabled = false
 
         managerFundPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
         managerPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
