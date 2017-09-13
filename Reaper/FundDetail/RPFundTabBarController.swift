@@ -29,11 +29,11 @@ class RPFundTabBarController: UITabBarController {
                     
                     var managerArray = [RPManagerShortModel]()
                     for dict in result["manager"].arrayValue {
-                        managerArray.append(RPManagerShortModel(code: dict["code"].stringValue,
+                        managerArray.append(RPManagerShortModel(code: dict["id"].stringValue,
                                                                 name: dict["name"].stringValue))
                     }
                     
-                    let companyShortModel = RPCompanyShortModel(code: result["company"]["code"].stringValue,
+                    let companyShortModel = RPCompanyShortModel(code: result["company"]["id"].stringValue,
                                                                 name: result["company"]["name"].stringValue)
                     
                     var rateDict: [String: Double] = [:]

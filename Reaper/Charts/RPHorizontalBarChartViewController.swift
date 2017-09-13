@@ -29,7 +29,9 @@ class RPHorizontalBarChartViewController: UIViewController {
         self.barView.data = dataModel?.data
         if let fmt = dataModel?.valueFormatter {
             self.barView.xAxis.valueFormatter = fmt
+            self.barView.xAxis.labelCount = (dataModel?.data.entryCount)!
         }
+        self.barView.xAxis.labelWidth = 100.0
     }
 
 }

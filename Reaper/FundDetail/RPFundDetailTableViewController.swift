@@ -181,6 +181,8 @@ class RPFundDetailTableViewController: UITableViewController {
 
     @IBAction func updateRateAction(_ sender: UIButton) {
         guard fundCode != nil else {
+            SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+            SVProgressHUD.dismiss(withDelay: 2.0)
             return
         }
 
@@ -255,6 +257,7 @@ class RPFundDetailTableViewController: UITableViewController {
             SVProgressHUD.dismiss(withDelay: 2.0)
             return
         }
+        SVProgressHUD.show()
         switch sender.tag {
         case 0:
             updateStyleProfit()
@@ -285,11 +288,12 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
-                    labels.append((dict["field"]?.stringValue)!)
-                    values.append((dict["value"]?.doubleValue)!)
-                    styleAttributionProfitEntries.append(BarChartDataEntry(x: Double(i),
-                                                                           y: values[i],
-                                                                           data: labels[i] as AnyObject))
+                    if let value = dict["value"]?.doubleValue {
+                        labels.append((dict["field"]?.stringValue)!)
+                        values.append(value)
+                        styleAttributionProfitEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
+                                                                               y: value))
+                    }
                 }
 
                 let styleAttributionProfitDataSet = BarChartDataSet(values: styleAttributionProfitEntries, label: "")
@@ -300,7 +304,7 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动收益",
                                                                                               data: data,
-                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -317,11 +321,12 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
-                    labels.append((dict["field"]?.stringValue)!)
-                    values.append((dict["value"]?.doubleValue)!)
-                    styleAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
-                                                                         y: values[i],
-                                                                         data: labels[i] as AnyObject))
+                    if let value = dict["value"]?.doubleValue {
+                        labels.append((dict["field"]?.stringValue)!)
+                        values.append(value)
+                        styleAttributionRiskEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
+                                                                             y: value))
+                    }
                 }
 
                 let styleAttributionRiskDataSet = BarChartDataSet(values: styleAttributionRiskEntries, label: "")
@@ -332,7 +337,7 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动风险",
                                                                                               data: data,
-                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -349,11 +354,12 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
-                    labels.append((dict["field"]?.stringValue)!)
-                    values.append((dict["value"]?.doubleValue)!)
-                    industryAttributionProfitEntries.append(BarChartDataEntry(x: Double(i),
-                                                                              y: values[i],
-                                                                              data: labels[i] as AnyObject))
+                    if let value = dict["value"]?.doubleValue {
+                        labels.append((dict["field"]?.stringValue)!)
+                        values.append(value)
+                        industryAttributionProfitEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
+                                                                                  y: value))
+                    }
                 }
 
                 let industryAttributionProfitDataSet = BarChartDataSet(values: industryAttributionProfitEntries, label: "")
@@ -361,10 +367,10 @@ class RPFundDetailTableViewController: UITableViewController {
                 industryAttributionProfitDataSet.valueTextColor = .black
 
                 let data = BarChartData(dataSet: industryAttributionProfitDataSet)
-
+                
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动收益",
                                                                                               data: data,
-                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -381,11 +387,12 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
-                    labels.append((dict["field"]?.stringValue)!)
-                    values.append((dict["value"]?.doubleValue)!)
-                    industryAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
-                                                                            y: values[i],
-                                                                            data: labels[i] as AnyObject))
+                    if let value = dict["value"]?.doubleValue {
+                        labels.append((dict["field"]?.stringValue)!)
+                        values.append(value)
+                        industryAttributionRiskEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
+                                                                                y: value))
+                    }
                 }
 
                 let industryAttributionRiskDataSet = BarChartDataSet(values: industryAttributionRiskEntries, label: "")
@@ -393,10 +400,13 @@ class RPFundDetailTableViewController: UITableViewController {
                 industryAttributionRiskDataSet.valueTextColor = .black
 
                 let data = BarChartData(dataSet: industryAttributionRiskDataSet)
+                
+                print(labels)
+                print(industryAttributionRiskEntries)
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动风险",
                                                                                               data: data,
-                                                                                              valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -437,6 +447,7 @@ class RPFundDetailTableViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        SVProgressHUD.dismiss()
         if segue.identifier == "fullChartSegue" {
             let vc = segue.destination as! RPLineChartViewController
             vc.dataModel = (sender as! RPChartViewModel)

@@ -2,6 +2,18 @@
 
 iOS App for Reaper.
 
+# Preview
+
+<table>
+    <tr>
+        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_1.png"></td>
+        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_2.png"></td>
+        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_3.png"></td>
+        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_4.png"></td
+        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_5.png"></td>
+    </tr>
+</table>
+
 # See Also
 
 * [Server Module](https://github.com/ReaperCitiCup/Reaper-Server)
@@ -20,6 +32,7 @@ iOS App for Reaper.
     * [DZNEmptyDataSet](https://github.com/dzenbot/DZNEmptyDataSet)
     * [BTNavigationDropdownMenu](https://github.com/PhamBaTho/BTNavigationDropdownMenu)
     * [SwiftLint](https://github.com/realm/SwiftLint)
+    * [Kingfisher](https://github.com/onevcat/Kingfisher)
 
 * Produced by [songkuixi](https://github.com/songkuixi).
 

@@ -57,7 +57,7 @@ class RPFundListTableViewController: UITableViewController {
         let para = ["keyword": searchString ?? "",
                     "order": "code",
                     "size": 10,
-                    "page": 1] as [String: Any]
+                    "page": self.currentPage] as [String: Any]
         Alamofire.request(url, parameters: para).responseJSON { response in
             if let json = response.result.value {
                 for result in JSON(json)["result"].arrayValue {

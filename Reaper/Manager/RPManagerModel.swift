@@ -17,5 +17,6 @@ struct RPManagerModel {
     var totalScope: Double?
     var bestReturns: Double?
     var introduction: String
+    var managerImageUrl: String?
     
 }

@@ -20,11 +20,6 @@ class RPCompanyTableViewController: UITableViewController {
     @IBOutlet weak var fundPerformanceScatterChart: ScatterChartView!
     @IBOutlet weak var managerPerformanceScatterChart: ScatterChartView!
     @IBOutlet weak var assetAllocationPieChart: PieChartView!
-
-    @IBOutlet weak var styleAttributionProfitBarChart: RPHorizontalBarChartView!
-    @IBOutlet weak var styleAttributionRiskBarChart: RPHorizontalBarChartView!
-    @IBOutlet weak var industryAttributionProfitBarChart: RPHorizontalBarChartView!
-    @IBOutlet weak var industryAttributionRiskBarChart: RPHorizontalBarChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +83,7 @@ class RPCompanyTableViewController: UITableViewController {
             SVProgressHUD.dismiss(withDelay: 2.0)
             return
         }
+        SVProgressHUD.show()
         switch sender.tag {
         case 0:
             updateStyleProfit()
@@ -191,7 +187,7 @@ class RPCompanyTableViewController: UITableViewController {
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动收益",
                                                                                          data: data,
-                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                         valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -224,7 +220,7 @@ class RPCompanyTableViewController: UITableViewController {
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动风险",
                                                                                          data: data,
-                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                         valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -257,7 +253,7 @@ class RPCompanyTableViewController: UITableViewController {
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动收益",
                                                                                          data: data,
-                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                         valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -290,7 +286,7 @@ class RPCompanyTableViewController: UITableViewController {
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动风险",
                                                                                          data: data,
-                                                                                         valueFormatter: RPCompanyAttributionFormatter(labels: labels)))
+                                                                                         valueFormatter: IndexAxisValueFormatter(values: labels)))
             }
         }
     }
@@ -332,6 +328,7 @@ class RPCompanyTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "horizontalSegue" {
+            SVProgressHUD.dismiss()
             let vc = segue.destination as! RPHorizontalBarChartViewController
             vc.dataModel = (sender as! RPChartViewModel)
         }

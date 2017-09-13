@@ -12,6 +12,7 @@ import SwiftyJSON
 import Charts
 import BTNavigationDropdownMenu
 import SVProgressHUD
+import Kingfisher
 
 class RPManagerTableViewController: UITableViewController {
     
@@ -21,6 +22,7 @@ class RPManagerTableViewController: UITableViewController {
     @IBOutlet weak var bestReturnLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
     @IBOutlet weak var appointedDateLabel: UILabel!
+    @IBOutlet weak var managerImageView: UIImageView!
     
     @IBOutlet weak var abilityRadarChart: RadarChartView!
     @IBOutlet weak var fundRankHorizontalBarChart: RPHorizontalBarChartView!
@@ -80,6 +82,9 @@ class RPManagerTableViewController: UITableViewController {
                 self.appointedDateLabel.text = String.init(format: "现任基金公司: %@", (self.managerModel?.appointedDate)!)
                 self.totalScopeLabel.text = String.init(format: "%.2f", (self.managerModel?.totalScope)!)
                 self.bestReturnLabel.text = String.init(format: "%.2f", (self.managerModel?.bestReturns)!)
+                if let url = self.managerModel?.managerImageUrl {
+                    self.managerImageView.kf.setImage(with: URL(string: url))
+                }
             }
 
             self.updateChartsData()
@@ -101,7 +106,7 @@ class RPManagerTableViewController: UITableViewController {
         
         self.abilityRadarChart.legend.enabled = false
         self.abilityRadarChart.yAxis.drawLabelsEnabled = false
-        self.abilityRadarChart.xAxis.valueFormatter = RPManagerAbilityFormatter()
+        self.abilityRadarChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["经验值", "择时能力", "收益率", "择股能力", "抗风险"])
         
         self.fundRateTrendChart.xAxis.labelPosition = .bottom
         self.fundRateTrendChart.xAxis.drawGridLinesEnabled = false
@@ -141,7 +146,6 @@ class RPManagerTableViewController: UITableViewController {
         Alamofire.request("\(BASE_URL)/manager/\(code)").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json)
-                // FIXME: ID or CODE
                 self.managerModel = RPManagerModel(code: result["id"].stringValue,
                                                    name: result["name"].stringValue,
                                                    appointedDate: result["appointedDate"].stringValue,
@@ -149,7 +153,8 @@ class RPManagerTableViewController: UITableViewController {
                                                                                 name: result["company"]["name"].stringValue),
                                                    totalScope: result["totalScope"].doubleValue,
                                                    bestReturns: result["bestReturns"].doubleValue,
-                                                   introduction: result["introduction"].stringValue)
+                                                   introduction: result["introduction"].stringValue,
+                                                   managerImageUrl: result["managerImageUrl"].stringValue)
                 self.tableView.reloadData()
             }
         }
@@ -238,43 +243,48 @@ class RPManagerTableViewController: UITableViewController {
     }
 
     private func updateManagerFundRank() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
-            if let json = response.result.value {
-                let result = JSON(json).arrayValue
-
-                var monthDataSets = [BarChartDataSet]()
-
-                for fundDict in result {
-                    let fundName = fundDict["name"].stringValue
-
-                    var monthDataEntries: [BarChartDataEntry] = []
-                    for dict in fundDict["data"].arrayValue {
-                        let month = Int.transformToXAxis(from: dict["month"].intValue)
-                        let rank = dict["rank"].doubleValue
-                        let total = dict["total"].doubleValue
-                        monthDataEntries.append(BarChartDataEntry(x: Double(month),
-                                                                  y: rank / total,
-                                                                  data: fundName as AnyObject))
-                    }
-
-                    let dataSet = BarChartDataSet(values: monthDataEntries.sorted(by: { $0.x < $1.x }),
-                                                  label: fundName)
-                    dataSet.setColor(ChartColorTemplates.vordiplom()[monthDataSets.count % ChartColorTemplates.vordiplom().count])
-
-                    monthDataSets.append(dataSet)
-                }
-
-                let data = BarChartData(dataSets: monthDataSets)
-                data.barWidth /= (Double(monthDataSets.count) * 1.5)
-                data.groupBars(fromX: 0.45,
-                               groupSpace: 0.15,
-                               barSpace: 0.15)
-
-                self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPManagerFundRankFormatter()
-                self.fundRankHorizontalBarChart.data = data
-                self.fundRankHorizontalBarChart.notifyDataSetChanged()
-            }
-        }
+//        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
+//            if let json = response.result.value {
+//                let result = JSON(json).arrayValue
+//
+//                var monthDataSets = [BarChartDataSet]()
+//
+//                var fields: [String] = []
+//                for fundDict in result {
+//                    let fundName = fundDict["name"].stringValue
+//
+//                    var monthDataEntries: [BarChartDataEntry] = []
+//
+//                    for dict in fundDict["data"].arrayValue {
+//                        let rank = dict["rank"].doubleValue
+//                        let total = dict["total"].doubleValue
+//                        let type = dict["type"].stringValue
+//
+//                        fields.append(type)
+//
+//                        monthDataEntries.append(BarChartDataEntry(x: Double(monthDataEntries.count),
+//                                                                  y: rank / total,
+//                                                                  data: type as AnyObject))
+//                    }
+//
+//                    let dataSet = BarChartDataSet(values: monthDataEntries,
+//                                                  label: fundName)
+//                    dataSet.setColor(ChartColorTemplates.vordiplom()[monthDataSets.count % ChartColorTemplates.vordiplom().count])
+//
+//                    monthDataSets.append(dataSet)
+//                }
+//
+//                let data = BarChartData(dataSets: monthDataSets)
+//                data.barWidth /= (Double(monthDataSets.count) * 1.5)
+//                data.groupBars(fromX: 0.45,
+//                               groupSpace: 0.15,
+//                               barSpace: 0.15)
+//
+//                self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPAttributionFormatter(labels: fields)
+//                self.fundRankHorizontalBarChart.data = data
+//                self.fundRankHorizontalBarChart.notifyDataSetChanged()
+//            }
+//        }
     }
 
     private func updateAbility() {
@@ -356,6 +366,9 @@ class RPManagerTableViewController: UITableViewController {
             self.performSegue(withIdentifier: "fullChartSegue", sender: RPChartViewModel(title: "现任基金收益率走势",
                                                                                              data: data,
                                                                                              valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
+        } else {
+            SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+            SVProgressHUD.dismiss(withDelay: 2.0)
         }
     }
     
@@ -393,27 +406,4 @@ class RPManagerTableViewController: UITableViewController {
         }
     }
 
-}
-
-private extension Int {
-    
-    static func transformToXAxis(from month: Int) -> Int {
-        switch month {
-        case 1:
-            return 1
-        case 3:
-            return 2
-        case 6:
-            return 3
-        case 12:
-            return 4
-        case 24:
-            return 5
-        case 36:
-            return 6
-        default:
-            return -1
-        }
-    }
-    
 }

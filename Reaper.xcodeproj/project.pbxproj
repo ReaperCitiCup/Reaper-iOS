@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		242F24621F68CFB1009D264E /* RPCompanyAttributionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F24611F68CFB1009D264E /* RPCompanyAttributionFormatter.swift */; };
+		2422FCAD1F6974B30071F12B /* RPFundDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2422FCAC1F6974B30071F12B /* RPFundDateFormatter.swift */; };
 		242F24641F68D526009D264E /* RPHorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */; };
 		242F24661F68D7A4009D264E /* RPHorizontalBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F24651F68D7A4009D264E /* RPHorizontalBarChartViewController.swift */; };
 		243A8B441F68197400E8BE40 /* RPAnalysisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A8B431F68197400E8BE40 /* RPAnalysisTableViewController.swift */; };
@@ -21,14 +21,12 @@
 		245377661F5BC102002970EB /* RPManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377651F5BC102002970EB /* RPManagerModel.swift */; };
 		2470FE0B1F5BC28200B034F9 /* RPManagerShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */; };
 		2470FE101F5BFF2700B034F9 /* RPCompanyShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */; };
-		2470FE251F5D276200B034F9 /* RPFundDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE241F5D276200B034F9 /* RPFundDateFormatter.swift */; };
 		2470FE391F5D7A8100B034F9 /* RPManagerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */; };
 		2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */; };
 		2485ADE71F5AFB3E008D32A0 /* RPFundListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */; };
 		248FB8841F6826F7001E7498 /* RPChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FB8831F6826F7001E7498 /* RPChartViewModel.swift */; };
 		249ADB501F6236B300307608 /* RPManagerHistoryFundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */; };
 		249ADB521F6236BF00307608 /* RPManagerHistoryFundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */; };
-		249ADB541F623DA800307608 /* RPManagerFundRankFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */; };
 		249ADB571F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */; };
 		249ADB581F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249ADB561F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib */; };
 		249ADB5A1F628B6800307608 /* RPManagerHistoryFundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */; };
@@ -38,12 +36,11 @@
 		24FBCA261F611E270016A894 /* RPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FBCA251F611E270016A894 /* RPNavigationController.swift */; };
 		24FBCA271F611F2D0016A894 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24FBCA221F60EBBB0016A894 /* Assets.xcassets */; };
 		24FBCA2B1F612E110016A894 /* RPCompanyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FBCA2A1F612E110016A894 /* RPCompanyTableViewController.swift */; };
-		24FBCA2D1F613F150016A894 /* RPManagerAbilityFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */; };
 		4B0AA389772429CEFDC1B342 /* Pods_Reaper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936FC6B77157823DDABC8274 /* Pods_Reaper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		242F24611F68CFB1009D264E /* RPCompanyAttributionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCompanyAttributionFormatter.swift; sourceTree = "<group>"; };
+		2422FCAC1F6974B30071F12B /* RPFundDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundDateFormatter.swift; sourceTree = "<group>"; };
 		242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPHorizontalBarChartView.swift; sourceTree = "<group>"; };
 		242F24651F68D7A4009D264E /* RPHorizontalBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPHorizontalBarChartViewController.swift; sourceTree = "<group>"; };
 		243A8B431F68197400E8BE40 /* RPAnalysisTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPAnalysisTableViewController.swift; sourceTree = "<group>"; };
@@ -57,14 +54,12 @@
 		245377651F5BC102002970EB /* RPManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerModel.swift; sourceTree = "<group>"; };
 		2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerShortModel.swift; sourceTree = "<group>"; };
 		2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCompanyShortModel.swift; sourceTree = "<group>"; };
-		2470FE241F5D276200B034F9 /* RPFundDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundDateFormatter.swift; sourceTree = "<group>"; };
 		2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE21F5AF759008D32A0 /* RPFundListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewController.swift; sourceTree = "<group>"; };
 		2485ADE61F5AFB3E008D32A0 /* RPFundListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundListTableViewCell.swift; sourceTree = "<group>"; };
 		248FB8831F6826F7001E7498 /* RPChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPChartViewModel.swift; sourceTree = "<group>"; };
 		249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerHistoryFundView.swift; sourceTree = "<group>"; };
 		249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RPManagerHistoryFundView.xib; sourceTree = "<group>"; };
-		249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPManagerFundRankFormatter.swift; sourceTree = "<group>"; };
 		249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerHistoryFundTableViewCell.swift; sourceTree = "<group>"; };
 		249ADB561F628AD200307608 /* RPManagerHistoryFundTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RPManagerHistoryFundTableViewCell.xib; sourceTree = "<group>"; };
 		249ADB591F628B6800307608 /* RPManagerHistoryFundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerHistoryFundModel.swift; sourceTree = "<group>"; };
@@ -76,7 +71,6 @@
 		24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundTabBarController.swift; sourceTree = "<group>"; };
 		24FBCA251F611E270016A894 /* RPNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPNavigationController.swift; sourceTree = "<group>"; };
 		24FBCA2A1F612E110016A894 /* RPCompanyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCompanyTableViewController.swift; sourceTree = "<group>"; };
-		24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerAbilityFormatter.swift; sourceTree = "<group>"; };
 		936FC6B77157823DDABC8274 /* Pods_Reaper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reaper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0331361091AAE5009936D90 /* Pods-Reaper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reaper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reaper/Pods-Reaper.debug.xcconfig"; sourceTree = "<group>"; };
 		CBE2CD3C567180C29743EAD7 /* Pods-Reaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reaper.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reaper/Pods-Reaper.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,27 +88,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2406B1F11F68F9790038823E /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				243A8B451F681A2D00E8BE40 /* RPLineChartViewController.swift */,
+				248FB8831F6826F7001E7498 /* RPChartViewModel.swift */,
+				242F24651F68D7A4009D264E /* RPHorizontalBarChartViewController.swift */,
+				242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
 		249ADB5B1F6293E000307608 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				242F24631F68D526009D264E /* RPHorizontalBarChartView.swift */,
-				249ADB5C1F629B2500307608 /* ChartFormatter */,
 				2453775B1F5BB54B002970EB /* UIColor+Extension.swift */,
 				243A8B471F681E0700E8BE40 /* RPBlueButton.swift */,
 				2453775F1F5BBAA4002970EB /* RPConstant.swift */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		249ADB5C1F629B2500307608 /* ChartFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				24FBCA2C1F613F150016A894 /* RPManagerAbilityFormatter.swift */,
-				2470FE241F5D276200B034F9 /* RPFundDateFormatter.swift */,
-				249ADB531F623DA800307608 /* RPManagerFundRankFormatter.swift */,
-				242F24611F68CFB1009D264E /* RPCompanyAttributionFormatter.swift */,
-			);
-			path = ChartFormatter;
 			sourceTree = "<group>";
 		};
 		24DC969A1F416544004E6123 = {
@@ -145,10 +137,12 @@
 				24FBCA2E1F6146860016A894 /* Manager */,
 				24FBCA2F1F6146A40016A894 /* Company */,
 				24E2631C1F6153C700F66DC3 /* Analysis */,
+				2406B1F11F68F9790038823E /* Charts */,
 				249ADB5B1F6293E000307608 /* Utility */,
 				24FBCA221F60EBBB0016A894 /* Assets.xcassets */,
 				24DC96AA1F416544004E6123 /* Main.storyboard */,
 				24DC96B21F416545004E6123 /* Info.plist */,
+				2422FCAC1F6974B30071F12B /* RPFundDateFormatter.swift */,
 			);
 			path = Reaper;
 			sourceTree = "<group>";
@@ -185,9 +179,6 @@
 				24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */,
 				2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */,
 				245377631F5BC0CC002970EB /* RPFundDetailModel.swift */,
-				243A8B451F681A2D00E8BE40 /* RPLineChartViewController.swift */,
-				248FB8831F6826F7001E7498 /* RPChartViewModel.swift */,
-				242F24651F68D7A4009D264E /* RPHorizontalBarChartViewController.swift */,
 			);
 			path = FundDetail;
 			sourceTree = "<group>";
@@ -316,6 +307,7 @@
 				"${BUILT_PRODUCTS_DIR}/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -326,6 +318,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BTNavigationDropdownMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -390,15 +383,12 @@
 			files = (
 				249ADB501F6236B300307608 /* RPManagerHistoryFundView.swift in Sources */,
 				242F24661F68D7A4009D264E /* RPHorizontalBarChartViewController.swift in Sources */,
-				249ADB541F623DA800307608 /* RPManagerFundRankFormatter.swift in Sources */,
 				249ADB5A1F628B6800307608 /* RPManagerHistoryFundModel.swift in Sources */,
+				2422FCAD1F6974B30071F12B /* RPFundDateFormatter.swift in Sources */,
 				2453775E1F5BB7E7002970EB /* RPFundDetailTableViewController.swift in Sources */,
 				2470FE391F5D7A8100B034F9 /* RPManagerTableViewController.swift in Sources */,
-				24FBCA2D1F613F150016A894 /* RPManagerAbilityFormatter.swift in Sources */,
 				243A8B481F681E0700E8BE40 /* RPBlueButton.swift in Sources */,
 				245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */,
-				242F24621F68CFB1009D264E /* RPCompanyAttributionFormatter.swift in Sources */,
-				2470FE251F5D276200B034F9 /* RPFundDateFormatter.swift in Sources */,
 				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
 				249ADB571F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift in Sources */,
 				242F24641F68D526009D264E /* RPHorizontalBarChartView.swift in Sources */,

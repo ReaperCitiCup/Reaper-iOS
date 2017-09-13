@@ -23,6 +23,7 @@ class RPLineChartViewController: UIViewController {
         self.lineChartView.xAxis.drawGridLinesEnabled = false
         self.lineChartView.rightAxis.drawAxisLineEnabled = false
         self.lineChartView.rightAxis.drawLabelsEnabled = false
+        self.lineChartView.xAxis.avoidFirstLastClippingEnabled = true
     }
 
     override func didReceiveMemoryWarning() {

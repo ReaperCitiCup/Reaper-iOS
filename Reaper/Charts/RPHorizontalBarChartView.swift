@@ -26,14 +26,15 @@ class RPHorizontalBarChartView: HorizontalBarChartView {
     private func setupProperties() {
         chartDescription?.text = ""
         legend.enabled = false
-
         xAxis.labelPosition = .bottom
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawLimitLinesBehindDataEnabled = true
+        xAxis.wordWrapEnabled = true
         rightAxis.drawAxisLineEnabled = false
         rightAxis.drawLabelsEnabled = false
-//        dragEnabled = false
         doubleTapToZoomEnabled = false
-//        pinchZoomEnabled = false
-        xAxis.drawGridLinesEnabled = false
+        xAxis.avoidFirstLastClippingEnabled = true
+        xAxis.labelWidth = 50.0
     }
 
 }
