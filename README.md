@@ -9,7 +9,7 @@ iOS App for Reaper.
         <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_1.png"></td>
         <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_2.png"></td>
         <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_3.png"></td>
-        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_4.png"></td
+        <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_4.png"></td>
         <td><img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Preview/Preview_5.png"></td>
     </tr>
 </table>
