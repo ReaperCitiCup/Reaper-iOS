@@ -886,16 +886,16 @@
                         <outlet property="currentAssetChart" destination="AT1-hM-5N1" id="oxO-iz-c00"/>
                         <outlet property="dateLabel" destination="Ncu-eW-TQg" id="OQn-m5-pSq"/>
                         <outlet property="managerLabel" destination="9D9-HH-cYJ" id="hzJ-W4-oW5"/>
-                        <outlet property="rate1MonthLabel" destination="XDe-84-RF5" id="eRk-KQ-4Vg"/>
-                        <outlet property="rate1YearLabel" destination="de9-XS-A7U" id="KfN-GU-BI1"/>
-                        <outlet property="rate3MonthLabel" destination="dpV-yg-iyp" id="Q9v-5e-Y7D"/>
-                        <outlet property="rate3YearLabel" destination="77w-Ut-Qrg" id="T9E-xG-MvB"/>
-                        <outlet property="rate6MonthLabel" destination="1Pq-xL-S2z" id="peJ-ut-r3p"/>
                         <outlet property="rateLabel" destination="1aA-A3-h6U" id="BH2-QY-QOk"/>
-                        <outlet property="rateSinceFoundLabel" destination="Uk4-tv-cfT" id="wft-yz-yGm"/>
                         <outlet property="scopeLabel" destination="Nr6-Om-rYh" id="cBa-K4-XTf"/>
                         <outlet property="typeLabel" destination="pzi-hC-Rhq" id="Lth-aj-g4A"/>
                         <outlet property="unitNetValueLabel" destination="dqd-Qi-5We" id="b3Q-wd-NRP"/>
+                        <outletCollection property="rateMonthLabels" destination="XDe-84-RF5" collectionClass="NSMutableArray" id="Zqw-0g-Wop"/>
+                        <outletCollection property="rateMonthLabels" destination="dpV-yg-iyp" collectionClass="NSMutableArray" id="0rF-rM-vvG"/>
+                        <outletCollection property="rateMonthLabels" destination="1Pq-xL-S2z" collectionClass="NSMutableArray" id="5Ht-bR-M41"/>
+                        <outletCollection property="rateMonthLabels" destination="de9-XS-A7U" collectionClass="NSMutableArray" id="T34-dw-f3V"/>
+                        <outletCollection property="rateMonthLabels" destination="77w-Ut-Qrg" collectionClass="NSMutableArray" id="059-M4-xqD"/>
+                        <outletCollection property="rateMonthLabels" destination="Uk4-tv-cfT" collectionClass="NSMutableArray" id="28b-6N-wXZ"/>
                         <segue destination="WiD-GP-I1P" kind="show" identifier="fullChartSegue" id="CUm-mS-zFB"/>
                         <segue destination="2VL-63-iJ0" kind="show" identifier="horizontalSegue" id="uUV-PU-MNj"/>
                     </connections>

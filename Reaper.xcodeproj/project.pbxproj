@@ -19,6 +19,9 @@
 		245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377611F5BC0B3002970EB /* RPFundModel.swift */; };
 		245377641F5BC0CC002970EB /* RPFundDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377631F5BC0CC002970EB /* RPFundDetailModel.swift */; };
 		245377661F5BC102002970EB /* RPManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245377651F5BC102002970EB /* RPManagerModel.swift */; };
+		2464CAD21F6ACB3600C48E49 /* RPManagerTableViewController+Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464CAD11F6ACB3600C48E49 /* RPManagerTableViewController+Charts.swift */; };
+		2464CAD41F6ACBC400C48E49 /* RPCompanyTableViewController+Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464CAD31F6ACBC400C48E49 /* RPCompanyTableViewController+Charts.swift */; };
+		24684E701F6AC98B00227DFF /* RPFundDetailTableViewController+Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24684E6F1F6AC98B00227DFF /* RPFundDetailTableViewController+Charts.swift */; };
 		2470FE0B1F5BC28200B034F9 /* RPManagerShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */; };
 		2470FE101F5BFF2700B034F9 /* RPCompanyShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */; };
 		2470FE391F5D7A8100B034F9 /* RPManagerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */; };
@@ -52,6 +55,9 @@
 		245377611F5BC0B3002970EB /* RPFundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundModel.swift; sourceTree = "<group>"; };
 		245377631F5BC0CC002970EB /* RPFundDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPFundDetailModel.swift; sourceTree = "<group>"; };
 		245377651F5BC102002970EB /* RPManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerModel.swift; sourceTree = "<group>"; };
+		2464CAD11F6ACB3600C48E49 /* RPManagerTableViewController+Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RPManagerTableViewController+Charts.swift"; sourceTree = "<group>"; };
+		2464CAD31F6ACBC400C48E49 /* RPCompanyTableViewController+Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RPCompanyTableViewController+Charts.swift"; sourceTree = "<group>"; };
+		24684E6F1F6AC98B00227DFF /* RPFundDetailTableViewController+Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RPFundDetailTableViewController+Charts.swift"; sourceTree = "<group>"; };
 		2470FE0A1F5BC28200B034F9 /* RPManagerShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerShortModel.swift; sourceTree = "<group>"; };
 		2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCompanyShortModel.swift; sourceTree = "<group>"; };
 		2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPManagerTableViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 			children = (
 				24FBCA231F61142E0016A894 /* RPFundTabBarController.swift */,
 				2453775D1F5BB7E7002970EB /* RPFundDetailTableViewController.swift */,
+				24684E6F1F6AC98B00227DFF /* RPFundDetailTableViewController+Charts.swift */,
 				245377631F5BC0CC002970EB /* RPFundDetailModel.swift */,
 			);
 			path = FundDetail;
@@ -187,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				2470FE381F5D7A8100B034F9 /* RPManagerTableViewController.swift */,
+				2464CAD11F6ACB3600C48E49 /* RPManagerTableViewController+Charts.swift */,
 				249ADB4F1F6236B300307608 /* RPManagerHistoryFundView.swift */,
 				249ADB511F6236BF00307608 /* RPManagerHistoryFundView.xib */,
 				249ADB551F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift */,
@@ -202,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				24FBCA2A1F612E110016A894 /* RPCompanyTableViewController.swift */,
+				2464CAD31F6ACBC400C48E49 /* RPCompanyTableViewController+Charts.swift */,
 				2470FE0F1F5BFF2700B034F9 /* RPCompanyShortModel.swift */,
 			);
 			path = Company;
@@ -385,12 +394,15 @@
 				242F24661F68D7A4009D264E /* RPHorizontalBarChartViewController.swift in Sources */,
 				249ADB5A1F628B6800307608 /* RPManagerHistoryFundModel.swift in Sources */,
 				2422FCAD1F6974B30071F12B /* RPFundDateFormatter.swift in Sources */,
+				2464CAD41F6ACBC400C48E49 /* RPCompanyTableViewController+Charts.swift in Sources */,
+				24684E701F6AC98B00227DFF /* RPFundDetailTableViewController+Charts.swift in Sources */,
 				2453775E1F5BB7E7002970EB /* RPFundDetailTableViewController.swift in Sources */,
 				2470FE391F5D7A8100B034F9 /* RPManagerTableViewController.swift in Sources */,
 				243A8B481F681E0700E8BE40 /* RPBlueButton.swift in Sources */,
 				245377621F5BC0B3002970EB /* RPFundModel.swift in Sources */,
 				2485ADE31F5AF759008D32A0 /* RPFundListTableViewController.swift in Sources */,
 				249ADB571F628AD200307608 /* RPManagerHistoryFundTableViewCell.swift in Sources */,
+				2464CAD21F6ACB3600C48E49 /* RPManagerTableViewController+Charts.swift in Sources */,
 				242F24641F68D526009D264E /* RPHorizontalBarChartView.swift in Sources */,
 				243A8B441F68197400E8BE40 /* RPAnalysisTableViewController.swift in Sources */,
 				243A8B461F681A2D00E8BE40 /* RPLineChartViewController.swift in Sources */,

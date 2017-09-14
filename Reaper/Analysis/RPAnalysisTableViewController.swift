@@ -91,59 +91,67 @@ class RPAnalysisTableViewController: UITableViewController {
                 print("Analysis \(result)")
 
                 if indexPath.row <= 7 {
-                    var dates = [String]()
-                    var values = [Double]()
-                    
-                    for dict in result {
-                        dates.append((dict.dictionaryValue["date"]?.stringValue)!)
-                        values.append((dict.dictionaryValue["value"]?.doubleValue)!)
-                    }
-                    
-                    var dataEntries = [ChartDataEntry]()
-                    for i in 0..<dates.count {
-                        dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
-                    }
-                    
-                    let analysisDataSet = LineChartDataSet(values: dataEntries, label: "")
-                    analysisDataSet.drawCircleHoleEnabled = false
-                    analysisDataSet.drawCirclesEnabled = false
-                    
-                    self.performSegue(withIdentifier: "fullChartSegue", sender:
-                        RPChartViewModel(title: self.analysisTypeArray[indexPath.row],
-                                         data: LineChartData(dataSet: analysisDataSet),
-                                         valueFormatter: RPFundDateFormatter(labels: dates)))
+                    self.lineChartAction(with: result, at: indexPath.row)
                 } else {
-                    var valueLabels: [String: Double] = [:]
-                    for i in 0..<result.count {
-                        let dict = result[i].dictionaryValue
-                        if let value = dict["value"]?.doubleValue {
-                            valueLabels[(dict["field"]?.stringValue)!] = value
-                        }
-                    }
-                    
-                    var barEntries = [ChartDataEntry]()
-                    let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
-                    for i in 0..<valueLabelsSorted.count {
-                        barEntries.append(BarChartDataEntry(x: Double(i),
-                                                            y: valueLabelsSorted[i].value))
-                    }
-                    
-                    let barDataSet = BarChartDataSet(values: barEntries, label: "")
-                    barDataSet.setColor(.rpColor)
-                    barDataSet.valueTextColor = .black
-                    
-                    let data = BarChartData(dataSet: barDataSet)
-                    
-                    self.performSegue(withIdentifier: "horizontalSegue",
-                                      sender: RPChartViewModel(title: self.analysisTypeArray[indexPath.row],
-                                                               data: data,
-                                                               valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
+                    self.horizontalChartAction(with: result, at: indexPath.row)
                 }
                 SVProgressHUD.dismiss()
             }
         }
     }
 
+    private func lineChartAction(with result: [JSON], at index: Int) {
+        var dates = [String]()
+        var values = [Double]()
+        
+        for dict in result {
+            dates.append((dict.dictionaryValue["date"]?.stringValue)!)
+            values.append((dict.dictionaryValue["value"]?.doubleValue)!)
+        }
+        
+        var dataEntries = [ChartDataEntry]()
+        for i in 0..<dates.count {
+            dataEntries.append(ChartDataEntry(x: Double(i) / Double(dates.count), y: values[i]))
+        }
+        
+        let analysisDataSet = LineChartDataSet(values: dataEntries, label: "")
+        analysisDataSet.drawCircleHoleEnabled = false
+        analysisDataSet.drawCirclesEnabled = false
+        
+        self.performSegue(withIdentifier: "fullChartSegue", sender:
+            RPChartViewModel(title: self.analysisTypeArray[index],
+                             data: LineChartData(dataSet: analysisDataSet),
+                             valueFormatter: RPFundDateFormatter(labels: dates)))
+    }
+    
+    private func horizontalChartAction(with result: [JSON], at index: Int) {
+        var valueLabels: [String: Double] = [:]
+        for i in 0..<result.count {
+            let dict = result[i].dictionaryValue
+            if let value = dict["value"]?.doubleValue {
+                valueLabels[(dict["field"]?.stringValue)!] = value
+            }
+        }
+        
+        var barEntries = [ChartDataEntry]()
+        let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
+        for i in 0..<valueLabelsSorted.count {
+            barEntries.append(BarChartDataEntry(x: Double(i),
+                                                y: valueLabelsSorted[i].value))
+        }
+        
+        let barDataSet = BarChartDataSet(values: barEntries, label: "")
+        barDataSet.setColor(.rpColor)
+        barDataSet.valueTextColor = .black
+        
+        let data = BarChartData(dataSet: barDataSet)
+        
+        self.performSegue(withIdentifier: "horizontalSegue",
+                          sender: RPChartViewModel(title: self.analysisTypeArray[index],
+                                                   data: data,
+                                                   valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
+    }
+    
      // MARK: - Navigation
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

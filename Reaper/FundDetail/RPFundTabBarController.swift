@@ -24,8 +24,6 @@ class RPFundTabBarController: UITabBarController {
             Alamofire.request("\(BASE_URL)/fund/\(fundCode)").responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json)
-
-                    print("Fund Detail \(result)")
                     
                     var managerArray = [RPManagerShortModel]()
                     for dict in result["manager"].arrayValue {

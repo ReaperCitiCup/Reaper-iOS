@@ -58,7 +58,7 @@ class RPFundListTableViewController: UITableViewController {
         let para = ["keyword": searchString ?? "",
                     "order": "code",
                     "size": 10,
-                    "page": self.currentPage] as [String: Any]
+                    "page": page] as [String: Any]
         Alamofire.request(url, parameters: para).responseJSON { response in
             if let json = response.result.value {
                 for result in JSON(json)["result"].arrayValue {
@@ -77,7 +77,7 @@ class RPFundListTableViewController: UITableViewController {
 
             SVProgressHUD.dismiss()
 
-            self.currentPage += 1
+            self.currentPage = page + 1
             self.tableView.reloadData()
         }
     }
@@ -130,6 +130,22 @@ class RPFundListTableViewController: UITableViewController {
 
 extension RPFundListTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "暂无基金", attributes: [NSForegroundColorAttributeName: UIColor.white])
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        return NSAttributedString(string: "点击重试", attributes: [NSForegroundColorAttributeName: UIColor.white])
+    }
+    
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        self.loadData(of: 1)
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
 }
 
 extension RPFundListTableViewController: UISearchBarDelegate {
@@ -142,13 +158,11 @@ extension RPFundListTableViewController: UISearchBarDelegate {
         searchString = nil
         searchFundArr.removeAll()
         loadData(of: 1)
-//        searchBar.resignFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchFundArr.removeAll()
         loadData(of: 1)
-//        searchBar.resignFirstResponder()
     }
     
 }
