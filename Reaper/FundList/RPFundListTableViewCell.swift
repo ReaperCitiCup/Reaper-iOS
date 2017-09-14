@@ -20,6 +20,7 @@ class RPFundListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.contentView.backgroundColor = .rpColor
+        self.backgroundColor = .rpColor
         self.roundView.layer.cornerRadius = 4.0
         self.roundView.layer.masksToBounds = true
     }

@@ -490,20 +490,17 @@
                                                     <rect key="frame" x="7" y="7" width="361" height="93"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="风格归因" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBq-Eo-BRL">
-                                                            <rect key="frame" x="10" y="5" width="56" height="23"/>
+                                                            <rect key="frame" x="10" y="5" width="56" height="20"/>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zi3-qm-Auv">
-                                                            <rect key="frame" x="10" y="33" width="341" height="55"/>
+                                                            <rect key="frame" x="10" y="30" width="341" height="58"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpI-xd-s0l" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="jpI-xd-s0l" secondAttribute="height" multiplier="3:1" id="zDm-Lo-igr"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动收益">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -514,11 +511,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4M9-aF-YDB" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="4M9-aF-YDB" secondAttribute="height" multiplier="3:1" id="hTU-y9-tuf"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动风险">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -562,20 +556,17 @@
                                                     <rect key="frame" x="7" y="7" width="361" height="93"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行业归因" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJa-VD-sMf">
-                                                            <rect key="frame" x="10" y="5" width="56" height="23"/>
+                                                            <rect key="frame" x="10" y="5" width="56" height="20"/>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TwD-Dd-sdP">
-                                                            <rect key="frame" x="10" y="33" width="341" height="55"/>
+                                                            <rect key="frame" x="10" y="30" width="341" height="58"/>
                                                             <subviews>
                                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXm-sv-7gH" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="bXm-sv-7gH" secondAttribute="height" multiplier="3:1" id="eD5-Zf-k2v"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动收益">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -586,11 +577,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wV5-lg-rQJ" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="wV5-lg-rQJ" secondAttribute="height" multiplier="3:1" id="J5B-Hh-6q0"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动风险">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -634,20 +622,17 @@
                                                     <rect key="frame" x="7" y="7" width="361" height="93"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="净值走势" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-QW-beP">
-                                                            <rect key="frame" x="10" y="5" width="56" height="23"/>
+                                                            <rect key="frame" x="10" y="5" width="56" height="20"/>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h7R-dL-WW6">
-                                                            <rect key="frame" x="10" y="33" width="341" height="55"/>
+                                                            <rect key="frame" x="10" y="30" width="341" height="58"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIp-a3-qIo" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="HIp-a3-qIo" secondAttribute="height" multiplier="3:1" id="A4y-Q4-6Cy"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="单位净值走势">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -657,11 +642,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWC-uu-aAs" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="LWC-uu-aAs" secondAttribute="height" multiplier="3:1" id="ajr-8g-XrL"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="累积净值走势">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1702,20 +1684,17 @@
                                                     <rect key="frame" x="7" y="7" width="361" height="93"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="风格归因" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LD-9R-GeS">
-                                                            <rect key="frame" x="10" y="5" width="56" height="23"/>
+                                                            <rect key="frame" x="10" y="5" width="56" height="20"/>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mEu-7c-Xi6">
-                                                            <rect key="frame" x="10" y="33" width="341" height="55"/>
+                                                            <rect key="frame" x="10" y="30" width="341" height="58"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmh-r2-qbR" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="fmh-r2-qbR" secondAttribute="height" multiplier="3:1" id="c8H-IC-y8Y"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动收益">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1725,11 +1704,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6j-AM-FLm" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="W6j-AM-FLm" secondAttribute="height" multiplier="3:1" id="y2g-rI-eer"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动风险">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1772,20 +1748,17 @@
                                                     <rect key="frame" x="7" y="7" width="361" height="93"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行业归因" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktB-X0-vZl">
-                                                            <rect key="frame" x="10" y="5" width="56" height="23"/>
+                                                            <rect key="frame" x="10" y="5" width="56" height="20"/>
                                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FJA-90-gHc">
-                                                            <rect key="frame" x="10" y="33" width="341" height="55"/>
+                                                            <rect key="frame" x="10" y="30" width="341" height="58"/>
                                                             <subviews>
                                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAG-Gs-zml" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="BAG-Gs-zml" secondAttribute="height" multiplier="3:1" id="qPp-1D-10d"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动收益">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1795,11 +1768,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKA-VY-A8P" customClass="RPBlueButton" customModule="Reaper" customModuleProvider="target">
-                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="55"/>
+                                                                    <rect key="frame" x="175.5" y="0.0" width="165.5" height="58"/>
                                                                     <color key="backgroundColor" red="0.31372549020000001" green="0.66666666669999997" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="nKA-VY-A8P" secondAttribute="height" multiplier="3:1" id="t97-E6-A2J"/>
-                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <state key="normal" title="主动风险">
                                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1878,6 +1848,7 @@
                     <tabBarItem key="tabBarItem" title="深度分析" image="analysis" id="r10-qj-Ltm"/>
                     <connections>
                         <segue destination="WiD-GP-I1P" kind="show" identifier="fullChartSegue" id="hrH-Dd-CmI"/>
+                        <segue destination="2VL-63-iJ0" kind="show" identifier="horizontalSegue" id="mZA-S8-IMv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APu-AS-2Bw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1893,6 +1864,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uUV-PU-MNj"/>
-        <segue reference="l5d-0l-Wl1"/>
+        <segue reference="CUm-mS-zFB"/>
     </inferredMetricsTieBreakers>
 </document>

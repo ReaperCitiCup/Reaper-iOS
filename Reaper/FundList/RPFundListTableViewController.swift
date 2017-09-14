@@ -31,6 +31,7 @@ class RPFundListTableViewController: UITableViewController {
         self.tableView.backgroundColor = .rpColor
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
+        self.view.backgroundColor = .rpColor
         
         self.searchBar.delegate = self
         self.searchBar.barTintColor = .rpColor

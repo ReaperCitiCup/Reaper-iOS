@@ -139,6 +139,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 unitNetValueDataSet = LineChartDataSet(values: dataEntries, label: "单位净值走势")
                 unitNetValueDataSet.drawCircleHoleEnabled = false
                 unitNetValueDataSet.drawCirclesEnabled = false
+                unitNetValueDataSet.setColor(.rpColor)
 
                 SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
@@ -170,13 +171,13 @@ class RPFundDetailTableViewController: UITableViewController {
                 cumulativeNetValueDataSet = LineChartDataSet(values: dataEntries2, label: "累积净值走势")
                 cumulativeNetValueDataSet.drawCircleHoleEnabled = false
                 cumulativeNetValueDataSet.drawCirclesEnabled = false
-                cumulativeNetValueDataSet.setColor(.red)
+                cumulativeNetValueDataSet.setColor(.rpColor)
 
                 SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
                     RPChartViewModel(title: "累积净值走势",
-                                         data: LineChartData(dataSet: cumulativeNetValueDataSet),
-                                         valueFormatter: RPFundDateFormatter(labels: dates2)))
+                                     data: LineChartData(dataSet: cumulativeNetValueDataSet),
+                                     valueFormatter: RPFundDateFormatter(labels: dates2)))
             }
         }
     }
@@ -212,7 +213,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 rateDataSet.drawCircleHoleEnabled = false
                 rateDataSet.drawCirclesEnabled = false
                 rateDataSet.valueFont = UIFont(name: "PingFangSC-Regular", size: 15.0)!
-
+                
                 SVProgressHUD.dismiss()
 
                 self.performSegue(withIdentifier: "fullChartSegue", sender:
@@ -305,9 +306,10 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 let data = BarChartData(dataSet: styleAttributionProfitDataSet)
 
-                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动收益",
-                                                                                              data: data,
-                                                                                              valueFormatter: IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
+                self.performSegue(withIdentifier: "horizontalSegue",
+                                  sender: RPChartViewModel(title: "风格归因 - 主动收益",
+                                                           data: data,
+                                                           valueFormatter: IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }
@@ -338,9 +340,10 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 let data = BarChartData(dataSet: styleAttributionRiskDataSet)
 
-                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动风险",
-                                                                                              data: data,
-                                                                                              valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
+                self.performSegue(withIdentifier: "horizontalSegue",
+                                  sender: RPChartViewModel(title: "风格归因 - 主动风险",
+                                                           data: data,
+                                                           valueFormatter: IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }
@@ -395,7 +398,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
                 for i in 0..<valueLabelsSorted.count {
                     industryAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
-                                                                              y: valueLabelsSorted[i].value))
+                                                                            y: valueLabelsSorted[i].value))
                 }
 
                 let industryAttributionRiskDataSet = BarChartDataSet(values: industryAttributionRiskEntries, label: "")
@@ -404,9 +407,10 @@ class RPFundDetailTableViewController: UITableViewController {
 
                 let data = BarChartData(dataSet: industryAttributionRiskDataSet)
 
-                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动风险",
-                                                                                              data: data,
-                                                                                              valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
+                self.performSegue(withIdentifier: "horizontalSegue",
+                                  sender: RPChartViewModel(title: "行业归因 - 主动风险",
+                                                           data: data,
+                                                           valueFormatter: IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }

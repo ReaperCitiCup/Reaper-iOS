@@ -14,7 +14,7 @@ class RPLineChartViewController: UIViewController {
     @IBOutlet weak var lineChartView: LineChartView!
 
     var dataModel: RPChartViewModel?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +37,11 @@ class RPLineChartViewController: UIViewController {
         self.lineChartView.data = dataModel?.data
         if let fmt = dataModel?.valueFormatter {
             self.lineChartView.xAxis.valueFormatter = fmt
+        }
+        if dataModel!.data.dataSetCount > 1 {
+            self.lineChartView.legend.enabled = true
+        } else {
+            self.lineChartView.legend.enabled = false
         }
     }
 

@@ -238,7 +238,6 @@ class RPManagerTableViewController: UITableViewController {
                     let data = LineChartData(dataSets: fundRateTrendDataSetArray)
                     self.fundRateTrendChart.data = data
                     self.fundRateTrendChart.xAxis.valueFormatter = dateFormatter!
-                    self.fundRateTrendChart.notifyDataSetChanged()
                 }
             }
         }
@@ -341,7 +340,7 @@ class RPManagerTableViewController: UITableViewController {
                                                                data: dict["name"].stringValue as AnyObject))
                 }
                 let fundPerformanceDataSet = ScatterChartDataSet(values: fundPerformanceEntry)
-//                fundPerformanceDataSet.valueFormatter = RPFundDateFormatter(labels: labels)
+                fundPerformanceDataSet.setColor(.rpColor)
                 let data = ScatterChartData(dataSet: fundPerformanceDataSet)
                 self.managerFundPerformanceScatterChart.data = data
                 self.managerFundPerformanceScatterChart.notifyDataSetChanged()
