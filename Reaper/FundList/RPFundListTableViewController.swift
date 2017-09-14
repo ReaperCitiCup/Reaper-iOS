@@ -112,22 +112,16 @@ class RPFundListTableViewController: UITableViewController {
         return 92.0
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let fundModel = searchBar.isFirstResponder ? searchFundArr[indexPath.row] : fundArr[indexPath.row]
-        performSegue(withIdentifier: "fundDetailSegue", sender: fundModel)
-    }
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fundDetailSegue" {
-            let fund = sender as? RPFundModel
-            guard fund != nil else {
-                return
+            if let cell = sender as? RPFundListTableViewCell,
+                let indexPath = self.tableView.indexPath(for: cell) {
+                let fundModel = searchBar.isFirstResponder ? searchFundArr[indexPath.row] : fundArr[indexPath.row]
+                let vc = segue.destination as! RPFundTabBarController
+                vc.fundCode = fundModel.code
             }
-            let vc = segue.destination as! RPFundTabBarController
-            vc.fundCode = fund!.code
         }
     }
 

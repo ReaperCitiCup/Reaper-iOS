@@ -22,7 +22,7 @@ class RPFundDetailTableViewController: UITableViewController {
             self.nameLabel?.text = "\(String(self.fundDetailModel?.name ?? "")!) \(String( self.fundDetailModel?.code ?? "")!)"
             self.unitNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.unitNetValue)!)
             self.cumulativeNetValueLabel.text = String(format: "%.4f", (self.fundDetailModel?.cumulativeNetValue)!)
-            self.typeLabel.text = self.fundDetailModel?.type.reduce("", { r, s in "\(r ?? "")/\(s)"})
+            self.typeLabel.text = self.fundDetailModel?.type.joined(separator: "/")
             self.scopeLabel.text = String(format: "%.2f", (self.fundDetailModel?.scope)!)
             self.rateLabel.text = String(format: "%.2f", (self.fundDetailModel?.dailyRate)!)
             if self.fundDetailModel?.manager?.count != 0 {
@@ -51,6 +51,8 @@ class RPFundDetailTableViewController: UITableViewController {
                     label.attributedText = attributedString
                 }
             }
+            
+            self.updateCurrentAsset()
 
             SVProgressHUD.dismiss()
         }
@@ -87,6 +89,8 @@ class RPFundDetailTableViewController: UITableViewController {
 
         self.currentAssetChart.chartDescription?.text = ""
         self.currentAssetChart.drawHoleEnabled = false
+        
+        SVProgressHUD.show()
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,8 +100,6 @@ class RPFundDetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "基金详情"
-
-        updateCurrentAsset()
     }
     
     @IBAction func netValueAction(_ sender: UIButton) {
@@ -245,6 +247,7 @@ class RPFundDetailTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     let data = PieChartData(dataSet: currentAssetDataSet)
                     self.currentAssetChart.data = data
+                    self.currentAssetChart.data?.notifyDataChanged()
                     self.currentAssetChart.notifyDataSetChanged()
                 }
             }
@@ -283,28 +286,28 @@ class RPFundDetailTableViewController: UITableViewController {
                 let result = JSON(json).arrayValue
                 var styleAttributionProfitEntries = [ChartDataEntry]()
 
-                var labels: [String] = []
-                var values: [Double] = []
-
+                var valueLabels: [String: Double] = [:]
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
                     if let value = dict["value"]?.doubleValue {
-                        labels.append((dict["field"]?.stringValue)!)
-                        values.append(value)
-                        styleAttributionProfitEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
-                                                                               y: value))
+                        valueLabels[(dict["field"]?.stringValue)!] = value
                     }
+                }
+                let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
+                for i in 0..<valueLabelsSorted.count {
+                    styleAttributionProfitEntries.append(BarChartDataEntry(x: Double(i),
+                                                                           y: valueLabelsSorted[i].value))
                 }
 
                 let styleAttributionProfitDataSet = BarChartDataSet(values: styleAttributionProfitEntries, label: "")
-                styleAttributionProfitDataSet.colors = ChartColorTemplates.vordiplom()
+                styleAttributionProfitDataSet.setColor(.rpColor)
                 styleAttributionProfitDataSet.valueTextColor = .black
 
                 let data = BarChartData(dataSet: styleAttributionProfitDataSet)
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动收益",
                                                                                               data: data,
-                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
+                                                                                              valueFormatter: IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }
@@ -316,28 +319,28 @@ class RPFundDetailTableViewController: UITableViewController {
                 let result = JSON(json).arrayValue
                 var styleAttributionRiskEntries = [ChartDataEntry]()
 
-                var labels: [String] = []
-                var values: [Double] = []
-
+                var valueLabels: [String: Double] = [:]
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
                     if let value = dict["value"]?.doubleValue {
-                        labels.append((dict["field"]?.stringValue)!)
-                        values.append(value)
-                        styleAttributionRiskEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
-                                                                             y: value))
+                        valueLabels[(dict["field"]?.stringValue)!] = value
                     }
+                }
+                let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
+                for i in 0..<valueLabelsSorted.count {
+                    styleAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
+                                                                           y: valueLabelsSorted[i].value))
                 }
 
                 let styleAttributionRiskDataSet = BarChartDataSet(values: styleAttributionRiskEntries, label: "")
-                styleAttributionRiskDataSet.colors = ChartColorTemplates.vordiplom()
+                styleAttributionRiskDataSet.setColor(.rpColor)
                 styleAttributionRiskDataSet.valueTextColor = .black
 
                 let data = BarChartData(dataSet: styleAttributionRiskDataSet)
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "风格归因 - 主动风险",
                                                                                               data: data,
-                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
+                                                                                              valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }
@@ -349,28 +352,28 @@ class RPFundDetailTableViewController: UITableViewController {
                 let result = JSON(json).arrayValue
                 var industryAttributionProfitEntries = [ChartDataEntry]()
 
-                var labels: [String] = []
-                var values: [Double] = []
-
+                var valueLabels: [String: Double] = [:]
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
                     if let value = dict["value"]?.doubleValue {
-                        labels.append((dict["field"]?.stringValue)!)
-                        values.append(value)
-                        industryAttributionProfitEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
-                                                                                  y: value))
+                        valueLabels[(dict["field"]?.stringValue)!] = value
                     }
+                }
+                let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
+                for i in 0..<valueLabelsSorted.count {
+                    industryAttributionProfitEntries.append(BarChartDataEntry(x: Double(i),
+                                                                              y: valueLabelsSorted[i].value))
                 }
 
                 let industryAttributionProfitDataSet = BarChartDataSet(values: industryAttributionProfitEntries, label: "")
-                industryAttributionProfitDataSet.colors = ChartColorTemplates.vordiplom()
+                industryAttributionProfitDataSet.setColor(.rpColor)
                 industryAttributionProfitDataSet.valueTextColor = .black
 
                 let data = BarChartData(dataSet: industryAttributionProfitDataSet)
                 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动收益",
                                                                                               data: data,
-                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
+                                                                                              valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }
@@ -381,32 +384,29 @@ class RPFundDetailTableViewController: UITableViewController {
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
                 var industryAttributionRiskEntries = [ChartDataEntry]()
-
-                var labels: [String] = []
-                var values: [Double] = []
-
+                
+                var valueLabels: [String: Double] = [:]
                 for i in 0..<result.count {
                     let dict = result[i].dictionaryValue
                     if let value = dict["value"]?.doubleValue {
-                        labels.append((dict["field"]?.stringValue)!)
-                        values.append(value)
-                        industryAttributionRiskEntries.append(BarChartDataEntry(x: Double(labels.count - 1),
-                                                                                y: value))
+                        valueLabels[(dict["field"]?.stringValue)!] = value
                     }
+                }
+                let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
+                for i in 0..<valueLabelsSorted.count {
+                    industryAttributionRiskEntries.append(BarChartDataEntry(x: Double(i),
+                                                                              y: valueLabelsSorted[i].value))
                 }
 
                 let industryAttributionRiskDataSet = BarChartDataSet(values: industryAttributionRiskEntries, label: "")
-                industryAttributionRiskDataSet.colors = ChartColorTemplates.vordiplom()
+                industryAttributionRiskDataSet.setColor(.rpColor)
                 industryAttributionRiskDataSet.valueTextColor = .black
 
                 let data = BarChartData(dataSet: industryAttributionRiskDataSet)
-                
-                print(labels)
-                print(industryAttributionRiskEntries)
 
                 self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "行业归因 - 主动风险",
                                                                                               data: data,
-                                                                                              valueFormatter: IndexAxisValueFormatter(values: labels)))
+                                                                                              valueFormatter:  IndexAxisValueFormatter(values:  valueLabelsSorted.map({$0.key}))))
             }
         }
     }

@@ -121,6 +121,8 @@ class RPManagerTableViewController: UITableViewController {
 
         managerFundPerformanceScatterChart.legend.enabled = false
         managerPerformanceScatterChart.legend.enabled = false
+        
+        SVProgressHUD.show()
     }
 
     override func didReceiveMemoryWarning() {
@@ -328,17 +330,22 @@ class RPManagerTableViewController: UITableViewController {
     private func updateFundPerformance() {
         Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-performance").responseJSON { response in
             if let json = response.result.value {
-                let result = JSON(json).arrayValue
-
+                let result = JSON(json)["funds"].arrayValue
+                
+//                var labels: [String] = []
                 var fundPerformanceEntry = [ChartDataEntry]()
                 for dict in result {
+//                    labels.append(dict["name"].stringValue)
                     fundPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
-                                                               y: dict["risk"].doubleValue))
+                                                               y: dict["risk"].doubleValue,
+                                                               data: dict["name"].stringValue as AnyObject))
                 }
                 let fundPerformanceDataSet = ScatterChartDataSet(values: fundPerformanceEntry)
+//                fundPerformanceDataSet.valueFormatter = RPFundDateFormatter(labels: labels)
                 let data = ScatterChartData(dataSet: fundPerformanceDataSet)
                 self.managerFundPerformanceScatterChart.data = data
                 self.managerFundPerformanceScatterChart.notifyDataSetChanged()
+                
             }
         }
     }
@@ -346,15 +353,28 @@ class RPManagerTableViewController: UITableViewController {
     private func updateManagerPerformance() {
         Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/manager-performance").responseJSON { response in
             if let json = response.result.value {
-                let result = JSON(json).arrayValue
+                let result = JSON(json).dictionaryValue
 
                 var managerPerformanceEntry = [ChartDataEntry]()
-                for dict in result {
-                    managerPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
-                                                               y: dict["risk"].doubleValue))
+                if let managerArray = result["managers"]?.arrayValue {
+                    for dict in managerArray {
+                        managerPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
+                                                                      y: dict["risk"].doubleValue))
+                    }
                 }
+                var otherManagerPerformanceEntry = [ChartDataEntry]()
+                if let otherManagerArray = result["others"]?.arrayValue {
+                    for otherDict in otherManagerArray {
+                        otherManagerPerformanceEntry.append(ChartDataEntry(x: otherDict["rate"].doubleValue,
+                                                                           y: otherDict["risk"].doubleValue))
+                    }
+                }
+                
                 let managerPerformanceDataSet = ScatterChartDataSet(values: managerPerformanceEntry)
-                let data = ScatterChartData(dataSet: managerPerformanceDataSet)
+                managerPerformanceDataSet.setColor(ChartColorTemplates.vordiplom()[0])
+                let otherManagerPerformanceDataSet = ScatterChartDataSet(values: otherManagerPerformanceEntry)
+                otherManagerPerformanceDataSet.setColor(ChartColorTemplates.vordiplom()[1])
+                let data = ScatterChartData(dataSets: [managerPerformanceDataSet, otherManagerPerformanceDataSet])
                 self.managerPerformanceScatterChart.data = data
                 self.managerPerformanceScatterChart.notifyDataSetChanged()
             }

@@ -91,6 +91,7 @@
 		2406B1F11F68F9790038823E /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				2422FCAC1F6974B30071F12B /* RPFundDateFormatter.swift */,
 				243A8B451F681A2D00E8BE40 /* RPLineChartViewController.swift */,
 				248FB8831F6826F7001E7498 /* RPChartViewModel.swift */,
 				242F24651F68D7A4009D264E /* RPHorizontalBarChartViewController.swift */,
@@ -142,7 +143,6 @@
 				24FBCA221F60EBBB0016A894 /* Assets.xcassets */,
 				24DC96AA1F416544004E6123 /* Main.storyboard */,
 				24DC96B21F416545004E6123 /* Info.plist */,
-				2422FCAC1F6974B30071F12B /* RPFundDateFormatter.swift */,
 			);
 			path = Reaper;
 			sourceTree = "<group>";
