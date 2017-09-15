@@ -95,23 +95,22 @@ class RPManagerTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = .rpColor
         self.tableView.tableHeaderView = UIView()
         
-        self.abilityRadarChart.chartDescription?.text = ""
-        self.fundRateTrendChart.chartDescription?.text = ""
-        self.fundRankHorizontalBarChart.chartDescription?.text = ""
-        self.managerFundPerformanceScatterChart.chartDescription?.text = ""
-        self.managerPerformanceScatterChart.chartDescription?.text = ""
+        abilityRadarChart.chartDescription?.text = ""
+        fundRateTrendChart.chartDescription?.text = ""
+        fundRankHorizontalBarChart.chartDescription?.text = ""
+        managerFundPerformanceScatterChart.chartDescription?.text = ""
+        managerPerformanceScatterChart.chartDescription?.text = ""
         
-        self.abilityRadarChart.legend.enabled = false
-        self.abilityRadarChart.yAxis.drawLabelsEnabled = false
-        self.abilityRadarChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["经验值", "择时能力", "收益率", "择股能力", "抗风险"])
+        abilityRadarChart.legend.enabled = false
+        abilityRadarChart.yAxis.drawLabelsEnabled = false
+        abilityRadarChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["经验值", "择时能力", "收益率", "择股能力", "抗风险"])
         
-        self.fundRateTrendChart.xAxis.labelPosition = .bottom
-        self.fundRateTrendChart.xAxis.drawGridLinesEnabled = false
-        self.fundRateTrendChart.rightAxis.drawAxisLineEnabled = false
-        self.fundRateTrendChart.rightAxis.drawLabelsEnabled = false
+        fundRateTrendChart.xAxis.labelPosition = .bottom
+        fundRateTrendChart.xAxis.drawGridLinesEnabled = false
+        fundRateTrendChart.rightAxis.drawAxisLineEnabled = false
+        fundRateTrendChart.rightAxis.drawLabelsEnabled = false
 
         managerFundPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
         managerPerformanceScatterChart.rightAxis.drawLabelsEnabled = false
@@ -199,13 +198,24 @@ class RPManagerTableViewController: UITableViewController {
     }
 
     @IBAction func seeFullChartAction(_ sender: UIButton) {
-        if let data = self.fundRateTrendChart.data {
-            self.performSegue(withIdentifier: "fullChartSegue", sender: RPChartViewModel(title: "现任基金收益率走势",
-                                                                                             data: data,
-                                                                                             valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
-        } else {
-            SVProgressHUD.showInfo(withStatus: "数据仍在加载")
-            SVProgressHUD.dismiss(withDelay: 2.0)
+        if sender.tag == 0 {
+            if let data = self.fundRateTrendChart.data {
+                self.performSegue(withIdentifier: "fullChartSegue", sender: RPChartViewModel(title: "现任基金收益率走势",
+                                                                                                 data: data,
+                                                                                                 valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
+            } else {
+                SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+                SVProgressHUD.dismiss(withDelay: 2.0)
+            }
+        } else if sender.tag == 1 {
+            if let data = self.fundRankHorizontalBarChart.data {
+                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "现任基金排名",
+                                                                                              data: data,
+                                                                                              valueFormatter: self.fundRankHorizontalBarChart.xAxis.valueFormatter))
+            } else {
+                SVProgressHUD.showInfo(withStatus: "数据仍在加载")
+                SVProgressHUD.dismiss(withDelay: 2.0)
+            }
         }
     }
     
@@ -216,7 +226,7 @@ class RPManagerTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 8
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -225,9 +235,9 @@ class RPManagerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 3, 7, 8:
+        case 3, 6, 7:
             return SCREEN_WIDTH - 20
-        case 6:
+        case 5:
             return CGFloat(75 + historyFundView.fundHistoryModels.count * 30)
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -239,6 +249,9 @@ class RPManagerTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullChartSegue" {
             let vc = segue.destination as! RPLineChartViewController
+            vc.dataModel = (sender as? RPChartViewModel)
+        } else if segue.identifier == "horizontalSegue" {
+            let vc = segue.destination as! RPHorizontalBarChartViewController
             vc.dataModel = (sender as? RPChartViewModel)
         }
     }

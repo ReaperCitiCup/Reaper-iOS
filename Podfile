@@ -17,5 +17,6 @@ target 'Reaper' do
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git'
   pod 'SwiftLint'
   pod 'Kingfisher'
+  pod 'UIColor_Hex_Swift'
 
 end

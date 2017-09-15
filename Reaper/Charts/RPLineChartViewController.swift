@@ -38,11 +38,7 @@ class RPLineChartViewController: UIViewController {
         if let fmt = dataModel?.valueFormatter {
             self.lineChartView.xAxis.valueFormatter = fmt
         }
-        if dataModel!.data.dataSetCount > 1 {
-            self.lineChartView.legend.enabled = true
-        } else {
-            self.lineChartView.legend.enabled = false
-        }
+        self.lineChartView.legend.enabled = dataModel!.data.dataSetCount > 1
     }
 
 }

@@ -64,7 +64,7 @@ extension RPCompanyTableViewController {
                 }
                 
                 let assetAllocationDataSet = PieChartDataSet(values: assetAllocationEntry, label: "")
-                assetAllocationDataSet.colors = ChartColorTemplates.vordiplom()
+                assetAllocationDataSet.colors = UIColor.reaperColors()
                 assetAllocationDataSet.valueTextColor = .black
                 assetAllocationDataSet.entryLabelColor = .clear
                 

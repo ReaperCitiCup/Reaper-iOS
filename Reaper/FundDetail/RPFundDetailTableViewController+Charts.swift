@@ -95,7 +95,7 @@ extension RPFundDetailTableViewController {
                     dataEntries4.append(PieChartDataEntry(value: value, label: key))
                 }
                 let currentAssetDataSet = PieChartDataSet(values: dataEntries4, label: "")
-                currentAssetDataSet.colors = ChartColorTemplates.vordiplom()
+                currentAssetDataSet.colors = UIColor.reaperColors()
                 currentAssetDataSet.valueTextColor = .black
                 currentAssetDataSet.entryLabelColor = .clear
                 

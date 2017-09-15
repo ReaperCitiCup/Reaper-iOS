@@ -73,8 +73,6 @@ class RPFundDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.backgroundColor = .rpColor
 
         self.currentAssetChart.chartDescription?.text = ""
         self.currentAssetChart.drawHoleEnabled = false

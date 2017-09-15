@@ -18,11 +18,6 @@ class RPFundListTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.contentView.backgroundColor = .rpColor
-        self.backgroundColor = .rpColor
-        self.roundView.layer.cornerRadius = 4.0
-        self.roundView.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

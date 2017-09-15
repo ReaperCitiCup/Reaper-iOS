@@ -43,7 +43,7 @@ extension RPManagerTableViewController {
                         let fundRateTrendDataSet = LineChartDataSet(values: dataEntries, label: fundName.stringValue)
                         fundRateTrendDataSet.drawCircleHoleEnabled = false
                         fundRateTrendDataSet.drawCirclesEnabled = false
-                        fundRateTrendDataSet.setColor(ChartColorTemplates.vordiplom()[fundRateTrendDataSetArray.count % ChartColorTemplates.vordiplom().count])
+                        fundRateTrendDataSet.setColor(UIColor.reaperColors()[fundRateTrendDataSetArray.count % UIColor.reaperColors().count])
                         fundRateTrendDataSetArray.append(fundRateTrendDataSet)
                         
                         if dateFormatter == nil {
@@ -60,48 +60,50 @@ extension RPManagerTableViewController {
     }
     
     func updateManagerFundRank() {
-        //        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
-        //            if let json = response.result.value {
-        //                let result = JSON(json).arrayValue
-        //
-        //                var monthDataSets = [BarChartDataSet]()
-        //
-        //                var fields: [String] = []
-        //                for fundDict in result {
-        //                    let fundName = fundDict["name"].stringValue
-        //
-        //                    var monthDataEntries: [BarChartDataEntry] = []
-        //
-        //                    for dict in fundDict["data"].arrayValue {
-        //                        let rank = dict["rank"].doubleValue
-        //                        let total = dict["total"].doubleValue
-        //                        let type = dict["type"].stringValue
-        //
-        //                        fields.append(type)
-        //
-        //                        monthDataEntries.append(BarChartDataEntry(x: Double(monthDataEntries.count),
-        //                                                                  y: rank / total,
-        //                                                                  data: type as AnyObject))
-        //                    }
-        //
-        //                    let dataSet = BarChartDataSet(values: monthDataEntries,
-        //                                                  label: fundName)
-        //                    dataSet.setColor(ChartColorTemplates.vordiplom()[monthDataSets.count % ChartColorTemplates.vordiplom().count])
-        //
-        //                    monthDataSets.append(dataSet)
-        //                }
-        //
-        //                let data = BarChartData(dataSets: monthDataSets)
-        //                data.barWidth /= (Double(monthDataSets.count) * 1.5)
-        //                data.groupBars(fromX: 0.45,
-        //                               groupSpace: 0.15,
-        //                               barSpace: 0.15)
-        //
-        //                self.fundRankHorizontalBarChart.xAxis.valueFormatter = RPAttributionFormatter(labels: fields)
-        //                self.fundRankHorizontalBarChart.data = data
-        //                self.fundRankHorizontalBarChart.notifyDataSetChanged()
-        //            }
-        //        }
+        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
+            if let json = response.result.value {
+                let result = JSON(json).arrayValue
+
+                var fields: [String] = []
+                var entries: [[BarChartDataEntry]] = []
+                for j in 0..<result.count {
+                    let fundDict = result[j]
+                    let fundName = fundDict["name"].stringValue
+
+                    let array = fundDict["data"].arrayValue
+                    for i in 0..<array.count {
+                        let dict = array[i]
+                        let rank = dict["rank"].doubleValue
+                        let total = dict["total"].doubleValue
+                        let type = dict["type"].stringValue
+
+                        if !fields.contains(type) {
+                            fields.append(type)
+                            entries.append([])
+                        }
+                        let index = fields.index(of: type)!
+                        entries[index].append(BarChartDataEntry(x: Double(j),
+                                                                y: rank / total,
+                                                                data: fundName as AnyObject))
+                    }
+                }
+                
+                var rankDataSets = [BarChartDataSet]()
+                for i in 0..<fields.count {
+                    let dataSet = BarChartDataSet(values: entries[i],
+                                                  label: fields[i])
+                    dataSet.setColor(UIColor.reaperColors()[rankDataSets.count % UIColor.reaperColors().count])
+                    rankDataSets.append(dataSet)
+                    
+                }
+
+                let data = BarChartData(dataSets: rankDataSets)
+                data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.1)
+                self.fundRankHorizontalBarChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: fields)
+                self.fundRankHorizontalBarChart.data = data
+                self.fundRankHorizontalBarChart.notifyDataSetChanged()
+            }
+        }
     }
     
     func updateAbility() {
@@ -147,10 +149,8 @@ extension RPManagerTableViewController {
             if let json = response.result.value {
                 let result = JSON(json)["funds"].arrayValue
                 
-                //                var labels: [String] = []
                 var fundPerformanceEntry = [ChartDataEntry]()
                 for dict in result {
-                    //                    labels.append(dict["name"].stringValue)
                     fundPerformanceEntry.append(ChartDataEntry(x: dict["rate"].doubleValue,
                                                                y: dict["risk"].doubleValue,
                                                                data: dict["name"].stringValue as AnyObject))
@@ -186,9 +186,9 @@ extension RPManagerTableViewController {
                 }
                 
                 let managerPerformanceDataSet = ScatterChartDataSet(values: managerPerformanceEntry)
-                managerPerformanceDataSet.setColor(ChartColorTemplates.vordiplom()[0])
+                managerPerformanceDataSet.setColor(UIColor.reaperColors()[0])
                 let otherManagerPerformanceDataSet = ScatterChartDataSet(values: otherManagerPerformanceEntry)
-                otherManagerPerformanceDataSet.setColor(ChartColorTemplates.vordiplom()[1])
+                otherManagerPerformanceDataSet.setColor(UIColor.reaperColors()[1])
                 let data = ScatterChartData(dataSets: [managerPerformanceDataSet, otherManagerPerformanceDataSet])
                 self.managerPerformanceScatterChart.data = data
                 self.managerPerformanceScatterChart.notifyDataSetChanged()

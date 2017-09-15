@@ -13,7 +13,6 @@ import SVProgressHUD
 class RPCompanyTableViewController: UITableViewController {
     
     var companyModel: RPCompanyShortModel?
-    private var nameLabel: UILabel?
     
     @IBOutlet weak var fundPerformanceScatterChart: ScatterChartView!
     @IBOutlet weak var managerPerformanceScatterChart: ScatterChartView!
@@ -21,8 +20,6 @@ class RPCompanyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.backgroundColor = .rpColor
         
         fundPerformanceScatterChart.chartDescription?.text = ""
         managerPerformanceScatterChart.chartDescription?.text = ""
@@ -122,7 +119,6 @@ class RPCompanyTableViewController: UITableViewController {
         label.font = UIFont(name: "PingFangSC-Semibold", size: 28.0)
         label.text = self.companyModel?.name
         label.textColor = .white
-        self.nameLabel = label
         view.addSubview(label)
         return view
     }
