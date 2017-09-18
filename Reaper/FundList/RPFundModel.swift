@@ -10,10 +10,10 @@ import UIKit
 
 struct RPFundModel {
     
-    var code: String
-    var name: String
-    var annualProfit: Double?
-    var volatility: Double?
-    var shortManager: [RPManagerShortModel]?
+    let code: String
+    let name: String
+    let annualProfit: Double?
+    let volatility: Double?
+    let shortManager: [RPManagerShortModel]?
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 struct RPCompanyShortModel {
     
-    var code: String
-    var name: String
+    let code: String
+    let name: String
     
 }

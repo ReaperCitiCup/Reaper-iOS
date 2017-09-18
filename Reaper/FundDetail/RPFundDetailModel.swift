@@ -10,19 +10,19 @@ import UIKit
 
 struct RPFundDetailModel {
     
-    var code: String
-    var name: String
-    var type: [String]
-    var establishmentDate: String
-    var scope: Double
-    var unitNetValue: Double
-    var cumulativeNetValue: Double
-    var dailyRate: Double
-    var assessNetValue: Double
-    var assessIncrease: Double
-    var assessDailyRate: Double
-    var rate: [String:Double]?
-    var manager: [RPManagerShortModel]?
-    var company: RPCompanyShortModel?
+    let code: String
+    let name: String
+    let type: [String]
+    let establishmentDate: String
+    let scope: Double
+    let unitNetValue: Double
+    let cumulativeNetValue: Double
+    let dailyRate: Double
+    let assessNetValue: Double
+    let assessIncrease: Double
+    let assessDailyRate: Double
+    let rate: [String:Double]?
+    let manager: [RPManagerShortModel]?
+    let company: RPCompanyShortModel?
     
 }

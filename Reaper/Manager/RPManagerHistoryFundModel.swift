@@ -10,8 +10,8 @@ import Foundation
 
 struct RPManagerHistoryFundModel {
     
-    var name: String
-    var scale: Double
-    var returnVal: Double
+    let name: String
+    let scale: Double
+    let returnVal: Double
     
 }

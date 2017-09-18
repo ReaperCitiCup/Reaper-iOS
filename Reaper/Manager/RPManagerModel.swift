@@ -10,13 +10,13 @@ import UIKit
 
 struct RPManagerModel {
     
-    var code: String
-    var name: String
-    var appointedDate: String
-    var company: RPCompanyShortModel?
-    var totalScope: Double?
-    var bestReturns: Double?
-    var introduction: String
-    var managerImageUrl: String?
+    let code: String
+    let name: String
+    let appointedDate: String
+    let company: RPCompanyShortModel?
+    let totalScope: Double?
+    let bestReturns: Double?
+    let introduction: String
+    let managerImageUrl: String?
     
 }

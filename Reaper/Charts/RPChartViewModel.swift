@@ -11,8 +11,8 @@ import Charts
 
 struct RPChartViewModel {
 
-    var title: String
-    var data: ChartData
-    var valueFormatter: IAxisValueFormatter?
+    let title: String
+    let data: ChartData
+    let valueFormatter: IAxisValueFormatter?
 
 }

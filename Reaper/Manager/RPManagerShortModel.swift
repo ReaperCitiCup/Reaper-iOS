@@ -10,12 +10,12 @@ import UIKit
 
 struct RPManagerShortModel {
     
-    var code: String
-    var name: String
-    var startDate: String?
-    var endDate: String?
-    var days: Int?
-    var returns: Double?
+    let code: String
+    let name: String
+    let startDate: String?
+    let endDate: String?
+    let days: Int?
+    let returns: Double?
     
     init(code: String, name: String) {
         self.code = code
