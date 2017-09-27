@@ -152,8 +152,8 @@ class RPFundDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 60))
-        let label = UILabel(frame: CGRect(x: 13, y: 6, width: SCREEN_WIDTH - 19, height: 48))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 60))
+        let label = UILabel(frame: CGRect(x: 13, y: 6, width: kScreenWidth - 19, height: 48))
         label.font = UIFont(name: "PingFangSC-Semibold", size: 28.0)
         label.text = "\(String(self.fundDetailModel?.name ?? "")!) \(String( self.fundDetailModel?.code ?? "")!)"
         label.textColor = .white
@@ -168,7 +168,7 @@ class RPFundDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 6 {
-            return SCREEN_WIDTH - 20
+            return kScreenWidth - 20
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }

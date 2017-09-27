@@ -15,7 +15,7 @@ import SVProgressHUD
 extension RPCompanyTableViewController {
     
     func updateFundPerformance() {
-        Alamofire.request("\(BASE_URL)/company/\(self.companyModel!.code)/fund-performance").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/company/\(self.companyModel!.code)/fund-performance").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).dictionaryValue["funds"]?.arrayValue
                 var fundPerformanceEntry = [ChartDataEntry]()
@@ -34,7 +34,7 @@ extension RPCompanyTableViewController {
     }
     
     func updateManagerPerformance() {
-        Alamofire.request("\(BASE_URL)/company/\(self.companyModel!.code)/manager-performance").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/company/\(self.companyModel!.code)/manager-performance").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).dictionaryValue["managers"]?.arrayValue
                 var managerPerformanceEntry = [ChartDataEntry]()
@@ -53,7 +53,7 @@ extension RPCompanyTableViewController {
     }
     
     func updateAssetAllocation() {
-        let url = "\(BASE_URL)/company/\(self.companyModel!.code)/asset-allocation"
+        let url = "\(kBaseUrl)/company/\(self.companyModel!.code)/asset-allocation"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -76,7 +76,7 @@ extension RPCompanyTableViewController {
     }
     
     func updateStyleProfit() {
-        let url = "\(BASE_URL)/company/\(self.companyModel!.code)/style-attribution/profit"
+        let url = "\(kBaseUrl)/company/\(self.companyModel!.code)/style-attribution/profit"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -110,7 +110,7 @@ extension RPCompanyTableViewController {
     }
     
     func updateStyleRisk() {
-        let url = "\(BASE_URL)/company/\(self.companyModel!.code)/style-attribution/risk"
+        let url = "\(kBaseUrl)/company/\(self.companyModel!.code)/style-attribution/risk"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -144,7 +144,7 @@ extension RPCompanyTableViewController {
     }
     
     func updateIndustryProfit() {
-        let url = "\(BASE_URL)/company/\(self.companyModel!.code)/industry-attribution/profit"
+        let url = "\(kBaseUrl)/company/\(self.companyModel!.code)/industry-attribution/profit"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -178,7 +178,7 @@ extension RPCompanyTableViewController {
     }
     
     func updateIndustryRisk() {
-        let url = "\(BASE_URL)/company/\(self.companyModel!.code)/industry-attribution/risk"
+        let url = "\(kBaseUrl)/company/\(self.companyModel!.code)/industry-attribution/risk"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue

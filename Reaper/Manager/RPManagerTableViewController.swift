@@ -34,7 +34,7 @@ class RPManagerTableViewController: UITableViewController {
     
     var fundCode: String? = nil {
         didSet {
-            let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/managers"
+            let url = "\(kBaseUrl)/fund/\(self.fundCode ?? "")/managers"
             Alamofire.request(url).responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json).arrayValue
@@ -144,7 +144,7 @@ class RPManagerTableViewController: UITableViewController {
     }
     
     func loadManager(of code: String) {
-        Alamofire.request("\(BASE_URL)/manager/\(code)").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(code)").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json)
                 self.managerModel = RPManagerModel(code: result["id"].stringValue,
@@ -236,7 +236,7 @@ class RPManagerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 3, 6, 7:
-            return SCREEN_WIDTH - 20
+            return kScreenWidth - 20
         case 5:
             return CGFloat(75 + historyFundView.fundHistoryModels.count * 30)
         default:

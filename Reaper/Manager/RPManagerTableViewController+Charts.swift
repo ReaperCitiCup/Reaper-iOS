@@ -15,7 +15,7 @@ import SVProgressHUD
 extension RPManagerTableViewController {
     
     func updateFundRateTrend() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rate-trend").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(self.managerModel!.code)/fund-rate-trend").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
                 
@@ -60,7 +60,7 @@ extension RPManagerTableViewController {
     }
     
     func updateManagerFundRank() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(self.managerModel!.code)/fund-rank").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
 
@@ -107,7 +107,7 @@ extension RPManagerTableViewController {
     }
     
     func updateAbility() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(self.managerModel!.code)/ability").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).dictionaryValue
                 
@@ -127,7 +127,7 @@ extension RPManagerTableViewController {
     }
     
     func updateHistoryFund() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/funds").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(self.managerModel!.code)/funds").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
                 
@@ -145,7 +145,7 @@ extension RPManagerTableViewController {
     }
     
     func updateFundPerformance() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/fund-performance").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(self.managerModel!.code)/fund-performance").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json)["funds"].arrayValue
                 
@@ -166,7 +166,7 @@ extension RPManagerTableViewController {
     }
     
     func updateManagerPerformance() {
-        Alamofire.request("\(BASE_URL)/manager/\(self.managerModel!.code)/manager-performance").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/manager/\(self.managerModel!.code)/manager-performance").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).dictionaryValue
                 

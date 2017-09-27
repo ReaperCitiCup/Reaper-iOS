@@ -8,7 +8,7 @@
 
 import UIKit
 
-let SCREEN_WIDTH = CGFloat.minimum(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-let SCREEN_HEIGHT = CGFloat.maximum(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-let SCREEN_BOUNDS = UIScreen.main.bounds
-let BASE_URL = "http://106.15.203.173:8080/api"
+let kScreenWidth = CGFloat.minimum(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+let kScreenHeight = CGFloat.maximum(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+let kScreenBounds = UIScreen.main.bounds
+let kBaseUrl = "http://106.15.203.173:8080/api"

@@ -15,7 +15,7 @@ import SVProgressHUD
 extension RPFundDetailTableViewController {
     
     func unitNetValueAction() {
-        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/unit-net-value").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/fund/\(self.fundCode ?? "")/unit-net-value").responseJSON { response in
             if let json = response.result.value {
                 var unitNetValueDataSet = LineChartDataSet()
                 
@@ -47,7 +47,7 @@ extension RPFundDetailTableViewController {
     }
     
     func cumulativeNetValueAction() {
-        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/cumulative-net-value").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/fund/\(self.fundCode ?? "")/cumulative-net-value").responseJSON { response in
             if let json = response.result.value {
                 let result2 = JSON(json).arrayValue
                 
@@ -79,7 +79,7 @@ extension RPFundDetailTableViewController {
     }
 
     func updateCurrentAsset() {
-        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/fund/\(self.fundCode ?? "")/current-asset").responseJSON { response in
             if let json = response.result.value {
                 let result4 = JSON(json).dictionaryValue
                 
@@ -112,7 +112,7 @@ extension RPFundDetailTableViewController {
     func rateAction(_ month: String, title: String) {
         SVProgressHUD.show()
         Alamofire.request(
-            "\(BASE_URL)/fund/\(self.fundCode ?? "")/rate",
+            "\(kBaseUrl)/fund/\(self.fundCode ?? "")/rate",
             method: .get,
             parameters: ["month": month]
             ).responseJSON { response in
@@ -146,7 +146,7 @@ extension RPFundDetailTableViewController {
     }
     
     func updateStyleProfit() {
-        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/style-attribution/profit"
+        let url = "\(kBaseUrl)/fund/\(self.fundCode ?? "")/style-attribution/profit"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -180,7 +180,7 @@ extension RPFundDetailTableViewController {
     }
     
     func updateStyleRisk() {
-        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/style-attribution/risk"
+        let url = "\(kBaseUrl)/fund/\(self.fundCode ?? "")/style-attribution/risk"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -214,7 +214,7 @@ extension RPFundDetailTableViewController {
     }
     
     func updateIndustryProfit() {
-        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/industry-attribution/profit"
+        let url = "\(kBaseUrl)/fund/\(self.fundCode ?? "")/industry-attribution/profit"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
@@ -247,7 +247,7 @@ extension RPFundDetailTableViewController {
     }
     
     func updateIndustryRisk() {
-        let url = "\(BASE_URL)/fund/\(self.fundCode ?? "")/industry-attribution/risk"
+        let url = "\(kBaseUrl)/fund/\(self.fundCode ?? "")/industry-attribution/risk"
         Alamofire.request(url).responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue

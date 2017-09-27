@@ -54,7 +54,7 @@ class RPFundListTableViewController: UITableViewController {
     func loadData(of page: Int) {
         SVProgressHUD.show()
 
-        let url: URLConvertible = "\(BASE_URL)/fund/search"
+        let url: URLConvertible = "\(kBaseUrl)/fund/search"
         let para = ["keyword": searchString ?? "",
                     "order": "code",
                     "size": 10,

@@ -18,7 +18,7 @@ class RPFundTabBarController: UITabBarController {
             (self.viewControllers![1] as! RPManagerTableViewController).fundCode = self.fundCode
             (self.viewControllers![3] as! RPAnalysisTableViewController).fundCode = self.fundCode
             
-            Alamofire.request("\(BASE_URL)/fund/\(fundCode)").responseJSON { response in
+            Alamofire.request("\(kBaseUrl)/fund/\(fundCode)").responseJSON { response in
                 if let json = response.result.value {
                     let result = JSON(json)
                     

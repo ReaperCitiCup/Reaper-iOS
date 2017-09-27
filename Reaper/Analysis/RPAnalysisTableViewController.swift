@@ -84,7 +84,7 @@ class RPAnalysisTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         SVProgressHUD.show()
-        Alamofire.request("\(BASE_URL)/fund/\(self.fundCode!)/\(analysisURLArray[indexPath.row])").responseJSON { response in
+        Alamofire.request("\(kBaseUrl)/fund/\(self.fundCode!)/\(analysisURLArray[indexPath.row])").responseJSON { response in
             if let json = response.result.value {
                 let result = JSON(json).arrayValue
 
