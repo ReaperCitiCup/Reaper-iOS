@@ -159,8 +159,7 @@ extension RPManagerTableViewController {
                 fundPerformanceDataSet.setColor(.rpColor)
                 let data = ScatterChartData(dataSet: fundPerformanceDataSet)
                 self.managerFundPerformanceScatterChart.data = data
-                self.managerFundPerformanceScatterChart.notifyDataSetChanged()
-                
+                self.managerFundPerformanceScatterChart.notifyDataSetChanged()   
             }
         }
     }

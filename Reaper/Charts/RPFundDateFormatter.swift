@@ -14,6 +14,9 @@ class RPFundDateFormatter: NSObject, IAxisValueFormatter {
     var labels: [String] = []
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if labels.count == 0 {
+            return ""
+        }
         return labels[Int(value * Double(labels.count)) % labels.count]
     }
     

@@ -134,7 +134,7 @@ class RPAnalysisTableViewController: UITableViewController {
         }
         
         var barEntries = [ChartDataEntry]()
-        let valueLabelsSorted = valueLabels.sorted(by: {$0.1 < $1.1})
+        let valueLabelsSorted = valueLabels.sorted {$0.1 < $1.1}
         for i in 0..<valueLabelsSorted.count {
             barEntries.append(BarChartDataEntry(x: Double(i),
                                                 y: valueLabelsSorted[i].value))

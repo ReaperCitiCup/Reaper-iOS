@@ -57,17 +57,19 @@ class RPManagerTableViewController: UITableViewController {
         didSet {
             self.loadManager(of: managers![0].code)
             
-            let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController,
-                                                    containerView: self.navigationController!.view,
-                                                    title: BTTitle.title(managers![0].name),
-                                                    items: managers!.map { $0.name })
-            menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> Void in
-                if let code = self?.managers![indexPath].code {
-                    self?.loadManager(of: code)
+            if let navVC = self.navigationController {
+                let menuView = BTNavigationDropdownMenu(navigationController: navVC,
+                                                        containerView: navVC.view,
+                                                        title: BTTitle.title(managers![0].name),
+                                                        items: managers!.map { $0.name })
+                menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> Void in
+                    if let code = self?.managers![indexPath].code {
+                        self?.loadManager(of: code)
+                    }
                 }
+                
+                self.menuView = menuView
             }
-            
-            self.menuView = menuView
         }
     }
     
@@ -200,18 +202,20 @@ class RPManagerTableViewController: UITableViewController {
     @IBAction func seeFullChartAction(_ sender: UIButton) {
         if sender.tag == 0 {
             if let data = self.fundRateTrendChart.data {
-                self.performSegue(withIdentifier: "fullChartSegue", sender: RPChartViewModel(title: "现任基金收益率走势",
-                                                                                                 data: data,
-                                                                                                 valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
+                self.performSegue(withIdentifier: "fullChartSegue",
+                                  sender: RPChartViewModel(title: "现任基金收益率走势",
+                                                           data: data,
+                                                           valueFormatter: self.fundRateTrendChart.xAxis.valueFormatter))
             } else {
                 SVProgressHUD.showInfo(withStatus: "数据仍在加载")
                 SVProgressHUD.dismiss(withDelay: 2.0)
             }
         } else if sender.tag == 1 {
             if let data = self.fundRankHorizontalBarChart.data {
-                self.performSegue(withIdentifier: "horizontalSegue", sender: RPChartViewModel(title: "现任基金排名",
-                                                                                              data: data,
-                                                                                              valueFormatter: self.fundRankHorizontalBarChart.xAxis.valueFormatter))
+                self.performSegue(withIdentifier: "horizontalSegue",
+                                  sender: RPChartViewModel(title: "现任基金排名",
+                                                           data: data,
+                                                           valueFormatter: self.fundRankHorizontalBarChart.xAxis.valueFormatter))
             } else {
                 SVProgressHUD.showInfo(withStatus: "数据仍在加载")
                 SVProgressHUD.dismiss(withDelay: 2.0)
