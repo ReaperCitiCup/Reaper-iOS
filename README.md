@@ -1,7 +1,8 @@
+<img src="https://github.com/ReaperCitiCup/Reaper-iOS/blob/master/Logo.png" width=100px height=100px>
+
 # Reaper iOS
 
-iOS App for FOF-Navigator
-Product of team Reaper
+iOS App for FOF-Navigator  
 Top 20 of [Citi Financial Innovation Application Competition](http://citicup.scu.edu.cn/public/index.html)
 
 # Main Tech
